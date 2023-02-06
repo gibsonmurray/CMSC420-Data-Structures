@@ -1,0 +1,36 @@
+comment: Same as test03 but without promotion/demotion/depth
+size: 0
+list:
+push(ant): successful
+push(bat): successful
+push(cow): successful
+push(dog): successful
+push(emu): successful
+push(fox): successful
+push(gnu): successful
+push(hen): successful
+push(jay): successful
+push(kea): successful
+size: 10
+list: kea jay hen gnu fox emu dog cow bat ant
+peek: kea
+pop: kea
+list: jay hen gnu fox emu dog cow bat ant
+size: 9
+peek: jay
+pop: jay
+pop: hen
+pop: gnu
+pop: fox
+list: emu dog cow bat ant
+pop: emu
+pop: dog
+pop: cow
+pop: bat
+pop: ant
+list:
+size: 0
+comment: The following should throw a "Pop of empty stack" exception
+pop: Failure due to exception: "Pop of empty stack"
+comment: The following should throw a "Peek of empty stack" exception
+peek: Failure due to exception: "Peek of empty stack"

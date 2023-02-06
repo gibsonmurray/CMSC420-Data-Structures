@@ -1,0 +1,26 @@
+comment:Same as test01 but without promotion/demotion/depth
+push:ant
+list
+size
+peek
+pop
+list
+size
+push:bat
+list
+size
+peek
+push:cow
+push:dog
+push:emu
+list
+size
+peek
+push:fox
+list
+size
+peek
+pop
+list
+size
+peek

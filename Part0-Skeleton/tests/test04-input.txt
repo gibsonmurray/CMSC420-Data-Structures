@@ -1,0 +1,36 @@
+comment:Same as test03 but without promotion/demotion/depth
+size
+list
+push:ant
+push:bat
+push:cow
+push:dog
+push:emu
+push:fox
+push:gnu
+push:hen
+push:jay
+push:kea
+size
+list
+peek
+pop
+list
+size
+peek
+pop
+pop
+pop
+pop
+list
+pop
+pop
+pop
+pop
+pop
+list
+size
+comment:The following should throw a "Pop of empty stack" exception
+pop
+comment:The following should throw a "Peek of empty stack" exception
+peek

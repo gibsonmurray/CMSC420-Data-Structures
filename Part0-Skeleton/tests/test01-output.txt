@@ -1,0 +1,36 @@
+comment: Basic test of the adjustable stack
+push(ant): successful
+list: ant
+size: 1
+peek: ant
+pop: ant
+list:
+size: 0
+push(bat): successful
+list: bat
+size: 1
+peek: bat
+push(cow): successful
+push(dog): successful
+push(emu): successful
+list: emu dog cow bat
+size: 4
+peek: emu
+push(fox): successful
+list: fox emu dog cow bat
+size: 5
+peek: fox
+pop: fox
+list: emu dog cow bat
+size: 4
+peek: emu
+promote(dog): successful
+list: dog emu cow bat
+demote(cow): successful
+list: dog emu bat cow
+size: 4
+peek: dog
+depth(dog): 0
+depth(bat): 2
+depth(cow): 3
+depth(emu): 1

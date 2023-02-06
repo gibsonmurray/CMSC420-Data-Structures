@@ -1,0 +1,128 @@
+comment: More extensive testing of promotion/demotion. This throws two exceptions.
+size: 0
+list:
+push(ant): successful
+push(bat): successful
+push(cow): successful
+push(dog): successful
+push(emu): successful
+push(fox): successful
+push(gnu): successful
+push(hen): successful
+push(jay): successful
+push(kea): successful
+size: 10
+list: kea jay hen gnu fox emu dog cow bat ant
+peek: kea
+comment: Promote -ant- from the bottom to the top
+promote(ant): successful
+list: kea jay hen gnu fox emu dog cow ant bat
+promote(ant): successful
+list: kea jay hen gnu fox emu dog ant cow bat
+promote(ant): successful
+promote(ant): successful
+promote(ant): successful
+promote(ant): successful
+promote(ant): successful
+promote(ant): successful
+list: kea ant jay hen gnu fox emu dog cow bat
+promote(ant): successful
+list: ant kea jay hen gnu fox emu dog cow bat
+comment: This last promotion should have no effect
+promote(ant): successful
+list: ant kea jay hen gnu fox emu dog cow bat
+size: 10
+peek: ant
+pop: ant
+list: kea jay hen gnu fox emu dog cow bat
+comment: Demote -kea- from the top to the bottom
+demote(kea): successful
+list: jay kea hen gnu fox emu dog cow bat
+demote(kea): successful
+list: jay hen kea gnu fox emu dog cow bat
+demote(kea): successful
+demote(kea): successful
+demote(kea): successful
+demote(kea): successful
+demote(kea): successful
+list: jay hen gnu fox emu dog cow kea bat
+demote(kea): successful
+list: jay hen gnu fox emu dog cow bat kea
+comment: This last demotion should have no effect
+demote(kea): successful
+list: jay hen gnu fox emu dog cow bat kea
+comment: Successively demote -jay- while promoting -kea-
+demote(jay): successful
+promote(kea): successful
+list: hen jay gnu fox emu dog cow kea bat
+demote(jay): successful
+promote(kea): successful
+list: hen gnu jay fox emu dog kea cow bat
+demote(jay): successful
+promote(kea): successful
+list: hen gnu fox jay emu kea dog cow bat
+demote(jay): successful
+promote(kea): successful
+list: hen gnu fox emu kea jay dog cow bat
+demote(jay): successful
+promote(kea): successful
+list: hen gnu fox kea emu dog jay cow bat
+demote(jay): successful
+promote(kea): successful
+list: hen gnu kea fox emu dog cow jay bat
+demote(jay): successful
+promote(kea): successful
+list: hen kea gnu fox emu dog cow bat jay
+demote(jay): successful
+promote(kea): successful
+list: kea hen gnu fox emu dog cow bat jay
+demote(jay): successful
+promote(kea): successful
+list: kea hen gnu fox emu dog cow bat jay
+size: 9
+peek: kea
+demote(jay): successful
+demote(bat): successful
+demote(cow): successful
+demote(dog): successful
+demote(emu): successful
+demote(fox): successful
+list: kea hen gnu jay fox emu dog cow bat
+promote(gnu): successful
+promote(fox): successful
+promote(emu): successful
+promote(dog): successful
+promote(cow): successful
+list: kea gnu hen fox emu dog cow jay bat
+size: 9
+peek: kea
+depth(kea): 0
+depth(gnu): 1
+depth(hen): 2
+depth(fox): 3
+depth(emu): 4
+depth(dog): 5
+depth(cow): 6
+depth(jay): 7
+depth(bat): 8
+pop: kea
+pop: gnu
+pop: hen
+pop: fox
+list: emu dog cow jay bat
+depth(emu): 0
+depth(dog): 1
+depth(cow): 2
+depth(jay): 3
+depth(bat): 4
+pop: emu
+pop: dog
+pop: cow
+pop: jay
+pop: bat
+list:
+size: 0
+comment: The following should throw a "Pop of empty stack" exception
+pop: Failure due to exception: "Pop of empty stack"
+comment: The following should throw a "Peek of empty stack" exception
+peek: Failure due to exception: "Peek of empty stack"
