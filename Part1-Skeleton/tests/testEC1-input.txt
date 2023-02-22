@@ -1,0 +1,49 @@
+alert:testEC1 - This tests the extra-credit portion
+insert:H1:BWI:88
+insert:H1:LAX:61
+insert:H1:IAD:47
+list:H1
+insert:H2:SEA:96
+insert:H2:CLT:82
+insert:H2:BOS:72
+list:H2
+insert:H3:DCA:33
+insert:H3:JFK:26
+insert:H3:ATL:52
+list:H3
+insert:H4:PVD:13
+insert:H4:ORD:37
+insert:H4:DFW:55
+list:H4
+insert:H5:DEN:23
+insert:H5:MIA:11
+list:H5
+extract:H5
+update-key:H5:MIA:91
+merge:H4:H5
+list:H4
+size:H4
+list:H5
+size:H5
+alert:We're expecting an "Invalid locator" exception
+update-key:H5:MIA:19
+list:H4
+alert:We're expecting an "Invalid locator" exception
+update-key:H2:PVD:31
+merge:H4:H5
+merge:H3:H4
+alert:We're expecting an "Invalid locator" exception
+update-key:H5:MIA:97
+alert:We're expecting an "Invalid locator" exception
+update-key:H4:MIA:10
+update-key:H3:MIA:99
+list:H3
+merge:H1:H2
+list:H1
+merge:H1:H3
+list:H1
+update-key:H1:BWI:12
+list:H1
+alert:We're expecting an "Invalid locator" exception 
+alert:If you see "Attempt to access nonexistent locator" below, update your skeleton code
+update-key:H5:DEN:93

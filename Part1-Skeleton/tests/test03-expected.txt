@@ -1,0 +1,225 @@
+alert: test03 - This tests basic operations and merge, and also tests some edge cases
+insert(88, BWI) into [H1]: successful
+insert(61, LAX) into [H1]: successful
+insert(47, IAD) into [H1]: successful
+insert(33, DCA) into [H1]: successful
+insert(26, JFK) into [H1]: successful
+insert(52, ATL) into [H1]: successful
+insert(13, PVD) into [H1]: successful
+list[H1]:
+  (88, BWI) [7]
+  (47, IAD) [3]
+  (13, PVD) [1]
+  []
+  []
+  (33, DCA) [1]
+  []
+  []
+  (61, LAX) [3]
+  (52, ATL) [1]
+  []
+  []
+  (26, JFK) [1]
+  []
+  []
+Formatted structure:
+  | | (13, PVD) [1]
+  | (47, IAD) [3]
+  | | (33, DCA) [1]
+  (88, BWI) [7]
+  | | (52, ATL) [1]
+  | (61, LAX) [3]
+  | | (26, JFK) [1]
+insert(96, SEA) into [H2]: successful
+insert(82, CLT) into [H2]: successful
+insert(72, BOS) into [H2]: successful
+insert(37, ORD) into [H2]: successful
+insert(55, DFW) into [H2]: successful
+insert(23, DEN) into [H2]: successful
+insert(11, MIA) into [H2]: successful
+list[H2]:
+  (96, SEA) [7]
+  (72, BOS) [3]
+  (11, MIA) [1]
+  []
+  []
+  (37, ORD) [1]
+  []
+  []
+  (82, CLT) [3]
+  (23, DEN) [1]
+  []
+  []
+  (55, DFW) [1]
+  []
+  []
+Formatted structure:
+  | | (11, MIA) [1]
+  | (72, BOS) [3]
+  | | (37, ORD) [1]
+  (96, SEA) [7]
+  | | (23, DEN) [1]
+  | (82, CLT) [3]
+  | | (55, DFW) [1]
+extract[H2]: SEA
+list[H2]:
+  (82, CLT) [6]
+  (55, DFW) [1]
+  []
+  []
+  (72, BOS) [4]
+  (37, ORD) [1]
+  []
+  []
+  (23, DEN) [2]
+  []
+  (11, MIA) [1]
+  []
+  []
+Formatted structure:
+  | (55, DFW) [1]
+  (82, CLT) [6]
+  | | (37, ORD) [1]
+  | (72, BOS) [4]
+  | | (23, DEN) [2]
+  | | | (11, MIA) [1]
+size[H2]: 6
+peek-key[H2]: 82
+peek-value[H2]: CLT
+merge[H1] with [H2]: successful
+list[H1]:
+  (88, BWI) [13]
+  (61, LAX) [3]
+  (52, ATL) [1]
+  []
+  []
+  (26, JFK) [1]
+  []
+  []
+  (82, CLT) [9]
+  (55, DFW) [4]
+  []
+  (47, IAD) [3]
+  (13, PVD) [1]
+  []
+  []
+  (33, DCA) [1]
+  []
+  []
+  (72, BOS) [4]
+  (37, ORD) [1]
+  []
+  []
+  (23, DEN) [2]
+  []
+  (11, MIA) [1]
+  []
+  []
+Formatted structure:
+  | | (52, ATL) [1]
+  | (61, LAX) [3]
+  | | (26, JFK) [1]
+  (88, BWI) [13]
+  | | (55, DFW) [4]
+  | | | | (13, PVD) [1]
+  | | | (47, IAD) [3]
+  | | | | (33, DCA) [1]
+  | (82, CLT) [9]
+  | | | (37, ORD) [1]
+  | | (72, BOS) [4]
+  | | | (23, DEN) [2]
+  | | | | (11, MIA) [1]
+list[H2]:
+  []
+Formatted structure:
+alert: We're expecting an "Extract from empty heap" exception
+extract[H2]: Failure due to exception: "Extract from empty heap"
+list[H1]:
+  (88, BWI) [13]
+  (61, LAX) [3]
+  (52, ATL) [1]
+  []
+  []
+  (26, JFK) [1]
+  []
+  []
+  (82, CLT) [9]
+  (55, DFW) [4]
+  []
+  (47, IAD) [3]
+  (13, PVD) [1]
+  []
+  []
+  (33, DCA) [1]
+  []
+  []
+  (72, BOS) [4]
+  (37, ORD) [1]
+  []
+  []
+  (23, DEN) [2]
+  []
+  (11, MIA) [1]
+  []
+  []
+Formatted structure:
+  | | (52, ATL) [1]
+  | (61, LAX) [3]
+  | | (26, JFK) [1]
+  (88, BWI) [13]
+  | | (55, DFW) [4]
+  | | | | (13, PVD) [1]
+  | | | (47, IAD) [3]
+  | | | | (33, DCA) [1]
+  | (82, CLT) [9]
+  | | | (37, ORD) [1]
+  | | (72, BOS) [4]
+  | | | (23, DEN) [2]
+  | | | | (11, MIA) [1]
+size[H1]: 13
+peek-key[H1]: 88
+peek-value[H1]: BWI
+extract[H1]: BWI
+extract[H1]: CLT
+extract[H1]: BOS
+extract[H1]: LAX
+extract[H1]: DFW
+extract[H1]: ATL
+extract[H1]: IAD
+extract[H1]: ORD
+extract[H1]: DCA
+extract[H1]: JFK
+extract[H1]: DEN
+extract[H1]: PVD
+list[H1]:
+  (11, MIA) [1]
+  []
+  []
+Formatted structure:
+  (11, MIA) [1]
+update-key(MIA) to 32 in [H1]: successful
+list[H1]:
+  (32, MIA) [1]
+  []
+  []
+Formatted structure:
+  (32, MIA) [1]
+update-key(MIA) to 5 in [H1]: successful
+list[H1]:
+  (5, MIA) [1]
+  []
+  []
+Formatted structure:
+  (5, MIA) [1]
+extract[H1]: MIA
+list[H1]:
+  []
+Formatted structure:
+alert: We're expecting an "Extract from empty heap" exception
+extract[H1]: Failure due to exception: "Extract from empty heap"
+list[H1]:
+  []
+Formatted structure:
+size[H1]: 0
+peek-key[H1]: null
+peek-value[H1]: null

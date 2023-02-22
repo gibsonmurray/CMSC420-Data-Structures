@@ -1,0 +1,256 @@
+alert: testEC1 - This tests the extra-credit portion
+insert(88, BWI) into [H1]: successful
+insert(61, LAX) into [H1]: successful
+insert(47, IAD) into [H1]: successful
+list[H1]:
+  (88, BWI) [3]
+  (47, IAD) [1]
+  []
+  []
+  (61, LAX) [1]
+  []
+  []
+Formatted structure:
+  | (47, IAD) [1]
+  (88, BWI) [3]
+  | (61, LAX) [1]
+insert(96, SEA) into [H2]: successful
+insert(82, CLT) into [H2]: successful
+insert(72, BOS) into [H2]: successful
+list[H2]:
+  (96, SEA) [3]
+  (72, BOS) [1]
+  []
+  []
+  (82, CLT) [1]
+  []
+  []
+Formatted structure:
+  | (72, BOS) [1]
+  (96, SEA) [3]
+  | (82, CLT) [1]
+insert(33, DCA) into [H3]: successful
+insert(26, JFK) into [H3]: successful
+insert(52, ATL) into [H3]: successful
+list[H3]:
+  (52, ATL) [3]
+  []
+  (33, DCA) [2]
+  []
+  (26, JFK) [1]
+  []
+  []
+Formatted structure:
+  (52, ATL) [3]
+  | (33, DCA) [2]
+  | | (26, JFK) [1]
+insert(13, PVD) into [H4]: successful
+insert(37, ORD) into [H4]: successful
+insert(55, DFW) into [H4]: successful
+list[H4]:
+  (55, DFW) [3]
+  []
+  (37, ORD) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  (55, DFW) [3]
+  | (37, ORD) [2]
+  | | (13, PVD) [1]
+insert(23, DEN) into [H5]: successful
+insert(11, MIA) into [H5]: successful
+list[H5]:
+  (23, DEN) [2]
+  []
+  (11, MIA) [1]
+  []
+  []
+Formatted structure:
+  (23, DEN) [2]
+  | (11, MIA) [1]
+extract[H5]: DEN
+update-key(MIA) to 91 in [H5]: successful
+merge[H4] with [H5]: successful
+list[H4]:
+  (91, MIA) [4]
+  []
+  (55, DFW) [3]
+  []
+  (37, ORD) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  (91, MIA) [4]
+  | (55, DFW) [3]
+  | | (37, ORD) [2]
+  | | | (13, PVD) [1]
+size[H4]: 4
+list[H5]:
+  []
+Formatted structure:
+size[H5]: 0
+alert: We're expecting an "Invalid locator" exception
+update-key(MIA) to 19 in [H5]: Failure due to exception: "Invalid locator"
+list[H4]:
+  (91, MIA) [4]
+  []
+  (55, DFW) [3]
+  []
+  (37, ORD) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  (91, MIA) [4]
+  | (55, DFW) [3]
+  | | (37, ORD) [2]
+  | | | (13, PVD) [1]
+alert: We're expecting an "Invalid locator" exception
+update-key(PVD) to 31 in [H2]: Failure due to exception: "Invalid locator"
+merge[H4] with [H5]: successful
+merge[H3] with [H4]: successful
+alert: We're expecting an "Invalid locator" exception
+update-key(MIA) to 97 in [H5]: Failure due to exception: "Invalid locator"
+alert: We're expecting an "Invalid locator" exception
+update-key(MIA) to 10 in [H4]: Failure due to exception: "Invalid locator"
+update-key(MIA) to 99 in [H3]: successful
+list[H3]:
+  (99, MIA) [7]
+  (52, ATL) [3]
+  []
+  (33, DCA) [2]
+  []
+  (26, JFK) [1]
+  []
+  []
+  (55, DFW) [3]
+  []
+  (37, ORD) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  | (52, ATL) [3]
+  | | (33, DCA) [2]
+  | | | (26, JFK) [1]
+  (99, MIA) [7]
+  | (55, DFW) [3]
+  | | (37, ORD) [2]
+  | | | (13, PVD) [1]
+merge[H1] with [H2]: successful
+list[H1]:
+  (96, SEA) [6]
+  (82, CLT) [1]
+  []
+  []
+  (88, BWI) [4]
+  (61, LAX) [1]
+  []
+  []
+  (72, BOS) [2]
+  []
+  (47, IAD) [1]
+  []
+  []
+Formatted structure:
+  | (82, CLT) [1]
+  (96, SEA) [6]
+  | | (61, LAX) [1]
+  | (88, BWI) [4]
+  | | (72, BOS) [2]
+  | | | (47, IAD) [1]
+merge[H1] with [H3]: successful
+list[H1]:
+  (99, MIA) [13]
+  (55, DFW) [3]
+  []
+  (37, ORD) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+  (96, SEA) [9]
+  (82, CLT) [4]
+  []
+  (52, ATL) [3]
+  []
+  (33, DCA) [2]
+  []
+  (26, JFK) [1]
+  []
+  []
+  (88, BWI) [4]
+  (61, LAX) [1]
+  []
+  []
+  (72, BOS) [2]
+  []
+  (47, IAD) [1]
+  []
+  []
+Formatted structure:
+  | (55, DFW) [3]
+  | | (37, ORD) [2]
+  | | | (13, PVD) [1]
+  (99, MIA) [13]
+  | | (82, CLT) [4]
+  | | | (52, ATL) [3]
+  | | | | (33, DCA) [2]
+  | | | | | (26, JFK) [1]
+  | (96, SEA) [9]
+  | | | (61, LAX) [1]
+  | | (88, BWI) [4]
+  | | | (72, BOS) [2]
+  | | | | (47, IAD) [1]
+update-key(BWI) to 12 in [H1]: successful
+list[H1]:
+  (99, MIA) [13]
+  (55, DFW) [3]
+  []
+  (37, ORD) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+  (96, SEA) [9]
+  (82, CLT) [4]
+  []
+  (52, ATL) [3]
+  []
+  (33, DCA) [2]
+  []
+  (26, JFK) [1]
+  []
+  []
+  (72, BOS) [4]
+  (61, LAX) [1]
+  []
+  []
+  (47, IAD) [2]
+  []
+  (12, BWI) [1]
+  []
+  []
+Formatted structure:
+  | (55, DFW) [3]
+  | | (37, ORD) [2]
+  | | | (13, PVD) [1]
+  (99, MIA) [13]
+  | | (82, CLT) [4]
+  | | | (52, ATL) [3]
+  | | | | (33, DCA) [2]
+  | | | | | (26, JFK) [1]
+  | (96, SEA) [9]
+  | | | (61, LAX) [1]
+  | | (72, BOS) [4]
+  | | | (47, IAD) [2]
+  | | | | (12, BWI) [1]
+alert: We're expecting an "Invalid locator" exception 
+alert: If you see "Attempt to access nonexistent locator" below, update your skeleton code
+update-key(DEN) to 93 in [H5]: Failure due to exception: "Invalid locator"
