@@ -1,4 +1,4 @@
-alert: test04 - Testing on a larger data set
+alert: test04b - Testing on a larger data set
 insert(290, TMX) into [H1]: successful
 insert(535, NRD) into [H1]: successful
 insert(548, GWT) into [H1]: successful

@@ -1,4 +1,4 @@
-alert: test05 - Lots of merges
+alert: test05b - Lots of merges
 insert(290, TMX) into [H01]: successful
 insert(535, NRD) into [H01]: successful
 insert(548, GWT) into [H01]: successful

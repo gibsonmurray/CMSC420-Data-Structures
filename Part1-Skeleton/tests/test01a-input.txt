@@ -1,0 +1,22 @@
+alert:test01a - Tests insert, list and size
+insert:H1:BWI:94
+list:H1
+size:H1
+insert:H1:LAX:88
+list:H1
+size:H1
+insert:H1:IAD:42
+list:H1
+size:H1
+insert:H1:DCA:67
+list:H1
+size:H1
+insert:H1:JFK:27
+list:H1
+size:H1
+insert:H1:ATL:48
+list:H1
+size:H1
+insert:H1:SFO:19
+list:H1
+size:H1

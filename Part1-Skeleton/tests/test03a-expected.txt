@@ -1,4 +1,4 @@
-alert: test03 - This tests basic operations and merge, and also tests some edge cases
+alert: test03a - This tests basic operations and merge, and also tests some edge cases
 insert(88, BWI) into [H1]: successful
 insert(61, LAX) into [H1]: successful
 insert(47, IAD) into [H1]: successful
@@ -179,47 +179,3 @@ Formatted structure:
 size[H1]: 13
 peek-key[H1]: 88
 peek-value[H1]: BWI
-extract[H1]: BWI
-extract[H1]: CLT
-extract[H1]: BOS
-extract[H1]: LAX
-extract[H1]: DFW
-extract[H1]: ATL
-extract[H1]: IAD
-extract[H1]: ORD
-extract[H1]: DCA
-extract[H1]: JFK
-extract[H1]: DEN
-extract[H1]: PVD
-list[H1]:
-  (11, MIA) [1]
-  []
-  []
-Formatted structure:
-  (11, MIA) [1]
-update-key(MIA) to 32 in [H1]: successful
-list[H1]:
-  (32, MIA) [1]
-  []
-  []
-Formatted structure:
-  (32, MIA) [1]
-update-key(MIA) to 5 in [H1]: successful
-list[H1]:
-  (5, MIA) [1]
-  []
-  []
-Formatted structure:
-  (5, MIA) [1]
-extract[H1]: MIA
-list[H1]:
-  []
-Formatted structure:
-alert: We're expecting an "Extract from empty heap" exception
-extract[H1]: Failure due to exception: "Extract from empty heap"
-list[H1]:
-  []
-Formatted structure:
-size[H1]: 0
-peek-key[H1]: null
-peek-value[H1]: null

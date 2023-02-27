@@ -30,19 +30,29 @@ public class Part1Tester {
 	private static final String inFolder = "tests"; // folder with input files (from project root)
 	private static final String outFolder = "tests"; // folder with output files (from project root)
 	private static String[] inputFileList = { // input files
-			"test01-input.txt",
-//			"test02-input.txt",
-//			"test03-input.txt",
-//			"test04-input.txt",
-//			"test05-input.txt",
+			"test01a-input.txt",
+//			"test01b-input.txt",
+//			"test02a-input.txt",
+//			"test02b-input.txt",
+//			"test03a-input.txt",
+//			"test03b-input.txt",
+//			"test04a-input.txt",
+//			"test04b-input.txt",
+//			"test05a-input.txt",
+//			"test05b-input.txt",
 //			"testEC1-input.txt", // for extra-credit only
 			};
 	private static String[] outputFileList = { // associated output files
-			"test01-output.txt",
-//			"test02-output.txt",
-//			"test03-output.txt",
-//			"test04-output.txt",
-//			"test05-output.txt",
+			"test01a-output.txt",
+//			"test01b-output.txt",
+//			"test02a-output.txt",
+//			"test02b-output.txt",
+//			"test03a-output.txt",
+//			"test03b-output.txt",
+//			"test04a-output.txt",
+//			"test04b-output.txt",
+//			"test05a-output.txt",
+//			"test05b-output.txt",
 //			"testEC1-output.txt", // for extra-credit only
 			};
 	// --------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-alert:test02 - Tests all operations
+alert:test02a - Tests all operations except extract
 insert:H1:BWI:88
 insert:H1:LAX:61
 insert:H1:IAD:47
@@ -39,32 +39,6 @@ list:H1
 update-key:H1:MIA:10
 list:H1
 update-key:H1:SEA:20
-list:H1
-size:H1
-peek-key:H1
-peek-value:H1
-extract:H1
-list:H1
-update-key:H1:BWI:19
-list:H1
-extract:H1
-list:H1
-extract:H1
-extract:H1
-extract:H1
-extract:H1
-extract:H1
-list:H1
-extract:H1
-extract:H1
-extract:H1
-extract:H1
-extract:H1
-list:H1
-size:H1
-peek-key:H1
-peek-value:H1
-extract:H1
 list:H1
 size:H1
 peek-key:H1

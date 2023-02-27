@@ -1,4 +1,4 @@
-alert:test05 - Lots of merges
+alert:test05b - Lots of merges
 insert:H01:TMX:290
 insert:H01:NRD:535
 insert:H01:GWT:548

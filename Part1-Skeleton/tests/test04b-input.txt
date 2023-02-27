@@ -1,4 +1,4 @@
-alert:test04 - Testing on a larger data set
+alert:test04b - Testing on a larger data set
 insert:H1:TMX:290
 insert:H1:NRD:535
 insert:H1:GWT:548

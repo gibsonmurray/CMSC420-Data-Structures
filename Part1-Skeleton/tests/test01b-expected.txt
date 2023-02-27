@@ -1,0 +1,206 @@
+alert: test01b - Tests insert, list, size, peek, extract
+insert(94, BWI) into [H1]: successful
+list[H1]:
+  (94, BWI) [1]
+  []
+  []
+Formatted structure:
+  (94, BWI) [1]
+insert(88, LAX) into [H1]: successful
+list[H1]:
+  (94, BWI) [2]
+  []
+  (88, LAX) [1]
+  []
+  []
+Formatted structure:
+  (94, BWI) [2]
+  | (88, LAX) [1]
+insert(42, IAD) into [H1]: successful
+list[H1]:
+  (94, BWI) [3]
+  (42, IAD) [1]
+  []
+  []
+  (88, LAX) [1]
+  []
+  []
+Formatted structure:
+  | (42, IAD) [1]
+  (94, BWI) [3]
+  | (88, LAX) [1]
+insert(67, DCA) into [H1]: successful
+list[H1]:
+  (94, BWI) [4]
+  (88, LAX) [1]
+  []
+  []
+  (67, DCA) [2]
+  []
+  (42, IAD) [1]
+  []
+  []
+Formatted structure:
+  | (88, LAX) [1]
+  (94, BWI) [4]
+  | (67, DCA) [2]
+  | | (42, IAD) [1]
+insert(27, JFK) into [H1]: successful
+list[H1]:
+  (94, BWI) [5]
+  (88, LAX) [2]
+  []
+  (27, JFK) [1]
+  []
+  []
+  (67, DCA) [2]
+  []
+  (42, IAD) [1]
+  []
+  []
+Formatted structure:
+  | (88, LAX) [2]
+  | | (27, JFK) [1]
+  (94, BWI) [5]
+  | (67, DCA) [2]
+  | | (42, IAD) [1]
+insert(48, ATL) into [H1]: successful
+list[H1]:
+  (94, BWI) [6]
+  (67, DCA) [2]
+  []
+  (42, IAD) [1]
+  []
+  []
+  (88, LAX) [3]
+  (48, ATL) [1]
+  []
+  []
+  (27, JFK) [1]
+  []
+  []
+Formatted structure:
+  | (67, DCA) [2]
+  | | (42, IAD) [1]
+  (94, BWI) [6]
+  | | (48, ATL) [1]
+  | (88, LAX) [3]
+  | | (27, JFK) [1]
+insert(19, SFO) into [H1]: successful
+list[H1]:
+  (94, BWI) [7]
+  (67, DCA) [3]
+  (19, SFO) [1]
+  []
+  []
+  (42, IAD) [1]
+  []
+  []
+  (88, LAX) [3]
+  (48, ATL) [1]
+  []
+  []
+  (27, JFK) [1]
+  []
+  []
+Formatted structure:
+  | | (19, SFO) [1]
+  | (67, DCA) [3]
+  | | (42, IAD) [1]
+  (94, BWI) [7]
+  | | (48, ATL) [1]
+  | (88, LAX) [3]
+  | | (27, JFK) [1]
+size[H1]: 7
+peek-key[H1]: 94
+peek-value[H1]: BWI
+extract[H1]: BWI
+list[H1]:
+  (88, LAX) [6]
+  (27, JFK) [1]
+  []
+  []
+  (67, DCA) [4]
+  (42, IAD) [1]
+  []
+  []
+  (48, ATL) [2]
+  []
+  (19, SFO) [1]
+  []
+  []
+Formatted structure:
+  | (27, JFK) [1]
+  (88, LAX) [6]
+  | | (42, IAD) [1]
+  | (67, DCA) [4]
+  | | (48, ATL) [2]
+  | | | (19, SFO) [1]
+extract[H1]: LAX
+list[H1]:
+  (67, DCA) [5]
+  (42, IAD) [2]
+  []
+  (27, JFK) [1]
+  []
+  []
+  (48, ATL) [2]
+  []
+  (19, SFO) [1]
+  []
+  []
+Formatted structure:
+  | (42, IAD) [2]
+  | | (27, JFK) [1]
+  (67, DCA) [5]
+  | (48, ATL) [2]
+  | | (19, SFO) [1]
+extract[H1]: DCA
+list[H1]:
+  (48, ATL) [4]
+  (19, SFO) [1]
+  []
+  []
+  (42, IAD) [2]
+  []
+  (27, JFK) [1]
+  []
+  []
+Formatted structure:
+  | (19, SFO) [1]
+  (48, ATL) [4]
+  | (42, IAD) [2]
+  | | (27, JFK) [1]
+size[H1]: 4
+peek-key[H1]: 48
+peek-value[H1]: ATL
+extract[H1]: ATL
+list[H1]:
+  (42, IAD) [3]
+  (19, SFO) [1]
+  []
+  []
+  (27, JFK) [1]
+  []
+  []
+Formatted structure:
+  | (19, SFO) [1]
+  (42, IAD) [3]
+  | (27, JFK) [1]
+extract[H1]: IAD
+list[H1]:
+  (27, JFK) [2]
+  []
+  (19, SFO) [1]
+  []
+  []
+Formatted structure:
+  (27, JFK) [2]
+  | (19, SFO) [1]
+clear[H1]: successful
+list[H1]:
+  []
+Formatted structure:
+size[H1]: 0
+peek-key[H1]: null
+peek-value[H1]: null

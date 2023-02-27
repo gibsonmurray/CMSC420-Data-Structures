@@ -1,4 +1,4 @@
-alert:test01 - This tests basic operations but not merge or update-key
+alert:test01b - Tests insert, list, size, peek, extract
 insert:H1:BWI:94
 list:H1
 insert:H1:LAX:88

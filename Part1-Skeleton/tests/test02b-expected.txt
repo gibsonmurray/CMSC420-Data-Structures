@@ -1,4 +1,4 @@
-alert: test02 - Tests all operations
+alert: test02b - Tests all operations
 insert(88, BWI) into [H1]: successful
 insert(61, LAX) into [H1]: successful
 insert(47, IAD) into [H1]: successful
