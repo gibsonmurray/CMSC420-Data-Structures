@@ -45,7 +45,8 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 
 	public Locator insert(Key x, Value v) {
 		Node newNode = new Node(x, v);
-		merge(this.root, newNode);
+		newNode.weight = 1;
+		this.root = merge(this.root, newNode);
 		this.size++;
 		return new Locator(newNode);
 	}
@@ -88,6 +89,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		if (u.k.compareTo(v.k) < 0) swapSiblings(u, v);
 		if (u.left == null){
 			u.left = v;
+			u.weight = v.weight + 1;
 			v.parent = u;
 		} 
 		else {
@@ -95,7 +97,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			u.right = uRight;
 			uRight.parent = u;
 			if (u.left.weight < u.right.weight) swapSiblings(u.left, u.right);
-			u.weight = u.right.weight + 1;
+			u.weight = u.right.weight + u.left.weight + 1;
 		}
 		return u;
 	}
