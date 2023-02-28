@@ -46,6 +46,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	public Locator insert(Key x, Value v) {
 		Node newNode = new Node(x, v);
 		merge(this.root, newNode);
+		this.size++;
 		return new Locator(newNode);
 	}
 
@@ -55,7 +56,8 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		h2.root = null;
 	}
 
-	private void swap(Node u, Node v) {
+	//refine for later
+	private void swapSiblings(Node u, Node v) {
 		Node temp = new Node(u.k, u.v);
 		temp.weight = u.weight;
 		temp.left = u.left;
@@ -64,11 +66,26 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		u = v;
 		v = temp;
 	}
+	
+	//swaps fields for updating key method
+	private void swapFields(Node u, Node v) {
+		//copy u's data
+		Key tempKey = u.k;
+		Value tempValue = u.v;
+		int tempWeight = u.weight;
+		//swap data w v
+		u.k = v.k;
+		u.v = v.v;
+		u.weight = v.weight;
+		v.k = tempKey;
+		v.v = tempValue;
+		v.weight = tempWeight;
+	}
 
 	private Node merge(Node u, Node v) {
 		if (u == null) return v;
 		if (v == null) return u;
-		if (u.k.compareTo(v.k) < 0) swap(u, v);
+		if (u.k.compareTo(v.k) < 0) swapSiblings(u, v);
 		if (u.left == null){
 			u.left = v;
 			v.parent = u;
@@ -77,7 +94,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			Node uRight = merge(u.right, v);
 			u.right = uRight;
 			uRight.parent = u;
-			if (u.left.weight < u.right.weight) swap(u.left, u.right);
+			if (u.left.weight < u.right.weight) swapSiblings(u.left, u.right);
 			u.weight = u.right.weight + 1;
 		}
 		return u;
@@ -94,86 +111,35 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	public void updateKey(Locator loc, Key x) {
 		Node curr = loc.node;
 		curr.k = x;
+		// check parents
 		while (curr.parent != null && curr.k.compareTo(curr.parent.k) > 0) {
-			//copy curr's data
-			Key tempKey = curr.k;
-			Value tempValue = curr.v;
-			int tempWeight = curr.weight;
-			//swap data w parent
-			curr.k = curr.parent.k;
-			curr.v = curr.parent.v;
-			curr.weight = curr.parent.weight;
-			curr.parent.k = tempKey;
-			curr.parent.v = tempValue;
-			curr.parent.weight = tempWeight;
+			swapFields(curr, curr.parent);
 			//iterate up
 			curr = curr.parent;
 		}
+		//check children
 		while ((curr.left != null && curr.right != null) 
 				|| curr.k.compareTo(curr.left.k) < 0 
 				|| curr.k.compareTo(curr.right.k) < 0) {
-			//swap with left
 			if (curr.k.compareTo(curr.left.k) < curr.k.compareTo(curr.right.k) 
-				&& curr.k.compareTo(curr.left.k) < 0) {
-				//copy curr's data
-				Key tempKey = curr.k;
-				Value tempValue = curr.v;
-				int tempWeight = curr.weight;
-				//swap data w left
-				curr.k = curr.left.k;
-				curr.v = curr.left.v;
-				curr.weight = curr.left.weight;
-				curr.left.k = tempKey;
-				curr.left.v = tempValue;
-				curr.left.weight = tempWeight;
-				//iterate down + left
+					&& curr.k.compareTo(curr.left.k) < 0) {
+				swapFields(curr, curr.left);
 				curr = curr.left;
 			} 
 			else if (curr.k.compareTo(curr.right.k) <= curr.k.compareTo(curr.left.k) 
 						&& curr.k.compareTo(curr.right.k) < 0) {
-				//copy curr's data
-				Key tempKey = curr.k;
-				Value tempValue = curr.v;
-				int tempWeight = curr.weight;
-				//swap data w right
-				curr.k = curr.right.k;
-				curr.v = curr.right.v;
-				curr.weight = curr.right.weight;
-				curr.right.k = tempKey;
-				curr.right.v = tempValue;
-				curr.right.weight = tempWeight;
-				//iterate down + right
+				swapFields(curr, curr.right);
 				curr = curr.right;
 			} 
 		}
 		//EDGE CASES at leaf level
 		if (curr.left != null && curr.right == null 
 			&& curr.k.compareTo(curr.left.k) < 0) {
-			//copy curr's data
-			Key tempKey = curr.k;
-			Value tempValue = curr.v;
-			int tempWeight = curr.weight;
-			//swap data w left
-			curr.k = curr.left.k;
-			curr.v = curr.left.v;
-			curr.weight = curr.left.weight;
-			curr.left.k = tempKey;
-			curr.left.v = tempValue;
-			curr.left.weight = tempWeight;
+			swapFields(curr, curr.left);
 		}
 		if (curr.right != null && curr.left == null 
 			&& curr.k.compareTo(curr.right.k) < 0) {
-			//copy curr's data
-			Key tempKey = curr.k;
-			Value tempValue = curr.v;
-			int tempWeight = curr.weight;
-			//swap data w right
-			curr.k = curr.right.k;
-			curr.v = curr.right.v;
-			curr.weight = curr.right.weight;
-			curr.right.k = tempKey;
-			curr.right.v = tempValue;
-			curr.right.weight = tempWeight;
+			swapFields(curr, curr.right);
 		}
 	}
 
@@ -189,18 +155,19 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 
 	public ArrayList<String> list() {
 		ArrayList<String> ans = new ArrayList<String>();
-		listAux(root, ans);
-		return ans;
+		return listAux(root, ans);
 	}
 
-	private void listAux(Node curr, ArrayList<String> ans){
+	private ArrayList<String> listAux(Node curr, ArrayList<String> ans){
 		if (curr == null) {
 			ans.add("[]");
+			return ans;
 		}
 		else {
 			ans.add("(" + curr.k + ", " + curr.v + ") [" + curr.weight + "]");
-			listAux(curr.right, ans);
-			listAux(curr.left, ans);
+			ans = listAux(curr.right, ans);
+			ans = listAux(curr.left, ans);
+			return ans;
 		}
 	}
 

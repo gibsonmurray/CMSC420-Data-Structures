@@ -1,0 +1,2 @@
+alert: test01a - Tests insert, list and size
+insert(94, BWI) into [H1]: successful
