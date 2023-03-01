@@ -9,7 +9,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	private class Node {
 		private Key k;
 		private Value v;
-		private Node left, right, parent;
+		private Node left, right;
 		private int weight;
 
 		private Node (Key k, Value v) {
@@ -18,7 +18,6 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			this.weight = 0;
 			this.left = null;
 			this.right = null;
-			this.parent = null;
 		}
 	}
 	
@@ -55,7 +54,6 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	public void mergeWith(WtLeftHeap<Key, Value> h2) {
 		this.size += h2.size;
 		this.root = merge(this.root, h2.root);
-		this.root.parent = null;
 		h2.root = null;
 		h2.size = 0;
 	}
@@ -68,25 +66,20 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			temp.weight = u.weight;
 			temp.left = u.left;
 			temp.right = u.right;
-			temp.parent = u.parent;
 			u = v;
 			v = temp;
 		}
 		if (u.left == null) {
 			u.left = v;
 			u.weight = v.weight + 1;
-			v.parent = u;
 		} 
 		else {
-			Node uRight = merge(u.right, v);
-			u.right = uRight;
-			uRight.parent = u;
+			u.right = merge(u.right, v);
 			if (u.left.weight < u.right.weight){
 				Node temp = new Node(u.left.k, u.left.v);
 				temp.weight = u.left.weight;
 				temp.left = u.left.left;
 				temp.right = u.left.right;
-				temp.parent = u;
 				u.left = u.right;
 				u.right = temp;
 			}
@@ -99,44 +92,66 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		if (root == null) throw new Exception("Extract from empty heap");
 		Value ans = root.v;
 		this.root = merge(this.root.left, this.root.right);
-		this.root.parent = null;
 		return ans;
 	}
 
 	public void updateKey(Locator loc, Key x) {
 		Node curr = loc.node;
-		curr.k = x;
-		// check parents
-		while (curr.parent != null && curr.k.compareTo(curr.parent.k) > 0) {
-			curr = swapParent(curr);
-			//iterate up
-			curr = curr.parent;
+		if (curr.k.compareTo(x) < 0) {
+			curr.k = x;
+			this.root = siftUp(curr, curr.k);
 		}
-		//check children
-		while ((curr.left != null && curr.right != null) 
-				|| curr.k.compareTo(curr.left.k) < 0 
-				|| curr.k.compareTo(curr.right.k) < 0) {
-			if (curr.k.compareTo(curr.left.k) < curr.k.compareTo(curr.right.k) 
-					&& curr.k.compareTo(curr.left.k) < 0) {
-				curr = swapLChild(curr);
-				curr = curr.left;
-			} 
-			else if (curr.k.compareTo(curr.right.k) <= curr.k.compareTo(curr.left.k) 
-						&& curr.k.compareTo(curr.right.k) < 0) {
-				curr = swapRChild(curr);
-				curr = curr.right;
-			} 
+		else if (curr.left.k.compareTo(x) > 0 || curr.right.k.compareTo(x) > 0) {
+			curr.k = x;
+			this.root = siftDown(curr);
 		}
-		//EDGE CASES at leaf level
-		if (curr.left != null && curr.right == null 
-			&& curr.k.compareTo(curr.left.k) < 0) {
-			curr = swapLChild(curr);
-		}
-		if (curr.right != null && curr.left == null 
-			&& curr.k.compareTo(curr.right.k) < 0) {
-				curr = swapRChild(curr);
+	}
 
+	private Node siftUp(Node node, Key k) {
+		if (node != null) {
+			node.left = siftUp(node.left, k);
+			node.right = siftUp(node.right, k);
 		}
+		if (node.left != null && node.left.k.compareTo(k) == 0
+				&& node.k.compareTo(node.left.k) < 0) {
+			node = swapLChild(node);
+			return node;
+		}
+		if (node.right != null && node.left.k.compareTo(k) == 0
+				&& node.k.compareTo(node.right.k) < 0) {
+			node = swapRChild(node);
+			return node;
+		}
+		return node;
+	}
+
+	private Node siftDown(Node node) {
+		if (node.left == null && node.right == null) return root;
+		else if (node.left != null && node.right == null
+			&& node.left.k.compareTo(node.k) > 0) {
+			node = swapLChild(node);
+			return siftDown(node.left);
+		}
+		else if (node.left == null && node.right != null 
+			&& node.right.k.compareTo(node.k) > 0) {
+			node = swapRChild(node);
+			return siftDown(node.right);
+		}
+		else {
+			int lComp = node.left.k.compareTo(node.k);
+			int rComp = node.right.k.compareTo(node.k);
+			if (lComp > 0 && rComp > 0) {
+				if (lComp > rComp) {
+					node = swapLChild(node);
+					return siftDown(node.left);
+				}
+				else {
+					node = swapRChild(node);
+					return siftDown(node.right);
+				}
+			}
+		}
+		return root;
 	}
 
 	private Node swapLChild(Node parent) {
@@ -157,16 +172,6 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		parent.right.k = tempKey;
 		parent.right.v = tempValue;
 		return parent;
-	}
-
-	private Node swapParent(Node child) {
-		Key tempKey = child.k;
-		Value tempValue = child.v;
-		child.k = child.parent.k;
-		child.v = child.parent.v;
-		child.parent.k = tempKey;
-		child.parent.v = tempValue;
-		return child;
 	}
 
 	public Key peekKey() {
