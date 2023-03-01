@@ -56,17 +56,6 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		this.root.parent = null;
 		h2.root = null;
 	}
-
-	//refine for later
-	private void swapSiblings(Node u, Node v) {
-		Node temp = new Node(u.k, u.v);
-		temp.weight = u.weight;
-		temp.left = u.left;
-		temp.right = u.right;
-		temp.parent = u.parent;
-		u = v;
-		v = temp;
-	}
 	
 	//swaps fields for updating key method
 	private void swapFields(Node u, Node v) {
@@ -86,8 +75,16 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	private Node merge(Node u, Node v) {
 		if (u == null) return v;
 		if (v == null) return u;
-		if (u.k.compareTo(v.k) < 0) swapSiblings(u, v);
-		if (u.left == null){
+		if (u.k.compareTo(v.k) < 0){
+			Node temp = new Node(u.k, u.v);
+			temp.weight = u.weight;
+			temp.left = u.left;
+			temp.right = u.right;
+			temp.parent = u.parent;
+			u = v;
+			u = temp;
+		}
+		if (u.left == null) {
 			u.left = v;
 			u.weight = v.weight + 1;
 			v.parent = u;
@@ -96,7 +93,15 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			Node uRight = merge(u.right, v);
 			u.right = uRight;
 			uRight.parent = u;
-			if (u.left.weight < u.right.weight) swapSiblings(u.left, u.right);
+			if (u.left.weight < u.right.weight){
+				Node temp = new Node(u.left.k, u.left.v);
+				temp.weight = u.left.weight;
+				temp.left = u.left.left;
+				temp.right = u.left.right;
+				temp.parent = u;
+				u.left = u.right;
+				u.right = temp;
+			}
 			u.weight = u.right.weight + u.left.weight + 1;
 		}
 		return u;
