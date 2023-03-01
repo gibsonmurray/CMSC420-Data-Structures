@@ -41,6 +41,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 
 	public void clear() {
 		this.root = null;
+		this.size = 0;
 	}
 
 	public Locator insert(Key x, Value v) {
@@ -52,24 +53,11 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	}
 
 	public void mergeWith(WtLeftHeap<Key, Value> h2) {
+		this.size += h2.size;
 		this.root = merge(this.root, h2.root);
 		this.root.parent = null;
 		h2.root = null;
-	}
-	
-	//swaps fields for updating key method
-	private void swapFields(Node u, Node v) {
-		//copy u's data
-		Key tempKey = u.k;
-		Value tempValue = u.v;
-		int tempWeight = u.weight;
-		//swap data w v
-		u.k = v.k;
-		u.v = v.v;
-		u.weight = v.weight;
-		v.k = tempKey;
-		v.v = tempValue;
-		v.weight = tempWeight;
+		h2.size = 0;
 	}
 
 	private Node merge(Node u, Node v) {
@@ -82,7 +70,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			temp.right = u.right;
 			temp.parent = u.parent;
 			u = v;
-			u = temp;
+			v = temp;
 		}
 		if (u.left == null) {
 			u.left = v;
@@ -120,7 +108,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		curr.k = x;
 		// check parents
 		while (curr.parent != null && curr.k.compareTo(curr.parent.k) > 0) {
-			swapFields(curr, curr.parent);
+			curr = swapParent(curr);
 			//iterate up
 			curr = curr.parent;
 		}
@@ -130,24 +118,55 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 				|| curr.k.compareTo(curr.right.k) < 0) {
 			if (curr.k.compareTo(curr.left.k) < curr.k.compareTo(curr.right.k) 
 					&& curr.k.compareTo(curr.left.k) < 0) {
-				swapFields(curr, curr.left);
+				curr = swapLChild(curr);
 				curr = curr.left;
 			} 
 			else if (curr.k.compareTo(curr.right.k) <= curr.k.compareTo(curr.left.k) 
 						&& curr.k.compareTo(curr.right.k) < 0) {
-				swapFields(curr, curr.right);
+				curr = swapRChild(curr);
 				curr = curr.right;
 			} 
 		}
 		//EDGE CASES at leaf level
 		if (curr.left != null && curr.right == null 
 			&& curr.k.compareTo(curr.left.k) < 0) {
-			swapFields(curr, curr.left);
+			curr = swapLChild(curr);
 		}
 		if (curr.right != null && curr.left == null 
 			&& curr.k.compareTo(curr.right.k) < 0) {
-			swapFields(curr, curr.right);
+				curr = swapRChild(curr);
+
 		}
+	}
+
+	private Node swapLChild(Node parent) {
+		Key tempKey = parent.k;
+		Value tempValue = parent.v;
+		parent.k = parent.left.k;
+		parent.v = parent.left.v;
+		parent.left.k = tempKey;
+		parent.left.v = tempValue;
+		return parent;
+	}
+
+	private Node swapRChild(Node parent) {
+		Key tempKey = parent.k;
+		Value tempValue = parent.v;
+		parent.k = parent.right.k;
+		parent.v = parent.right.v;
+		parent.right.k = tempKey;
+		parent.right.v = tempValue;
+		return parent;
+	}
+
+	private Node swapParent(Node child) {
+		Key tempKey = child.k;
+		Value tempValue = child.v;
+		child.k = child.parent.k;
+		child.v = child.parent.v;
+		child.parent.k = tempKey;
+		child.parent.v = tempValue;
+		return child;
 	}
 
 	public Key peekKey() {

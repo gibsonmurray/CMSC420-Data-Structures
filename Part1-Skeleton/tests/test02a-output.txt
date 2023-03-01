@@ -1,0 +1,126 @@
+alert: test02a - Tests all operations except extract
+insert(88, BWI) into [H1]: successful
+insert(61, LAX) into [H1]: successful
+insert(47, IAD) into [H1]: successful
+insert(33, DCA) into [H1]: successful
+insert(26, JFK) into [H1]: successful
+insert(52, ATL) into [H1]: successful
+insert(13, PVD) into [H1]: successful
+list[H1]:
+  (88, BWI) [7]
+  (47, IAD) [3]
+  (13, PVD) [1]
+  []
+  []
+  (33, DCA) [1]
+  []
+  []
+  (61, LAX) [3]
+  (52, ATL) [1]
+  []
+  []
+  (26, JFK) [1]
+  []
+  []
+Formatted structure:
+  | | (13, PVD) [1]
+  | (47, IAD) [3]
+  | | (33, DCA) [1]
+  (88, BWI) [7]
+  | | (52, ATL) [1]
+  | (61, LAX) [3]
+  | | (26, JFK) [1]
+size[H1]: 7
+peek-key[H1]: 88
+peek-value[H1]: BWI
+insert(93, SEA) into [H2]: successful
+insert(82, CLT) into [H2]: successful
+insert(72, BOS) into [H2]: successful
+insert(37, ORD) into [H2]: successful
+insert(55, DFW) into [H2]: successful
+insert(23, DEN) into [H2]: successful
+insert(11, MIA) into [H2]: successful
+list[H2]:
+  (93, SEA) [7]
+  (72, BOS) [3]
+  (11, MIA) [1]
+  []
+  []
+  (37, ORD) [1]
+  []
+  []
+  (82, CLT) [3]
+  (23, DEN) [1]
+  []
+  []
+  (55, DFW) [1]
+  []
+  []
+Formatted structure:
+  | | (11, MIA) [1]
+  | (72, BOS) [3]
+  | | (37, ORD) [1]
+  (93, SEA) [7]
+  | | (23, DEN) [1]
+  | (82, CLT) [3]
+  | | (55, DFW) [1]
+size[H2]: 7
+peek-key[H2]: 93
+peek-value[H2]: SEA
+comment: Merging H1 with H2
+merge[H1] with [H2]: successful
+comment: H1 should have everything and H2 is empty
+list[H1]:
+  (93, SEA) [14]
+  (82, CLT) [3]
+  (23, DEN) [1]
+  []
+  []
+  (55, DFW) [1]
+  []
+  []
+  (88, BWI) [10]
+  (61, LAX) [3]
+  (52, ATL) [1]
+  []
+  []
+  (26, JFK) [1]
+  []
+  []
+  (72, BOS) [6]
+  (37, ORD) [1]
+  []
+  []
+  (47, IAD) [4]
+  (33, DCA) [1]
+  []
+  []
+  (13, PVD) [2]
+  []
+  (11, MIA) [1]
+  []
+  []
+Formatted structure:
+  | | (23, DEN) [1]
+  | (82, CLT) [3]
+  | | (55, DFW) [1]
+  (93, SEA) [14]
+  | | | (52, ATL) [1]
+  | | (61, LAX) [3]
+  | | | (26, JFK) [1]
+  | (88, BWI) [10]
+  | | | (37, ORD) [1]
+  | | (72, BOS) [6]
+  | | | | (33, DCA) [1]
+  | | | (47, IAD) [4]
+  | | | | (13, PVD) [2]
+  | | | | | (11, MIA) [1]
+size[H1]: 14
+peek-key[H1]: 93
+peek-value[H1]: SEA
+list[H2]:
+  []
+Formatted structure:
+size[H2]: 0
+peek-key[H2]: null
+peek-value[H2]: null
