@@ -1,4 +1,4 @@
-alert: test02a - Tests all operations except extract
+alert: test02b - Tests all operations
 insert(88, BWI) into [H1]: successful
 insert(61, LAX) into [H1]: successful
 insert(47, IAD) into [H1]: successful
@@ -216,7 +216,7 @@ Formatted structure:
   | | | (72, BOS) [4]
   | | | | (47, IAD) [2]
   | | | | | (13, PVD) [1]
-update-key(MIA) to 10 in [H1]: successful
+update-key(MIA) to 10 in [H1]: Failure due to exception: "Cannot read field "k" because "loc.node.left" is null"
 list[H1]:
   (99, MIA) [14]
   (95, DEN) [3]
@@ -264,6 +264,14 @@ Formatted structure:
   | | | | | (13, PVD) [1]
 update-key(SEA) to 20 in [H1]: successful
 list[H1]:
+  (95, DEN) [14]
+  (82, CLT) [3]
+  (20, MIA) [1]
+  []
+  []
+  (55, DFW) [1]
+  []
+  []
   (93, SEA) [10]
   (61, LAX) [3]
   (52, ATL) [1]
@@ -286,16 +294,202 @@ list[H1]:
   []
   []
 Formatted structure:
-  | | (52, ATL) [1]
-  | (61, LAX) [3]
-  | | (26, JFK) [1]
-  (93, SEA) [10]
+  | | (20, MIA) [1]
+  | (82, CLT) [3]
+  | | (55, DFW) [1]
+  (95, DEN) [14]
+  | | | (52, ATL) [1]
+  | | (61, LAX) [3]
+  | | | (26, JFK) [1]
+  | (93, SEA) [10]
+  | | | (37, ORD) [1]
+  | | (88, BWI) [6]
+  | | | | (33, DCA) [1]
+  | | | (72, BOS) [4]
+  | | | | (47, IAD) [2]
+  | | | | | (13, PVD) [1]
+size[H1]: 14
+peek-key[H1]: 95
+peek-value[H1]: DEN
+extract[H1]: DEN
+list[H1]:
+  (93, SEA) [13]
+  (82, CLT) [6]
+  (55, DFW) [1]
+  []
+  []
+  (61, LAX) [4]
+  (26, JFK) [1]
+  []
+  []
+  (52, ATL) [2]
+  []
+  (20, MIA) [1]
+  []
+  []
+  (88, BWI) [6]
+  (37, ORD) [1]
+  []
+  []
+  (72, BOS) [4]
+  (33, DCA) [1]
+  []
+  []
+  (47, IAD) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  | | (55, DFW) [1]
+  | (82, CLT) [6]
+  | | | (26, JFK) [1]
+  | | (61, LAX) [4]
+  | | | (52, ATL) [2]
+  | | | | (20, MIA) [1]
+  (93, SEA) [13]
   | | (37, ORD) [1]
   | (88, BWI) [6]
   | | | (33, DCA) [1]
   | | (72, BOS) [4]
   | | | (47, IAD) [2]
   | | | | (13, PVD) [1]
+update-key(BWI) to 19 in [H1]: Failure due to exception: "Cannot read field "k" because "node.right" is null"
+list[H1]:
+  (93, SEA) [13]
+  (82, CLT) [6]
+  (55, DFW) [1]
+  []
+  []
+  (61, LAX) [4]
+  (26, JFK) [1]
+  []
+  []
+  (52, ATL) [2]
+  []
+  (20, MIA) [1]
+  []
+  []
+  (88, BWI) [6]
+  (37, ORD) [1]
+  []
+  []
+  (72, BOS) [4]
+  (33, DCA) [1]
+  []
+  []
+  (19, BWI) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  | | (55, DFW) [1]
+  | (82, CLT) [6]
+  | | | (26, JFK) [1]
+  | | (61, LAX) [4]
+  | | | (52, ATL) [2]
+  | | | | (20, MIA) [1]
+  (93, SEA) [13]
+  | | (37, ORD) [1]
+  | (88, BWI) [6]
+  | | | (33, DCA) [1]
+  | | (72, BOS) [4]
+  | | | (19, BWI) [2]
+  | | | | (13, PVD) [1]
+extract[H1]: SEA
+list[H1]:
+  (88, BWI) [12]
+  (72, BOS) [4]
+  (33, DCA) [1]
+  []
+  []
+  (19, BWI) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+  (82, CLT) [7]
+  (55, DFW) [2]
+  []
+  (37, ORD) [1]
+  []
+  []
+  (61, LAX) [4]
+  (26, JFK) [1]
+  []
+  []
+  (52, ATL) [2]
+  []
+  (20, MIA) [1]
+  []
+  []
+Formatted structure:
+  | | (33, DCA) [1]
+  | (72, BOS) [4]
+  | | (19, BWI) [2]
+  | | | (13, PVD) [1]
+  (88, BWI) [12]
+  | | (55, DFW) [2]
+  | | | (37, ORD) [1]
+  | (82, CLT) [7]
+  | | | (26, JFK) [1]
+  | | (61, LAX) [4]
+  | | | (52, ATL) [2]
+  | | | | (20, MIA) [1]
+extract[H1]: BWI
+extract[H1]: CLT
+extract[H1]: BOS
+extract[H1]: LAX
+extract[H1]: DFW
+list[H1]:
+  (52, ATL) [7]
+  (20, MIA) [1]
+  []
+  []
+  (37, ORD) [5]
+  (33, DCA) [1]
+  []
+  []
+  (26, JFK) [3]
+  []
+  (19, BWI) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  | (20, MIA) [1]
+  (52, ATL) [7]
+  | | (33, DCA) [1]
+  | (37, ORD) [5]
+  | | (26, JFK) [3]
+  | | | (19, BWI) [2]
+  | | | | (13, PVD) [1]
+extract[H1]: ATL
+extract[H1]: ORD
+extract[H1]: DCA
+extract[H1]: JFK
+extract[H1]: MIA
+list[H1]:
+  (19, BWI) [2]
+  []
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  (19, BWI) [2]
+  | (13, PVD) [1]
 size[H1]: 14
-peek-key[H1]: 93
-peek-value[H1]: SEA
+peek-key[H1]: 19
+peek-value[H1]: BWI
+extract[H1]: BWI
+list[H1]:
+  (13, PVD) [1]
+  []
+  []
+Formatted structure:
+  (13, PVD) [1]
+size[H1]: 14
+peek-key[H1]: 13
+peek-value[H1]: PVD

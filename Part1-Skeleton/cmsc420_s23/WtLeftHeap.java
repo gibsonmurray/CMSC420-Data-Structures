@@ -10,6 +10,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		private Key k;
 		private Value v;
 		private Node left, right;
+		private Locator loc;
 		private int weight;
 
 		private Node (Key k, Value v) {
@@ -18,6 +19,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			this.weight = 0;
 			this.left = null;
 			this.right = null;
+			this.loc = new Locator(this);
 		}
 	}
 	
@@ -48,7 +50,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		newNode.weight = 1;
 		this.root = merge(this.root, newNode);
 		this.size++;
-		return new Locator(newNode);
+		return newNode.loc;
 	}
 
 	public void mergeWith(WtLeftHeap<Key, Value> h2) {
@@ -92,85 +94,112 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 		if (root == null) throw new Exception("Extract from empty heap");
 		Value ans = root.v;
 		this.root = merge(this.root.left, this.root.right);
+		this.size--;
 		return ans;
 	}
 
 	public void updateKey(Locator loc, Key x) {
-		Node curr = loc.node;
-		if (curr.k.compareTo(x) < 0) {
-			curr.k = x;
-			this.root = siftUp(curr, curr.k);
+		if (loc.node.k.compareTo(x) < 0) {
+			this.root = siftUp(this.root, loc.node.k, x, loc);
 		}
-		else if (curr.left.k.compareTo(x) > 0 || curr.right.k.compareTo(x) > 0) {
-			curr.k = x;
-			this.root = siftDown(curr);
+		else if (loc.node.left.k.compareTo(x) > 0 || loc.node.right.k.compareTo(x) > 0) {
+			this.root = siftDown(loc.node, loc);
 		}
 	}
 
-	private Node siftUp(Node node, Key k) {
-		if (node != null) {
-			node.left = siftUp(node.left, k);
-			node.right = siftUp(node.right, k);
-		}
-		if (node.left != null && node.left.k.compareTo(k) == 0
-				&& node.k.compareTo(node.left.k) < 0) {
-			node = swapLChild(node);
+	private Node siftUp(Node node, Key pre, Key post, Locator loc) {
+		if (node == null){
 			return node;
+		} 
+		else if (node.left != null && node.left.k == pre && node.k.compareTo(post) < 0) {
+			node.left.k = post;
+			swapLChild(node);
 		}
-		if (node.right != null && node.left.k.compareTo(k) == 0
-				&& node.k.compareTo(node.right.k) < 0) {
-			node = swapRChild(node);
-			return node;
+		else if (node.right != null && node.right.k == pre && node.k.compareTo(post) < 0) {
+			node.right.k = post;
+			swapRChild(node);
+		}
+		else {
+			node.left = siftUp(node.left, pre, post, loc);
+			if (node.left != null && node.left.k == post && node.k.compareTo(post) < 0) {
+				swapLChild(node);
+				loc.node = node;
+			}
+			node.right = siftUp(node.right, pre, post, loc);
+			if (node.left != null && node.left.k == post && node.k.compareTo(post) < 0) {
+				swapRChild(node);
+				loc.node = node;
+			}
 		}
 		return node;
 	}
 
-	private Node siftDown(Node node) {
-		if (node.left == null && node.right == null) return root;
-		else if (node.left != null && node.right == null
-			&& node.left.k.compareTo(node.k) > 0) {
-			node = swapLChild(node);
-			return siftDown(node.left);
+	private Node siftDown(Node node, Locator loc) {
+		if (node == null) {
+			return node;
 		}
-		else if (node.left == null && node.right != null 
-			&& node.right.k.compareTo(node.k) > 0) {
-			node = swapRChild(node);
-			return siftDown(node.right);
-		}
-		else {
-			int lComp = node.left.k.compareTo(node.k);
-			int rComp = node.right.k.compareTo(node.k);
-			if (lComp > 0 && rComp > 0) {
-				if (lComp > rComp) {
-					node = swapLChild(node);
-					return siftDown(node.left);
+		else if (node.left != null && node.right != null) {
+			int compL = node.k.compareTo(node.left.k);
+			int compR = node.k.compareTo(node.right.k);
+			if (compL < 0 && compR < 0) {
+				if (compL > compR) {
+					swapLChild(node);
+					loc.node = node.left;
+					node.left = siftDown(node.left, loc);
 				}
-				else {
-					node = swapRChild(node);
-					return siftDown(node.right);
+				else if (compL < compR) {
+					swapRChild(node);
+					loc.node = node.right;
+					node.right = siftDown(node.right, loc);
 				}
 			}
 		}
-		return root;
+		else if (node.left != null && node.right == null) {
+			int compL = node.k.compareTo(node.left.k);
+			if (compL < 0) {
+				swapLChild(node);
+				loc.node = node.left;
+				node.left = siftDown(node.left, loc);
+			}
+		}
+		else if (node.left == null && node.right != null) {
+			int compR = node.k.compareTo(node.right.k);
+			if (compR < 0) {
+				swapLChild(node);
+				loc.node = node.right;
+				node.right = siftDown(node.right, loc);
+			}
+		}
+		return node;
 	}
 
 	private Node swapLChild(Node parent) {
 		Key tempKey = parent.k;
 		Value tempValue = parent.v;
+		Locator tempLoc = parent.loc;
 		parent.k = parent.left.k;
 		parent.v = parent.left.v;
+		parent.loc = parent.left.loc;
+		parent.loc.node = parent;
 		parent.left.k = tempKey;
 		parent.left.v = tempValue;
+		parent.left.loc = tempLoc;
+		parent.left.loc.node = parent.left;
 		return parent;
 	}
 
 	private Node swapRChild(Node parent) {
 		Key tempKey = parent.k;
 		Value tempValue = parent.v;
+		Locator tempLoc = parent.loc;
 		parent.k = parent.right.k;
 		parent.v = parent.right.v;
+		parent.loc = parent.right.loc;
+		parent.loc.node = parent;
 		parent.right.k = tempKey;
 		parent.right.v = tempValue;
+		parent.right.loc = tempLoc;
+		parent.right.loc.node = parent.right;
 		return parent;
 	}
 
