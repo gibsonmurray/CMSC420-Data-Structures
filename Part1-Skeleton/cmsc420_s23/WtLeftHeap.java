@@ -136,32 +136,19 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	}
 
 	private Node siftDown(Node node) {
-		if (node.left == null && node.right == null) return root;
-		else if (node.left != null && node.right == null
-			&& node.left.k.compareTo(node.k) > 0) {
-			node = swapLChild(node);
-			return siftDown(node.left);
-		}
-		else if (node.left == null && node.right != null 
-			&& node.right.k.compareTo(node.k) > 0) {
-			node = swapRChild(node);
-			return siftDown(node.right);
-		}
-		else {
-			int lComp = node.left.k.compareTo(node.k);
-			int rComp = node.right.k.compareTo(node.k);
-			if (lComp > 0 && rComp > 0) {
-				if (lComp > rComp) {
-					node = swapLChild(node);
-					return siftDown(node.left);
-				}
-				else {
-					node = swapRChild(node);
-					return siftDown(node.right);
-				}
+		if (node.right != null) {
+			if (node.k.compareTo(node.right.k) < 0 && node.right.k.compareTo(node.left.k) > 0) {
+				swapRChild(node);
+				node.right = siftDown(node.right);
 			}
 		}
-		return root;
+		if (node.left != null) {
+			if (node.k.compareTo(node.left.k) < 0) {
+				swapLChild(node);
+				node.left = siftDown(node.left);
+			}
+		}
+		return node;
 	}
 
 	private Node swapLChild(Node parent) {
