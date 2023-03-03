@@ -7,18 +7,19 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	private int size;
 
 	private class Node {
-		private Key k;
-		private Value v;
-		private Node left, right;
+		private Key key;
+		private Value value;
+		private Node left, right, parent;
 		private Locator loc;
 		private int weight;
 
-		private Node (Key k, Value v) {
-			this.k = k;
-			this.v = v;
+		private Node (Key key, Value value) {
+			this.key = key;
+			this.value = value;
 			this.weight = 0;
 			this.left = null;
 			this.right = null;
+			this.parent = null;
 			this.loc = new Locator(this);
 		}
 	}
@@ -26,8 +27,8 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	public class Locator {
 		private Node node;
 
-		public Locator(Node n) {
-			this.node = n;
+		public Locator(Node node) {
+			this.node = node;
 		}
 	}
 
@@ -54,34 +55,32 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 	}
 
 	public void mergeWith(WtLeftHeap<Key, Value> h2) {
-		this.size += h2.size;
-		this.root = merge(this.root, h2.root);
-		h2.root = null;
-		h2.size = 0;
+		if (this != h2) {
+			this.size += h2.size;
+			this.root = merge(this.root, h2.root);
+			h2.root = null;
+			h2.size = 0;
+		}
 	}
 
 	private Node merge(Node u, Node v) {
 		if (u == null) return v;
 		if (v == null) return u;
-		if (u.k.compareTo(v.k) < 0){
-			Node temp = new Node(u.k, u.v);
-			temp.weight = u.weight;
-			temp.left = u.left;
-			temp.right = u.right;
+		if (u.key.compareTo(v.key) < 0){
+			Node temp = u;
 			u = v;
 			v = temp;
 		}
 		if (u.left == null) {
 			u.left = v;
+			u.left.parent = u;
 			u.weight = v.weight + 1;
 		} 
 		else {
 			u.right = merge(u.right, v);
+			u.right.parent = u;
 			if (u.left.weight < u.right.weight){
-				Node temp = new Node(u.left.k, u.left.v);
-				temp.weight = u.left.weight;
-				temp.left = u.left.left;
-				temp.right = u.left.right;
+				Node temp = u.left;
 				u.left = u.right;
 				u.right = temp;
 			}
@@ -92,103 +91,132 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 
 	public Value extract() throws Exception {
 		if (root == null) throw new Exception("Extract from empty heap");
-		Value ans = root.v;
+		Value ans = root.value;
 		this.root = merge(this.root.left, this.root.right);
 		this.size--;
+		if (root != null) {
+			this.root.parent = null;
+		}
 		return ans;
 	}
 
 	public void updateKey(Locator loc, Key x) {
-		if (loc.node.k.compareTo(x) < 0) {
-			this.root = siftUp(this.root, loc.node.k, x, loc);
-		}
-		else if (loc.node.left.k.compareTo(x) > 0 || loc.node.right.k.compareTo(x) > 0) {
-			loc.node.k = x;
-			this.root = siftDown(loc.node);
-		}
-	}
-
-	private Node siftUp(Node node, Key pre, Key post, Locator loc) {
-		if (node == null){
-			return node;
-		} 
-		else if (node.left != null && node.left.k == pre && node.k.compareTo(post) < 0) {
-			node.left.k = post;
-			swapLChild(node);
-		}
-		else if (node.right != null && node.right.k == pre && node.k.compareTo(post) < 0) {
-			node.right.k = post;
-			swapRChild(node);
+		if (loc.node.key.compareTo(x) < 0) {
+			loc.node.key = x;
+			siftUp(loc.node);
 		}
 		else {
-			node.left = siftUp(node.left, pre, post, loc);
-			if (node.left != null && node.left.k == post && node.k.compareTo(post) < 0) {
-				swapLChild(node);
-				loc.node = node;
-			}
-			node.right = siftUp(node.right, pre, post, loc);
-			if (node.left != null && node.left.k == post && node.k.compareTo(post) < 0) {
-				swapRChild(node);
-				loc.node = node;
-			}
+			loc.node.key = x;
+			siftDown(loc.node);
 		}
-		return node;
+		checker(root);
 	}
 
-	private Node siftDown(Node node) {
+	private void checker(Node node) {
+		if (node == null) {
+			return;
+		}
+		if (node.loc.node != node) {
+			System.out.println("INVALID LOCATOR:" + node.value.toString());
+		}
+		checker(node.left);
+		checker(node.right);
+	}
+
+	private void siftUp(Node node) {
+		if (node == root || node.key.compareTo(node.parent.key) < 0) {
+			return;
+		}
+		else {
+			swapParent(node);
+			siftUp(node.parent);
+		}
+	}
+
+	private void swapParent(Node node) {
+		/* 1. assign node's values to a temp var don't
+				worry about parent, children & weight data  */
+		Node temp = new Node(node.key, node.value);
+		temp.loc = node.loc; //worry about the node pointer later...
+		// 2. swap keys
+		node.key = node.parent.key;
+		node.parent.key = temp.key;
+		// 3. swap values
+		node.value = node.parent.value;
+		node.parent.value = temp.value;
+		// 4. swap locator node pointers
+		node.loc.node = node.parent;
+		node.parent.loc.node = node;
+		// 5. swap locators
+		node.loc = node.parent.loc;
+		node.parent.loc = temp.loc;
+	}
+
+	private void siftDown(Node node) {
 		if (node.right != null) {
-			if (node.k.compareTo(node.right.k) < 0 && node.right.k.compareTo(node.left.k) > 0) {
+			if (node.key.compareTo(node.right.key) < 0
+					&& node.right.key.compareTo(node.left.key) > 0) {
 				swapRChild(node);
-				node.right = siftDown(node.right);
+				siftDown(node.right);
 			}
 		}
 		if (node.left != null) {
-			if (node.k.compareTo(node.left.k) < 0) {
+			if (node.key.compareTo(node.left.key) < 0) {
 				swapLChild(node);
-				node.left = siftDown(node.left);
+				siftDown(node.left);
 			}
 		}
-		return node;
 	}
 
-	private Node swapLChild(Node parent) {
-		Key tempKey = parent.k;
-		Value tempValue = parent.v;
-		Locator tempLoc = parent.loc;
-		parent.k = parent.left.k;
-		parent.v = parent.left.v;
-		parent.loc = parent.left.loc;
-		parent.loc.node = parent;
-		parent.left.k = tempKey;
-		parent.left.v = tempValue;
-		parent.left.loc = tempLoc;
-		parent.left.loc.node = parent.left;
-		return parent;
+	private void swapLChild(Node node) {
+		/* 1. assign node's values to a temp var don't
+				worry about parent, children & weight data  */
+		Node temp = new Node(node.key, node.value);
+		temp.loc = node.loc; //worry about the node pointer later...
+		// 2. swap keys
+		node.key = node.left.key;
+		node.left.key = temp.key;
+		// 3. swap values
+		node.value = node.left.value;
+		node.left.value = temp.value;
+		// 4. swap locator node pointers
+		node.loc.node = node.left;
+		node.left.loc.node = node;
+		// 5. swap locators
+		node.loc = node.left.loc;
+		node.left.loc = temp.loc;
 	}
 
-	private Node swapRChild(Node parent) {
-		Key tempKey = parent.k;
-		Value tempValue = parent.v;
-		Locator tempLoc = parent.loc;
-		parent.k = parent.right.k;
-		parent.v = parent.right.v;
-		parent.loc = parent.right.loc;
-		parent.loc.node = parent;
-		parent.right.k = tempKey;
-		parent.right.v = tempValue;
-		parent.right.loc = tempLoc;
-		parent.right.loc.node = parent.right;
-		return parent;
+	private void swapRChild(Node node) {
+		/* 1. assign node's values to a temp var don't
+				worry about parent, children & weight data  */
+		Node temp = new Node(node.key, node.value);
+		temp.loc = node.loc; //worry about the node pointer later...
+		// 2. swap keys
+		node.key = node.right.key;
+		node.right.key = temp.key;
+		// 3. swap values
+		node.value = node.right.value;
+		node.right.value = temp.value;
+		// 4. swap locator node pointers
+		node.loc.node = node.right;
+		node.right.loc.node = node;
+		// 5. swap locators
+		node.loc = node.right.loc;
+		node.right.loc = temp.loc;
 	}
+
+	/* rest is fine :) */
+
 
 	public Key peekKey() {
 		if (root == null) return null;
-		return root.k;
+		return root.key;
 	}
 
 	public Value peekValue() {
 		if (root == null) return null;
-		return root.v;
+		return root.value;
 	}
 
 	public ArrayList<String> list() {
@@ -202,7 +230,7 @@ public class WtLeftHeap<Key extends Comparable<Key>, Value> {
 			return ans;
 		}
 		else {
-			ans.add("(" + curr.k + ", " + curr.v + ") [" + curr.weight + "]");
+			ans.add("(" + curr.key + ", " + curr.value + ") [" + curr.weight + "]");
 			ans = listAux(curr.right, ans);
 			ans = listAux(curr.left, ans);
 			return ans;

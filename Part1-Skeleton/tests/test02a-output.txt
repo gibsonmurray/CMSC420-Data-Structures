@@ -264,6 +264,14 @@ Formatted structure:
   | | | | | (13, PVD) [1]
 update-key(SEA) to 20 in [H1]: successful
 list[H1]:
+  (95, DEN) [14]
+  (82, CLT) [3]
+  (10, MIA) [1]
+  []
+  []
+  (55, DFW) [1]
+  []
+  []
   (88, BWI) [10]
   (61, LAX) [3]
   (52, ATL) [1]
@@ -286,16 +294,20 @@ list[H1]:
   []
   []
 Formatted structure:
-  | | (52, ATL) [1]
-  | (61, LAX) [3]
-  | | (26, JFK) [1]
-  (88, BWI) [10]
-  | | (37, ORD) [1]
-  | (72, BOS) [6]
-  | | | (33, DCA) [1]
-  | | (47, IAD) [4]
-  | | | (20, SEA) [2]
-  | | | | (13, PVD) [1]
+  | | (10, MIA) [1]
+  | (82, CLT) [3]
+  | | (55, DFW) [1]
+  (95, DEN) [14]
+  | | | (52, ATL) [1]
+  | | (61, LAX) [3]
+  | | | (26, JFK) [1]
+  | (88, BWI) [10]
+  | | | (37, ORD) [1]
+  | | (72, BOS) [6]
+  | | | | (33, DCA) [1]
+  | | | (47, IAD) [4]
+  | | | | (20, SEA) [2]
+  | | | | | (13, PVD) [1]
 size[H1]: 14
-peek-key[H1]: 88
-peek-value[H1]: BWI
+peek-key[H1]: 95
+peek-value[H1]: DEN
