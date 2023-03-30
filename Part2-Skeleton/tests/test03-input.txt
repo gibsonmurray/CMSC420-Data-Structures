@@ -1,0 +1,36 @@
+comment:Rebuild-offset=6
+initialize:6:0:10:0:10
+insert:ATL:Atlanta:1:4
+list
+insert:JFK:New York:9.5:1.5
+list
+insert:BWI:Baltimore:9:9
+list
+insert:IAD:Dulles:2:1
+list
+insert:ORD:Chicago:2:6
+list
+insert:DFW:Dallas-Fort Worth:3:8
+list
+insert:DCA:Washington:5.5:9.5
+list
+insert:LAX:Los Angeles:3.5:1.5
+list
+insert:SEA:Seattle:5:0.5
+list
+size
+comment:Our first attempt at a nearest-neighbor query
+nearest-neighbor:1:8.5
+nearest-neighbor-visit:1:8.5
+nearest-neighbor:2.5:3
+nearest-neighbor-visit:2.5:3
+nearest-neighbor:9:7.5
+comment:The next nearest-neighbor visits DCA but just barely, since it lies on the border
+nearest-neighbor-visit:9:7.5
+nearest-neighbor:6.5:5
+nearest-neighbor-visit:6.5:5
+clear
+list
+size
+nearest-neighbor:1:8.5
+nearest-neighbor-visit:1:8.5

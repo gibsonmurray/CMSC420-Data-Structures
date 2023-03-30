@@ -1,0 +1,174 @@
+comment: Rebuild-offset=999
+initialize: rebuild-offset = 999 bounding-box = [(0.0,0.0),(10.0,10.0)]
+insert(ATL): successful {Atlanta, (1.0,4.0)}
+insert(JFK): successful {New York, (9.0,4.0)}
+insert(BWI): successful {Baltimore, (8.0,9.0)}
+insert(IAD): successful {Dulles, (2.0,1.0)}
+insert(ORD): successful {Chicago, (2.0,6.0)}
+insert(DFW): successful {Dallas-Fort Worth, (3.0,8.0)}
+insert(DCA): successful {Washington, (6.0,7.0)}
+insert(LAX): successful {Los Angeles, (4.0,2.0)}
+insert(SEA): successful {Seattle, (5.0,4.0)}
+insert(SFO): successful {San Francisco, (7.0,1.0)}
+list:
+  (x=5.0) 10:8
+  (y=5.0) 5:3
+  (x=7.5) 2:0
+  [BWI: (8.0,9.0)]
+  [DCA: (6.0,7.0)]
+  (x=7.5) 3:1
+  [JFK: (9.0,4.0)]
+  (y=2.5) 2:0
+  [SEA: (5.0,4.0)]
+  [SFO: (7.0,1.0)]
+  (y=4.0) 5:3
+  (y=6.0) 3:1
+  (x=2.5) 2:0
+  [DFW: (3.0,8.0)]
+  [ORD: (2.0,6.0)]
+  [ATL: (1.0,4.0)]
+  (x=2.5) 2:0
+  [LAX: (4.0,2.0)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | | [BWI: (8.0,9.0)]
+  | | (x=7.5) 2:0
+  | | | [DCA: (6.0,7.0)]
+  | (y=5.0) 5:3
+  | | | [JFK: (9.0,4.0)]
+  | | (x=7.5) 3:1
+  | | | | [SEA: (5.0,4.0)]
+  | | | (y=2.5) 2:0
+  | | | | [SFO: (7.0,1.0)]
+  (x=5.0) 10:8
+  | | | | [DFW: (3.0,8.0)]
+  | | | (x=2.5) 2:0
+  | | | | [ORD: (2.0,6.0)]
+  | | (y=6.0) 3:1
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 5:3
+  | | | [LAX: (4.0,2.0)]
+  | | (x=2.5) 2:0
+  | | | [IAD: (2.0,1.0)]
+iterator:
+  IAD: (2.0,1.0)
+  LAX: (4.0,2.0)
+  ATL: (1.0,4.0)
+  ORD: (2.0,6.0)
+  DFW: (3.0,8.0)
+  SFO: (7.0,1.0)
+  SEA: (5.0,4.0)
+  JFK: (9.0,4.0)
+  DCA: (6.0,7.0)
+  BWI: (8.0,9.0)
+successful
+delete(BWI): successful
+list:
+  (x=5.0) 9:8
+  (y=5.0) 4:3
+  (x=7.5) 1:0
+  [null]
+  [DCA: (6.0,7.0)]
+  (x=7.5) 3:1
+  [JFK: (9.0,4.0)]
+  (y=2.5) 2:0
+  [SEA: (5.0,4.0)]
+  [SFO: (7.0,1.0)]
+  (y=4.0) 5:3
+  (y=6.0) 3:1
+  (x=2.5) 2:0
+  [DFW: (3.0,8.0)]
+  [ORD: (2.0,6.0)]
+  [ATL: (1.0,4.0)]
+  (x=2.5) 2:0
+  [LAX: (4.0,2.0)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | | [null]
+  | | (x=7.5) 1:0
+  | | | [DCA: (6.0,7.0)]
+  | (y=5.0) 4:3
+  | | | [JFK: (9.0,4.0)]
+  | | (x=7.5) 3:1
+  | | | | [SEA: (5.0,4.0)]
+  | | | (y=2.5) 2:0
+  | | | | [SFO: (7.0,1.0)]
+  (x=5.0) 9:8
+  | | | | [DFW: (3.0,8.0)]
+  | | | (x=2.5) 2:0
+  | | | | [ORD: (2.0,6.0)]
+  | | (y=6.0) 3:1
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 5:3
+  | | | [LAX: (4.0,2.0)]
+  | | (x=2.5) 2:0
+  | | | [IAD: (2.0,1.0)]
+iterator:
+  IAD: (2.0,1.0)
+  LAX: (4.0,2.0)
+  ATL: (1.0,4.0)
+  ORD: (2.0,6.0)
+  DFW: (3.0,8.0)
+  SFO: (7.0,1.0)
+  SEA: (5.0,4.0)
+  JFK: (9.0,4.0)
+  DCA: (6.0,7.0)
+successful
+delete(IAD): successful
+delete(ORD): successful
+delete(SEA): successful
+list:
+  (x=5.0) 6:8
+  (y=5.0) 3:3
+  (x=7.5) 1:0
+  [null]
+  [DCA: (6.0,7.0)]
+  (x=7.5) 2:1
+  [JFK: (9.0,4.0)]
+  (y=2.5) 1:0
+  [null]
+  [SFO: (7.0,1.0)]
+  (y=4.0) 3:3
+  (y=6.0) 2:1
+  (x=2.5) 1:0
+  [DFW: (3.0,8.0)]
+  [null]
+  [ATL: (1.0,4.0)]
+  (x=2.5) 1:0
+  [LAX: (4.0,2.0)]
+  [null]
+Tree structure:
+  | | | [null]
+  | | (x=7.5) 1:0
+  | | | [DCA: (6.0,7.0)]
+  | (y=5.0) 3:3
+  | | | [JFK: (9.0,4.0)]
+  | | (x=7.5) 2:1
+  | | | | [null]
+  | | | (y=2.5) 1:0
+  | | | | [SFO: (7.0,1.0)]
+  (x=5.0) 6:8
+  | | | | [DFW: (3.0,8.0)]
+  | | | (x=2.5) 1:0
+  | | | | [null]
+  | | (y=6.0) 2:1
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 3:3
+  | | | [LAX: (4.0,2.0)]
+  | | (x=2.5) 1:0
+  | | | [null]
+iterator:
+  LAX: (4.0,2.0)
+  ATL: (1.0,4.0)
+  DFW: (3.0,8.0)
+  SFO: (7.0,1.0)
+  JFK: (9.0,4.0)
+  DCA: (6.0,7.0)
+successful
+clear: successful
+list:
+  [null]
+Tree structure:
+  [null]
+iterator:
+successful

@@ -1,0 +1,38 @@
+comment:Rebuild-offset=0
+initialize:0:0:10:0:10
+insert:ATL:Atlanta:1:4
+list
+insert:JFK:New York:9:4
+list
+insert:BWI:Baltimore:8:9
+list
+insert:DFW:Dallas-Fort Worth:2:1
+list
+comment:Inserting ORD should trigger a rebuild at the root
+insert:ORD:Chicago:2:6
+list
+insert:IAD:Dulles:3:4
+list
+insert:DCA:Washington:3:3
+list
+comment:Inserting LAX should trigger a rebuild at the root's left-left grandchild
+insert:LAX:Los Angeles:4:2
+list
+size
+find:1:4
+find:9:4
+find:8:9
+find:2:1
+find:2:6
+find:3:8
+find:6:7
+find:4:2
+find:3:4
+find:9:3
+find:5:1
+find:-1:-1
+find:11:11
+clear
+list
+size
+find:1:4

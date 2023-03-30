@@ -1,0 +1,80 @@
+comment:Rebuild-offset=0
+initialize:0:0:10:0:10
+alert:The following deletion should result in a nonexistent-point exception
+delete-point:6:7
+list
+insert:ATL:Atlanta:5:4
+list
+comment:Split direction flips to y because points have same x coordinates
+insert:JFK:New York:5:6
+list
+insert:BWI:Baltimore:5:9
+list
+insert:IAD:Dulles:2:1
+list
+comment:Inserting ORD should trigger a rebuild at the root
+insert:ORD:Chicago:2:9
+list
+insert:DFW:Dallas-Fort Worth:2:8
+list
+insert:DCA:Washington:2:7
+list
+insert:LAX:Los Angeles:8:2
+list
+insert:SEA:Seattle:8:4
+list
+insert:SFO:San Francisco:8:1
+list
+comment:Inserting PVD should trigger a rebuild at the root
+insert:PVD:Providence:8:3
+list
+size
+delete-count
+size
+delete:ATL
+list
+size
+delete-count
+delete:JFK
+list
+size
+delete-count
+delete:BWI
+list
+size
+delete-count
+delete:IAD
+list
+size
+delete-count
+delete:ORD
+list
+size
+delete-count
+comment:Deleting DFW should trigger a full rebuild
+delete:DFW
+list
+size
+delete-count
+delete:DCA
+list
+size
+delete-count
+delete:LAX
+list
+size
+delete-count
+comment:Deleting SEA should trigger a full rebuild
+delete:SEA
+list
+size
+delete-count
+delete:SFO
+list
+size
+delete-count
+comment:Deleting PVD should trigger a full rebuild
+delete:PVD
+list
+size
+delete-count

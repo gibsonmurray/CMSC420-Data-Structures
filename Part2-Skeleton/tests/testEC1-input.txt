@@ -1,0 +1,25 @@
+comment:Rebuild-offset=999
+initialize:999:0:10:0:10
+insert:ATL:Atlanta:1:4
+insert:JFK:New York:9:4
+insert:BWI:Baltimore:8:9
+insert:IAD:Dulles:2:1
+insert:ORD:Chicago:2:6
+insert:DFW:Dallas-Fort Worth:3:8
+insert:DCA:Washington:6:7
+insert:LAX:Los Angeles:4:2
+insert:SEA:Seattle:5:4
+insert:SFO:San Francisco:7:1
+list
+iterate
+delete:BWI
+list
+iterate
+delete:IAD
+delete:ORD
+delete:SEA
+list
+iterate
+clear
+list
+iterate

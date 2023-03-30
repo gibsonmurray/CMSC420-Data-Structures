@@ -1,0 +1,53 @@
+comment:Rebuild-offset=5
+initialize:5:0:10:0:10
+insert:ATL:Atlanta:1:4
+insert:JFK:New York:9:4
+insert:BWI:Baltimore:8:9
+insert:IAD:Dulles:2:1
+insert:ORD:Chicago:2:6
+insert:DFW:Dallas-Fort Worth:3:8
+insert:DCA:Washington:6:7
+insert:LAX:Los Angeles:4:2
+insert:SEA:Seattle:5:4
+insert:SFO:San Francisco:7:1
+alert:The following insertion should result in a duplicate-point exception
+insert:PVD:Providence:2:1
+list
+size
+delete-count
+delete:ORD
+list
+size
+delete-count
+delete:DFW
+list
+size
+delete-count
+delete:DCA
+list
+size
+delete-count
+delete:LAX
+list
+size
+delete-count
+alert:The following deletion should result in a nonexistent-point exception
+delete-point:4:2
+delete:BWI
+list
+size
+delete-count
+comment:The following deletion should result in a full rebuild
+delete:JFK
+list
+size
+delete-count
+clear
+list
+size
+delete-count
+alert:The following deletion should result in a nonexistent-point exception
+delete-point:6:7
+list
+size
+delete-count
