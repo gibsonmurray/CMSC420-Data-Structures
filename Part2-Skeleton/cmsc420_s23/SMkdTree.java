@@ -3,6 +3,7 @@ package cmsc420_s23;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Comparator;
 
 /*
  * AN ADDITIONAL CHALLENGE IS SORT ONLY ONCE ON RESTRUCTURE
@@ -13,26 +14,106 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 	/* ----------------------- PART I: ----------------------- */
 
-	public SMkdTree(int rebuildOffset, Rectangle2D rootCell) {
+	int rebuildOffset;
+	Rectangle2D rootCell;
+	Node root;
 
+	private abstract class Node {
+		abstract LPoint find();
+		abstract Node insert();
+		abstract Node delete();
+	}
+
+	private class InternalNode extends Node {
+		int cutDim; // cutting dimension
+		double cutVal; // the cutting value
+		Node left, right; // children
+
+		private InternalNode(int cutDim, double cutVal) {
+			this.cutDim = cutDim;
+			this.cutVal = cutVal;
+			this.left = null;
+			this.right = null;
+		}
+
+		@Override
+		LPoint find() {
+			
+		}
+
+		@Override
+		SMkdTree<LPoint>.Node insert() {
+			
+		}
+
+		@Override
+		SMkdTree<LPoint>.Node delete() {
+			
+		}
+		
+	}
+
+	private class ExternalNode extends Node {
+		LPoint point; // the point (null if empty)
+		
+		private ExternalNode(LPoint point) {
+			this.point = point;
+		}
+
+		@Override
+		LPoint find() {
+			
+		}
+
+		@Override
+		SMkdTree<LPoint>.Node insert() {
+			
+		}
+
+		@Override
+		SMkdTree<LPoint>.Node delete() {
+			
+		}
+	}
+
+	private class ByXThenY implements Comparator<LPoint> {
+		public int compare(LPoint pt1, LPoint pt2) {
+			/* compare pt1 and pt2 lexicographically by x then y */
+			return 0;
+		}
+	}
+
+	private class ByYThenX implements Comparator<LPoint> {
+		public int compare(LPoint pt1, LPoint pt2) {
+			/* compare pt1 and pt2 lexicographically by y then x */
+			return 0;
+		}
+	}
+
+	public SMkdTree(int rebuildOffset, Rectangle2D rootCell) {
+		
 	}
 
 	public int size() {
-		return 0; 
+		return 0;
 	}
 
 	public LPoint find(Point2D q) {
-		return null; 
+		return null;
+	}
+
+	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell) {
+		return null;
 	}
 
 	public void insert(LPoint pt) throws Exception {
-		
+
 	}
 
 	public void clear() {
-		
+
 	}
-	
+
 	public ArrayList<String> list() {
 		return null;
 	}
@@ -44,7 +125,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	}
 
 	public void delete(Point2D pt) throws Exception {
-		
+
 	}
 
 	public LPoint nearestNeighbor(Point2D center) {
@@ -59,7 +140,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 	private class LPointIterator implements Iterator<LPoint> {
 		public LPointIterator() {
-			
+
 		}
 
 		public boolean hasNext() {
@@ -67,7 +148,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		public LPoint next() throws NoSuchElementException {
-			return null; 
+			return null;
 		}
 
 	}
@@ -76,4 +157,3 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		return new LPointIterator();
 	}
 }
-
