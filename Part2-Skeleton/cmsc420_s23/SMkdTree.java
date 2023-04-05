@@ -251,7 +251,14 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			double yLength = cell.high.getY() - cell.low.getY();
 			boolean isXLess = xLength < yLength;
 			int cutDim = isXLess ? 1 : 0;
-			double cutVal = isXLess ? cell.high.getY() - yLength / 2 : cell.high.getX() - xLength / 2;
+			//TODO: change cut dimension if all points lie on the same axis line
+			if (cutDim == 0 && pts.get(0).getX() == pts.get(1).getX()) {
+				cutDim = 1;
+			}
+			else if (cutDim == 1 && pts.get(0).getY() == pts.get(1).getY()) {
+				cutDim = 0;
+			}
+			double cutVal = cutDim == 1 ? cell.high.getY() - yLength / 2 : cell.high.getX() - xLength / 2;
 			int splitIndex = len;
 			if (cutDim == 0) { // x split
 				return bulkCreateX(pts, cell, len, splitIndex, cutVal);

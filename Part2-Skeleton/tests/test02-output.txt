@@ -1,0 +1,177 @@
+comment: Rebuild-offset=0
+initialize: rebuild-offset = 0 bounding-box = [(0.0,0.0),(10.0,10.0)]
+insert(ATL): successful {Atlanta, (1.0,4.0)}
+list:
+  [ATL: (1.0,4.0)]
+Tree structure:
+  [ATL: (1.0,4.0)]
+insert(JFK): successful {New York, (9.0,4.0)}
+list:
+  (x=5.0) 2:0
+  [JFK: (9.0,4.0)]
+  [ATL: (1.0,4.0)]
+Tree structure:
+  | [JFK: (9.0,4.0)]
+  (x=5.0) 2:0
+  | [ATL: (1.0,4.0)]
+insert(BWI): successful {Baltimore, (8.0,9.0)}
+list:
+  (x=5.0) 3:1
+  (y=5.0) 2:0
+  [BWI: (8.0,9.0)]
+  [JFK: (9.0,4.0)]
+  [ATL: (1.0,4.0)]
+Tree structure:
+  | | [BWI: (8.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.0,4.0)]
+  (x=5.0) 3:1
+  | [ATL: (1.0,4.0)]
+insert(DFW): successful {Dallas-Fort Worth, (2.0,1.0)}
+list:
+  (x=5.0) 4:2
+  (y=5.0) 2:0
+  [BWI: (8.0,9.0)]
+  [JFK: (9.0,4.0)]
+  (y=4.0) 2:0
+  [ATL: (1.0,4.0)]
+  [DFW: (2.0,1.0)]
+Tree structure:
+  | | [BWI: (8.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.0,4.0)]
+  (x=5.0) 4:2
+  | | [ATL: (1.0,4.0)]
+  | (y=4.0) 2:0
+  | | [DFW: (2.0,1.0)]
+comment: Inserting ORD should trigger a rebuild at the root
+insert(ORD): successful {Chicago, (2.0,6.0)}
+list:
+  (x=5.0) 5:0
+  (y=5.0) 2:0
+  [BWI: (8.0,9.0)]
+  [JFK: (9.0,4.0)]
+  (y=5.0) 3:0
+  [ORD: (2.0,6.0)]
+  (x=2.0) 2:0
+  [DFW: (2.0,1.0)]
+  [ATL: (1.0,4.0)]
+Tree structure:
+  | | [BWI: (8.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.0,4.0)]
+  (x=5.0) 5:0
+  | | [ORD: (2.0,6.0)]
+  | (y=5.0) 3:0
+  | | | [DFW: (2.0,1.0)]
+  | | (x=2.0) 2:0
+  | | | [ATL: (1.0,4.0)]
+insert(IAD): successful {Dulles, (3.0,4.0)}
+list:
+  (x=5.0) 6:1
+  (y=5.0) 2:0
+  [BWI: (8.0,9.0)]
+  [JFK: (9.0,4.0)]
+  (y=5.0) 4:1
+  [ORD: (2.0,6.0)]
+  (x=2.0) 3:1
+  (y=2.5) 2:0
+  [IAD: (3.0,4.0)]
+  [DFW: (2.0,1.0)]
+  [ATL: (1.0,4.0)]
+Tree structure:
+  | | [BWI: (8.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.0,4.0)]
+  (x=5.0) 6:1
+  | | [ORD: (2.0,6.0)]
+  | (y=5.0) 4:1
+  | | | | [IAD: (3.0,4.0)]
+  | | | (y=2.5) 2:0
+  | | | | [DFW: (2.0,1.0)]
+  | | (x=2.0) 3:1
+  | | | [ATL: (1.0,4.0)]
+insert(DCA): successful {Washington, (3.0,3.0)}
+list:
+  (x=5.0) 7:2
+  (y=5.0) 2:0
+  [BWI: (8.0,9.0)]
+  [JFK: (9.0,4.0)]
+  (y=5.0) 5:2
+  [ORD: (2.0,6.0)]
+  (x=2.0) 4:2
+  (y=2.5) 3:1
+  (y=3.75) 2:0
+  [IAD: (3.0,4.0)]
+  [DCA: (3.0,3.0)]
+  [DFW: (2.0,1.0)]
+  [ATL: (1.0,4.0)]
+Tree structure:
+  | | [BWI: (8.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.0,4.0)]
+  (x=5.0) 7:2
+  | | [ORD: (2.0,6.0)]
+  | (y=5.0) 5:2
+  | | | | | [IAD: (3.0,4.0)]
+  | | | | (y=3.75) 2:0
+  | | | | | [DCA: (3.0,3.0)]
+  | | | (y=2.5) 3:1
+  | | | | [DFW: (2.0,1.0)]
+  | | (x=2.0) 4:2
+  | | | [ATL: (1.0,4.0)]
+comment: Inserting LAX should trigger a rebuild at the root's left-left grandchild
+insert(LAX): successful {Los Angeles, (4.0,2.0)}
+list:
+  (x=5.0) 8:3
+  (y=5.0) 2:0
+  [BWI: (8.0,9.0)]
+  [JFK: (9.0,4.0)]
+  (y=5.0) 6:3
+  [ORD: (2.0,6.0)]
+  (y=2.5) 5:0
+  (x=2.5) 3:0
+  (y=3.75) 2:0
+  [IAD: (3.0,4.0)]
+  [DCA: (3.0,3.0)]
+  [ATL: (1.0,4.0)]
+  (x=2.5) 2:0
+  [LAX: (4.0,2.0)]
+  [DFW: (2.0,1.0)]
+Tree structure:
+  | | [BWI: (8.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.0,4.0)]
+  (x=5.0) 8:3
+  | | [ORD: (2.0,6.0)]
+  | (y=5.0) 6:3
+  | | | | | [IAD: (3.0,4.0)]
+  | | | | (y=3.75) 2:0
+  | | | | | [DCA: (3.0,3.0)]
+  | | | (x=2.5) 3:0
+  | | | | [ATL: (1.0,4.0)]
+  | | (y=2.5) 5:0
+  | | | | [LAX: (4.0,2.0)]
+  | | | (x=2.5) 2:0
+  | | | | [DFW: (2.0,1.0)]
+size: 8
+find((1.0,4.0)): found [ATL: (1.0,4.0)]
+find((9.0,4.0)): found [JFK: (9.0,4.0)]
+find((8.0,9.0)): found [BWI: (8.0,9.0)]
+find((2.0,1.0)): found [DFW: (2.0,1.0)]
+find((2.0,6.0)): found [ORD: (2.0,6.0)]
+find((3.0,8.0)): not found
+find((6.0,7.0)): not found
+find((4.0,2.0)): found [LAX: (4.0,2.0)]
+find((3.0,4.0)): found [IAD: (3.0,4.0)]
+find((9.0,3.0)): not found
+find((5.0,1.0)): not found
+find((-1.0,-1.0)): not found
+find((11.0,11.0)): not found
+clear: successful
+list:
+  [null]
+Tree structure:
+  [null]
+size: 0
+find((1.0,4.0)): not found
