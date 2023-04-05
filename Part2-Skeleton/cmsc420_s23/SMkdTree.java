@@ -26,6 +26,8 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		abstract Node insert(LPoint pt, Rectangle2D cell) throws Exception;
 
 		abstract Node delete(Point2D pt);
+
+		abstract Node restructure(LPoint pt);
 	}
 
 	/* --------------------- INTERNAL NODE --------------------- */
@@ -36,6 +38,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		Node left, right; // children
 		int size;
 		int insertionCount;
+		Rectangle2D subCell;
 
 		private InternalNode(int cutDim, double cutVal, Node left, Node right) {
 			this.cutDim = cutDim;
@@ -67,6 +70,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) throws Exception {
 			this.size++;
 			this.insertionCount++;
+			this.subCell = cell;
 
 			if (cutDim == 0) { // x-split
 				if (pt.getX() < cutVal) {
@@ -75,13 +79,11 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 					Point2D high = new Point2D(cutVal, cell.high.getY()); // adjust rightmost cell's X
 					Rectangle2D rect = new Rectangle2D(low, high);
 					this.left = this.left.insert(pt, rect);
-					return this;
 				} else {
 					Point2D low = new Point2D(cutVal, cell.low.getY()); // adjust leftmost cell's X
 					Point2D high = new Point2D(cell.high.getX(), cell.high.getY());
 					Rectangle2D rect = new Rectangle2D(low, high);
 					this.right = this.right.insert(pt, rect);
-					return this;
 				}
 			} else { // y-split
 				if (pt.getY() < cutVal) {
@@ -89,14 +91,37 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 					Point2D high = new Point2D(cell.high.getX(), cutVal); // adjust rightmost cell's Y
 					Rectangle2D rect = new Rectangle2D(low, high);
 					this.left = this.left.insert(pt, rect);
-					return this;
 				} else {
 					Point2D low = new Point2D(cell.low.getX(), cutVal); // adjust leftmost cell's Y
 					Point2D high = new Point2D(cell.high.getX(), cell.high.getY());
 					Rectangle2D rect = new Rectangle2D(low, high);
 					this.right = this.right.insert(pt, rect);
-					return this;
 				}
+			}
+			return this;
+		}
+
+		@Override
+		SMkdTree<LPoint>.Node restructure(LPoint pt) {
+			if (this.insertionCount > (this.size + rebuildOffset) / 2) {
+				ArrayList<LPoint> list = new ArrayList<LPoint>();
+				traverse(this, list);
+				return bulkCreate(list, this.subCell);
+			} else {
+				if (cutDim == 0) { // x-split
+					if (pt.getX() < cutVal) {
+						this.left = this.left.restructure(pt);
+					} else {
+						this.right = this.right.restructure(pt);
+					}
+				} else { // y-split
+					if (pt.getY() < cutVal) {
+						this.left = this.left.restructure(pt);
+					} else {
+						this.right = this.right.restructure(pt);
+					}
+				}
+				return this;
 			}
 		}
 
@@ -118,7 +143,10 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		@Override
 		LPoint find(Point2D pt) {
-			if (this.point.getPoint2D().equals(pt)) {
+			if (this.point == null) {
+				return null;
+			}
+			else if (this.point.getPoint2D().equals(pt)) {
 				return this.point;
 			} else {
 				return null;
@@ -138,6 +166,11 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 				list.add(pt);
 				return bulkCreate(list, cell);
 			}
+		}
+
+		@Override
+		SMkdTree<LPoint>.Node restructure(LPoint pt) {
+			return this;
 		}
 
 		@Override
@@ -207,6 +240,8 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		return this.root.find(q);
 	}
 
+	//TODO: ADJUST SIZE OF INTERNAL NODES ON RETURN
+	//TODO: SOME SPLITS ARE INCORRECT SEE OUTPUT FOR DETAILS
 	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell) {
 		int len = pts.size();
 		if (len == 0) {
@@ -218,7 +253,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			double yLength = cell.high.getY() - cell.low.getY();
 			boolean isXLess = xLength < yLength;
 			int cutDim = isXLess ? 1 : 0;
-			double cutVal = isXLess ? yLength / 2 : xLength / 2;
+			double cutVal = isXLess ? cell.high.getY() - yLength / 2 : cell.high.getX() - xLength / 2;
 			int splitIndex = len;
 			if (cutDim == 0) { // x split
 				return bulkCreateX(pts, cell, len, splitIndex, cutVal);
@@ -231,12 +266,12 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	private Node bulkCreateX(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, double cutVal) {
 		Collections.sort(pts, new ByXThenY());
 		for (int i = 0; i < len; i++) {
-			if (pts.get(i).getX() > cutVal) {
+			if (pts.get(i).getX() >= cutVal) {
 				splitIndex = i;
 				break;
 			}
 		}
-		// TODO: fix sliding midpoint
+
 		if (splitIndex == 0) { // slides it to leftmost
 			cutVal = pts.get(0).getX();
 			splitIndex++; // avoids empty list / infinite recursion
@@ -268,19 +303,19 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		if (isFirstNull(rightNode, leftNode)) {
 			return leftNode;
 		}
-
+		
 		return new InternalNode(0, cutVal, leftNode, rightNode);
 	}
 
 	private Node bulkCreateY(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, double cutVal) {
 		Collections.sort(pts, new ByYThenX());
 		for (int i = 0; i < len; i++) {
-			if (pts.get(i).getY() > cutVal) {
+			if (pts.get(i).getY() >= cutVal) {
 				splitIndex = i;
 				break;
 			}
 		}
-		// TODO: fix sliding midpoint
+
 		if (splitIndex == 0) { // slides it to bottommost
 			cutVal = pts.get(0).getY();
 			splitIndex++; // avoids empty list / infinite recursion
@@ -331,11 +366,27 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 				|| pt.getY() < this.rootCell.low.getY() || pt.getY() > this.rootCell.high.getY()) {
 			throw new Exception("Attempt to insert a point outside bounding box");
 		}
+
 		this.root = root.insert(pt, rootCell);
+		this.size++;
+
+		this.root = root.restructure(pt);
+	}
+
+	private void traverse(Node curr, ArrayList<LPoint> list) {
+		if (curr instanceof InternalNode) {
+			InternalNode node = (InternalNode) curr;
+			traverse(node.right, list);
+			traverse(node.left, list);
+		}
+		else {
+			ExternalNode node = (ExternalNode) curr;
+			list.add(node.point);
+		}
 	}
 
 	public void clear() {
-		this.root = null;
+		this.root = new ExternalNode(null);
 		this.size = 0;
 	}
 
