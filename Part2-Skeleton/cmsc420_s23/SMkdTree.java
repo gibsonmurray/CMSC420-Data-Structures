@@ -22,11 +22,13 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 	private abstract class Node {
 		abstract LPoint find(Point2D pt);
-		abstract Node insert(LPoint pt, Rectangle2D cell);
+
+		abstract Node insert(LPoint pt, Rectangle2D cell) throws Exception;
+
 		abstract Node delete(Point2D pt);
 	}
 
-/* --------------------- INTERNAL NODE ---------------------*/
+	/* --------------------- INTERNAL NODE --------------------- */
 
 	private class InternalNode extends Node {
 		int cutDim; // cutting dimension
@@ -49,23 +51,20 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			if (cutDim == 0) { // x-split
 				if (pt.getX() < cutVal) {
 					return this.left.find(pt);
-				}
-				else {
+				} else {
 					return this.right.find(pt);
 				}
-			}
-			else { // y-split
+			} else { // y-split
 				if (pt.getY() < cutVal) {
 					return this.left.find(pt);
-				}
-				else {
+				} else {
 					return this.right.find(pt);
 				}
 			}
 		}
 
 		@Override
-		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) {
+		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) throws Exception {
 			this.size++;
 			this.insertionCount++;
 
@@ -75,43 +74,44 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 					Point2D low = new Point2D(cell.low.getX(), cell.low.getY());
 					Point2D high = new Point2D(cutVal, cell.high.getY()); // adjust rightmost cell's X
 					Rectangle2D rect = new Rectangle2D(low, high);
-					return this.left.insert(pt, rect);
-				}
-				else {
+					this.left = this.left.insert(pt, rect);
+					return this;
+				} else {
 					Point2D low = new Point2D(cutVal, cell.low.getY()); // adjust leftmost cell's X
-					Point2D high = new Point2D(cell.high.getX(), cell.high.getY()); 
+					Point2D high = new Point2D(cell.high.getX(), cell.high.getY());
 					Rectangle2D rect = new Rectangle2D(low, high);
-					return this.right.insert(pt, rect);
+					this.right = this.right.insert(pt, rect);
+					return this;
 				}
-			}
-			else { // y-split
+			} else { // y-split
 				if (pt.getY() < cutVal) {
 					Point2D low = new Point2D(cell.low.getX(), cell.low.getY());
 					Point2D high = new Point2D(cell.high.getX(), cutVal); // adjust rightmost cell's Y
 					Rectangle2D rect = new Rectangle2D(low, high);
-					return this.left.insert(pt, rect);
-				}
-				else {
+					this.left = this.left.insert(pt, rect);
+					return this;
+				} else {
 					Point2D low = new Point2D(cell.low.getX(), cutVal); // adjust leftmost cell's Y
-					Point2D high = new Point2D(cell.high.getX(), cell.high.getY()); 
+					Point2D high = new Point2D(cell.high.getX(), cell.high.getY());
 					Rectangle2D rect = new Rectangle2D(low, high);
-					return this.right.insert(pt, rect);
+					this.right = this.right.insert(pt, rect);
+					return this;
 				}
 			}
 		}
 
 		@Override
 		SMkdTree<LPoint>.Node delete(Point2D pt) {
-			return null;
+			return null; // TODO
 		}
-		
+
 	}
 
-/* --------------------- EXTERNAL NODE ---------------------*/
+	/* --------------------- EXTERNAL NODE --------------------- */
 
 	private class ExternalNode extends Node {
 		LPoint point; // the point (null if empty)
-		
+
 		private ExternalNode(LPoint point) {
 			this.point = point;
 		}
@@ -120,19 +120,19 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		LPoint find(Point2D pt) {
 			if (this.point.getPoint2D().equals(pt)) {
 				return this.point;
-			}
-			else {
+			} else {
 				return null;
 			}
 		}
 
 		@Override
-		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) {
+		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) throws Exception {
 			if (this.point == null) {
 				this.point = pt;
 				return this;
-			}
-			else {
+			} else if (this.point.equals(pt)) {
+				throw new Exception("Insertion of duplicate point");
+			} else {
 				ArrayList<LPoint> list = new ArrayList<LPoint>();
 				list.add(this.point);
 				list.add(pt);
@@ -142,11 +142,11 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		@Override
 		SMkdTree<LPoint>.Node delete(Point2D pt) {
-			return null; /* TODO */
+			return null; // TODO
 		}
 	}
 
-/* --------------------- COMPARATOR ---------------------*/
+	/* --------------------- COMPARATOR --------------------- */
 
 	private class ByXThenY implements Comparator<LPoint> {
 		public int compare(LPoint pt1, LPoint pt2) {
@@ -156,18 +156,14 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 				diffY = pt1.getY() - pt2.getY();
 				if (diffY < 0) {
 					return -1;
-				}
-				else if (diffY > 0) {
+				} else if (diffY > 0) {
 					return 1;
-				}
-				else {
+				} else {
 					return 0;
 				}
-			}
-			else if (diffX < 0) {
+			} else if (diffX < 0) {
 				return -1;
-			}
-			else {
+			} else {
 				return 1;
 			}
 		}
@@ -181,29 +177,25 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 				diffX = pt1.getX() - pt2.getX();
 				if (diffX < 0) {
 					return -1;
-				}
-				else if (diffX > 0) {
+				} else if (diffX > 0) {
 					return 1;
-				}
-				else {
+				} else {
 					return 0;
 				}
-			}
-			else if (diffY < 0) {
+			} else if (diffY < 0) {
 				return -1;
-			}
-			else {
+			} else {
 				return 1;
 			}
 		}
 	}
 
-/* --------------------- SMKD TREE METHODS ---------------------*/
+	/* --------------------- SMKD TREE METHODS --------------------- */
 
 	public SMkdTree(int rebuildOffset, Rectangle2D rootCell) {
 		this.rebuildOffset = rebuildOffset;
 		this.rootCell = rootCell;
-		this.root = null;
+		this.root = new ExternalNode(null);
 		this.size = 0;
 	}
 
@@ -219,109 +211,157 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		int len = pts.size();
 		if (len == 0) {
 			return new ExternalNode(null);
-		}
-		else if (len == 1) {
+		} else if (len == 1) {
 			return new ExternalNode(pts.get(0));
-		}
-		else {
-			/*
-			 * \get midpoint based on current cell & cut based on greatest side length
-			 * select two points
-			 * if both points are on one side of the midpoint, slide to closer points X/Y
-			 * otherwise leave cut value the same
-			 * create new cells& arrays and recursively call
-			 */
+		} else {
 			double xLength = cell.high.getX() - cell.low.getX();
 			double yLength = cell.high.getY() - cell.low.getY();
-			int cutDim = xLength < yLength ? 1 : 0;
-			double cutVal = xLength < yLength ? yLength / 2 : xLength / 2;
+			boolean isXLess = xLength < yLength;
+			int cutDim = isXLess ? 1 : 0;
+			double cutVal = isXLess ? yLength / 2 : xLength / 2;
 			int splitIndex = len;
 			if (cutDim == 0) { // x split
-				Collections.sort(pts, new ByXThenY());
-				for (int i = 0; i < len; i++) {
-					if (pts.get(i).getX() > cutVal) {
-						splitIndex = i;
-						break;
-					}
-				}
-				ArrayList<LPoint> leftList = new ArrayList<LPoint>(pts.subList(0, splitIndex));
-				ArrayList<LPoint> rightList = new ArrayList<LPoint>(pts.subList(splitIndex, len));
-
-				//Potential sliding midpoint solution
-				if (splitIndex == 0) { // slides it to leftmost
-					cutVal = pts.get(0).getX();
-				}
-				if (splitIndex == len) { //slides it to rightmost
-					cutVal = pts.get(len - 1).getX();
-				}
-
-				// create new left cell
-				Point2D leftLow = new Point2D(cell.low.getX(), cell.low.getY()); 
-				Point2D leftHigh = new Point2D(cutVal, cell.high.getY()); // adjust leftmost cell's X
-				Rectangle2D leftRect = new Rectangle2D(leftLow, leftHigh);
-
-				//create new right cell
-				Point2D rightLow = new Point2D(cutVal, cell.low.getY()); // adjust rightmost cell's X
-				Point2D rightHigh = new Point2D(cell.high.getX(), cell.high.getY()); 
-				Rectangle2D rightRect = new Rectangle2D(rightLow, rightHigh);
-
-				Node leftNode = bulkCreate(leftList, leftRect);
-				Node rightNode = bulkCreate(rightList, rightRect);
-				return new InternalNode(cutDim, cutVal, leftNode, rightNode);
-			}
-			else { // y split
-				Collections.sort(pts, new ByYThenX());
-				for (int i = 0; i < len; i++) {
-					if (pts.get(i).getY() > cutVal) {
-						splitIndex = i;
-						break;
-					}
-				}
-				ArrayList<LPoint> bottomList = new ArrayList<LPoint>(pts.subList(0, splitIndex));
-				ArrayList<LPoint> topList = new ArrayList<LPoint>(pts.subList(splitIndex, len));
-
-				//Potential sliding midpoint solution
-				if (splitIndex == 0) { // slides it to bottommost
-					cutVal = pts.get(0).getY();
-				}
-				if (splitIndex == len) { //slides it to topmost
-					cutVal = pts.get(len - 1).getY();
-				}
-
-				// create new bottom cell
-				Point2D bottomLow = new Point2D(cell.low.getX(), cell.low.getY()); 
-				Point2D bottomHigh = new Point2D(cell.high.getY(), cutVal); // adjust leftmost cell's X
-				Rectangle2D bottomRect = new Rectangle2D(bottomLow, bottomHigh);
-
-				//create new top cell
-				Point2D topLow = new Point2D(cutVal, cell.low.getY()); // adjust rightmost cell's X
-				Point2D topHigh = new Point2D(cell.high.getX(), cell.high.getY()); 
-				Rectangle2D topRect = new Rectangle2D(topLow, topHigh);
-
-				Node bottomNode = bulkCreate(bottomList, bottomRect);
-				Node topNode = bulkCreate(topList, topRect);
-				return new InternalNode(cutDim, cutVal, bottomNode, topNode);
+				return bulkCreateX(pts, cell, len, splitIndex, cutVal);
+			} else { // y split
+				return bulkCreateY(pts, cell, len, splitIndex, cutVal);
 			}
 		}
 	}
 
+	private Node bulkCreateX(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, double cutVal) {
+		Collections.sort(pts, new ByXThenY());
+		for (int i = 0; i < len; i++) {
+			if (pts.get(i).getX() > cutVal) {
+				splitIndex = i;
+				break;
+			}
+		}
+		// TODO: fix sliding midpoint
+		if (splitIndex == 0) { // slides it to leftmost
+			cutVal = pts.get(0).getX();
+			splitIndex++; // avoids empty list / infinite recursion
+		}
+		if (splitIndex == len) { // slides it to rightmost
+			cutVal = pts.get(len - 1).getX();
+			splitIndex--; // avoids empty list / infinite recursion
+		}
+
+		ArrayList<LPoint> leftList = new ArrayList<LPoint>(pts.subList(0, splitIndex));
+		ArrayList<LPoint> rightList = new ArrayList<LPoint>(pts.subList(splitIndex, len));
+
+		// create new left cell
+		Point2D leftLow = new Point2D(cell.low.getX(), cell.low.getY());
+		Point2D leftHigh = new Point2D(cutVal, cell.high.getY()); // adjust leftmost cell's X
+		Rectangle2D leftRect = new Rectangle2D(leftLow, leftHigh);
+
+		// create new right cell
+		Point2D rightLow = new Point2D(cutVal, cell.low.getY()); // adjust rightmost cell's X
+		Point2D rightHigh = new Point2D(cell.high.getX(), cell.high.getY());
+		Rectangle2D rightRect = new Rectangle2D(rightLow, rightHigh);
+
+		Node leftNode = bulkCreate(leftList, leftRect);
+		Node rightNode = bulkCreate(rightList, rightRect);
+
+		if (isFirstNull(leftNode, rightNode)) {
+			return rightNode;
+		}
+		if (isFirstNull(rightNode, leftNode)) {
+			return leftNode;
+		}
+
+		return new InternalNode(0, cutVal, leftNode, rightNode);
+	}
+
+	private Node bulkCreateY(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, double cutVal) {
+		Collections.sort(pts, new ByYThenX());
+		for (int i = 0; i < len; i++) {
+			if (pts.get(i).getY() > cutVal) {
+				splitIndex = i;
+				break;
+			}
+		}
+		// TODO: fix sliding midpoint
+		if (splitIndex == 0) { // slides it to bottommost
+			cutVal = pts.get(0).getY();
+			splitIndex++; // avoids empty list / infinite recursion
+		}
+		if (splitIndex == len) { // slides it to toptmost
+			cutVal = pts.get(len - 1).getY();
+			splitIndex--; // avoids empty list / infinite recursion
+		}
+
+		ArrayList<LPoint> bottomList = new ArrayList<LPoint>(pts.subList(0, splitIndex));
+		ArrayList<LPoint> topList = new ArrayList<LPoint>(pts.subList(splitIndex, len));
+
+		// create new bottom cell
+		Point2D bottomLow = new Point2D(cell.low.getX(), cell.low.getY());
+		Point2D bottomHigh = new Point2D(cell.high.getY(), cutVal); // adjust leftmost cell's X
+		Rectangle2D bottomRect = new Rectangle2D(bottomLow, bottomHigh);
+
+		// create new top cell
+		Point2D topLow = new Point2D(cutVal, cell.low.getY()); // adjust rightmost cell's X
+		Point2D topHigh = new Point2D(cell.high.getX(), cell.high.getY());
+		Rectangle2D topRect = new Rectangle2D(topLow, topHigh);
+
+		Node bottomNode = bulkCreate(bottomList, bottomRect);
+		Node topNode = bulkCreate(topList, topRect);
+
+		if (isFirstNull(bottomNode, topNode)) {
+			return topNode;
+		}
+		if (isFirstNull(topNode, bottomNode)) {
+			return bottomNode;
+		}
+
+		return new InternalNode(1, cutVal, bottomNode, topNode);
+	}
+
+	private boolean isFirstNull(Node x, Node y) {
+		if (x instanceof ExternalNode) {
+			ExternalNode temp = (ExternalNode) x;
+			if (temp.point == null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void insert(LPoint pt) throws Exception {
 		if (pt.getX() < this.rootCell.low.getX() || pt.getX() > this.rootCell.high.getX()
-			|| pt.getY() < this.rootCell.low.getY() || pt.getY() > this.rootCell.high.getY()) {
+				|| pt.getY() < this.rootCell.low.getY() || pt.getY() > this.rootCell.high.getY()) {
 			throw new Exception("Attempt to insert a point outside bounding box");
-		}
-		if (find(pt.getPoint2D()) != null) {
-			throw new Exception("Insertion of duplicate point");
 		}
 		this.root = root.insert(pt, rootCell);
 	}
 
 	public void clear() {
-
+		this.root = null;
+		this.size = 0;
 	}
 
 	public ArrayList<String> list() {
-		return null;
+		return listAux(new ArrayList<String>(), this.root);
+	}
+
+	private ArrayList<String> listAux(ArrayList<String> ans, Node curr) {
+		if (curr instanceof InternalNode) {
+			InternalNode node = (InternalNode) curr;
+			if (node.cutDim == 0) {
+				ans.add("(x=" + node.cutVal + ") " + node.size + ":" + node.insertionCount);
+			} else {
+				ans.add("(y=" + node.cutVal + ") " + node.size + ":" + node.insertionCount);
+			}
+			ans = listAux(ans, node.right);
+			ans = listAux(ans, node.left);
+		} else {
+			ExternalNode node = (ExternalNode) curr;
+			if (node.point != null) {
+				ans.add("[" + node.point.toString() + "]");
+			} else {
+				ans.add("[null]");
+			}
+		}
+		return ans;
 	}
 
 	/* ----------------------- PART II: ----------------------- */
