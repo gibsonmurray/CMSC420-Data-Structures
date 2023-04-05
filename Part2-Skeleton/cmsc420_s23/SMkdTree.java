@@ -251,14 +251,13 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			double yLength = cell.high.getY() - cell.low.getY();
 			boolean isXLess = xLength < yLength;
 			int cutDim = isXLess ? 1 : 0;
-			//TODO: change cut dimension if all points lie on the same axis line
 			if (cutDim == 0 && pts.get(0).getX() == pts.get(1).getX()) {
 				cutDim = 1;
 			}
 			else if (cutDim == 1 && pts.get(0).getY() == pts.get(1).getY()) {
 				cutDim = 0;
 			}
-			double cutVal = cutDim == 1 ? cell.high.getY() - yLength / 2 : cell.high.getX() - xLength / 2;
+			double cutVal = cutDim == 1 ? cell.high.getY() - (yLength / 2) : cell.high.getX() - (xLength / 2);
 			int splitIndex = len;
 			if (cutDim == 0) { // x split
 				return bulkCreateX(pts, cell, len, splitIndex, cutVal);
@@ -312,13 +311,13 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		//fix size
 		InternalNode node = new InternalNode(0, cutVal, leftNode, rightNode);
-		if (leftNode instanceof InternalNode) {
+		if (leftNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) leftNode;
 			node.size += temp.size;
 		} else {
 			node.size += 1;
 		}
-		if (rightNode instanceof InternalNode) {
+		if (rightNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) rightNode;
 			node.size += temp.size;
 		} else {
@@ -350,7 +349,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		// create new bottom cell
 		Point2D bottomLow = new Point2D(cell.low.getX(), cell.low.getY());
-		Point2D bottomHigh = new Point2D(cell.high.getY(), cutVal); // adjust leftmost cell's X
+		Point2D bottomHigh = new Point2D(cell.high.getX(), cutVal); // adjust leftmost cell's X
 		Rectangle2D bottomRect = new Rectangle2D(bottomLow, bottomHigh);
 
 		// create new top cell
@@ -371,13 +370,13 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		//fix size
 		InternalNode node = new InternalNode(1, cutVal, bottomNode, topNode);
-		if (bottomNode instanceof InternalNode) {
+		if (bottomNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) bottomNode;
 			node.size += temp.size;
 		} else {
 			node.size += 1;
 		}
-		if (topNode instanceof InternalNode) {
+		if (topNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) topNode;
 			node.size += temp.size;
 		} else {
@@ -387,7 +386,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	}
 
 	private boolean isFirstNull(Node x, Node y) {
-		if (x instanceof ExternalNode) {
+		if (x.getClass() == ExternalNode.class) {
 			ExternalNode temp = (ExternalNode) x;
 			if (temp.point == null) {
 				return true;
@@ -409,7 +408,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	}
 
 	private void traverse(Node curr, ArrayList<LPoint> list) {
-		if (curr instanceof InternalNode) {
+		if (curr.getClass() == InternalNode.class) {
 			InternalNode node = (InternalNode) curr;
 			traverse(node.right, list);
 			traverse(node.left, list);
@@ -430,7 +429,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	}
 
 	private ArrayList<String> listAux(ArrayList<String> ans, Node curr) {
-		if (curr instanceof InternalNode) {
+		if (curr.getClass() == InternalNode.class) {
 			InternalNode node = (InternalNode) curr;
 			if (node.cutDim == 0) {
 				ans.add("(x=" + node.cutVal + ") " + node.size + ":" + node.insertionCount);
