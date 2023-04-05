@@ -45,7 +45,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			this.cutVal = cutVal;
 			this.left = left;
 			this.right = right;
-			this.size = 2;
+			this.size = 0;
 			this.insertionCount = 0;
 		}
 
@@ -240,8 +240,6 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		return this.root.find(q);
 	}
 
-	//TODO: ADJUST SIZE OF INTERNAL NODES ON RETURN
-	//TODO: SOME SPLITS ARE INCORRECT SEE OUTPUT FOR DETAILS
 	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell) {
 		int len = pts.size();
 		if (len == 0) {
@@ -297,14 +295,29 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		Node leftNode = bulkCreate(leftList, leftRect);
 		Node rightNode = bulkCreate(rightList, rightRect);
 
+		// check for nulls after empty arraylist
 		if (isFirstNull(leftNode, rightNode)) {
 			return rightNode;
 		}
 		if (isFirstNull(rightNode, leftNode)) {
 			return leftNode;
 		}
-		
-		return new InternalNode(0, cutVal, leftNode, rightNode);
+
+		//fix size
+		InternalNode node = new InternalNode(0, cutVal, leftNode, rightNode);
+		if (leftNode instanceof InternalNode) {
+			InternalNode temp = (InternalNode) leftNode;
+			node.size += temp.size;
+		} else {
+			node.size += 1;
+		}
+		if (rightNode instanceof InternalNode) {
+			InternalNode temp = (InternalNode) rightNode;
+			node.size += temp.size;
+		} else {
+			node.size += 1;
+		}
+		return node;
 	}
 
 	private Node bulkCreateY(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, double cutVal) {
@@ -334,13 +347,14 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		Rectangle2D bottomRect = new Rectangle2D(bottomLow, bottomHigh);
 
 		// create new top cell
-		Point2D topLow = new Point2D(cutVal, cell.low.getY()); // adjust rightmost cell's X
+		Point2D topLow = new Point2D(cell.low.getX(), cutVal); // adjust rightmost cell's X
 		Point2D topHigh = new Point2D(cell.high.getX(), cell.high.getY());
 		Rectangle2D topRect = new Rectangle2D(topLow, topHigh);
 
 		Node bottomNode = bulkCreate(bottomList, bottomRect);
 		Node topNode = bulkCreate(topList, topRect);
 
+		// check for nulls after empty arraylist
 		if (isFirstNull(bottomNode, topNode)) {
 			return topNode;
 		}
@@ -348,7 +362,21 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			return bottomNode;
 		}
 
-		return new InternalNode(1, cutVal, bottomNode, topNode);
+		//fix size
+		InternalNode node = new InternalNode(1, cutVal, bottomNode, topNode);
+		if (bottomNode instanceof InternalNode) {
+			InternalNode temp = (InternalNode) bottomNode;
+			node.size += temp.size;
+		} else {
+			node.size += 1;
+		}
+		if (topNode instanceof InternalNode) {
+			InternalNode temp = (InternalNode) topNode;
+			node.size += temp.size;
+		} else {
+			node.size += 1;
+		}
+		return node;
 	}
 
 	private boolean isFirstNull(Node x, Node y) {
