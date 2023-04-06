@@ -251,12 +251,18 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			double yLength = cell.high.getY() - cell.low.getY();
 			boolean isXLess = xLength < yLength;
 			int cutDim = isXLess ? 1 : 0;
+			if (cutDim == 0) {
+				Collections.sort(pts, new ByXThenY());
+			}
+			else {
+				Collections.sort(pts, new ByYThenX());
+			}
 
 			// if two points are on the same line (and they are the only two) swap the cut dimension 
-			if (cutDim == 0 && len == 2 && pts.get(0).getX() == pts.get(len - 1).getX()) {
+			if (cutDim == 0 && pts.get(0).getX() == pts.get(len - 1).getX()) {
 				cutDim = 1;
 			}
-			else if (cutDim == 1 && len == 2 && pts.get(0).getY() == pts.get(len - 1).getY()) {
+			else if (cutDim == 1 && pts.get(0).getY() == pts.get(len - 1).getY()) {
 				cutDim = 0;
 			}
 
@@ -272,7 +278,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	}
 
 	private Node bulkCreateX(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, double cutVal) {
-		Collections.sort(pts, new ByXThenY());
+
 		for (int i = 0; i < len; i++) {
 			if (pts.get(i).getX() >= cutVal) {
 				splitIndex = i;
@@ -331,7 +337,6 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	}
 
 	private Node bulkCreateY(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, double cutVal) {
-		Collections.sort(pts, new ByYThenX());
 		for (int i = 0; i < len; i++) {
 			if (pts.get(i).getY() >= cutVal) {
 				splitIndex = i;
