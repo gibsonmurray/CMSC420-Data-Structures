@@ -19,15 +19,18 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	Rectangle2D rootCell;
 	Node root;
 	int size;
+	int deleteCount;
 
 	private abstract class Node {
 		abstract LPoint find(Point2D pt);
 
 		abstract Node insert(LPoint pt, Rectangle2D cell) throws Exception;
 
-		abstract Node delete(Point2D pt);
+		abstract Node delete(Point2D pt) throws Exception;
 
 		abstract Node restructure(LPoint pt);
+
+		abstract LPoint nearestNeighbor(Point2D center, Rectangle2D cell, LPoint best);
 	}
 
 	/* --------------------- INTERNAL NODE --------------------- */
@@ -126,10 +129,43 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		SMkdTree<LPoint>.Node delete(Point2D pt) {
-			return null; // TODO
+		SMkdTree<LPoint>.Node delete(Point2D pt) throws Exception{
+			if (cutDim == 0) { // x-split
+				if (pt.getX() < cutVal) {
+					this.left = this.left.delete(pt);
+				} else {
+					this.right = this.right.delete(pt);
+				}
+			} else { // y-split
+				if (pt.getY() < cutVal) {
+					this.left = this.left.delete(pt);
+				} else {
+					this.right = this.right.delete(pt);
+				}
+			}
+			return this;
 		}
 
+		@Override
+		public LPoint nearestNeighbor(Point2D center, Rectangle2D cell, LPoint best) {
+			int cd = this.cutDim;
+			double cv = this.cutVal;
+			Rectangle2D leftCell = cell.leftPart(cd, cv);
+			Rectangle2D rightCell = cell.rightPart(cd, cv);
+
+			if (center.get(cd) < cv) {
+				best = this.left.nearestNeighbor(center, leftCell, best);
+				if (rightCell.distanceSq(center) < center.distance(best.getPoint2D())) {
+					best = this.right.nearestNeighbor(center, rightCell, best);
+				}
+			} else {
+				best = this.right.nearestNeighbor(center, rightCell, best);
+				if (leftCell.distanceSq(center) < center.distance(best.getPoint2D())) {
+					best = this.left.nearestNeighbor(center, leftCell, best);
+				}
+			}
+			return best;
+		}
 	}
 
 	/* --------------------- EXTERNAL NODE --------------------- */
@@ -174,8 +210,20 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		SMkdTree<LPoint>.Node delete(Point2D pt) {
-			return null; // TODO
+		SMkdTree<LPoint>.Node delete(Point2D pt) throws Exception {
+			if (!this.point.getPoint2D().equals(pt)) {
+				throw new Exception("Deletion of nonexistent point");
+			}
+			this.point = null;
+			return this;
+		}
+
+		@Override
+		public LPoint nearestNeighbor(Point2D center, Rectangle2D cell, LPoint best) {
+			if (center.distance(this.point.getPoint2D()) < center.distance(best.getPoint2D())) {
+				best = this.point;
+			}
+			return best;
 		}
 	}
 
@@ -230,6 +278,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		this.rootCell = rootCell;
 		this.root = new ExternalNode(null);
 		this.size = 0;
+		this.deleteCount = 0;
 	}
 
 	public int size() {
@@ -461,15 +510,21 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	/* ----------------------- PART II: ----------------------- */
 
 	public int deleteCount() {
-		return 0;
+		return this.deleteCount;
 	}
 
 	public void delete(Point2D pt) throws Exception {
-
+		this.root = this.root.delete(pt);
+		deleteCount++;
+		if (this.deleteCount > this.size) {
+			ArrayList<LPoint> list = new ArrayList<LPoint>();
+			traverse(root, list);
+			this.root = bulkCreate(list, rootCell);
+		}
 	}
 
 	public LPoint nearestNeighbor(Point2D center) {
-		return null;
+		return root.nearestNeighbor(center, rootCell, null);
 	}
 
 	public ArrayList<LPoint> nearestNeighborVisit(Point2D center) {
