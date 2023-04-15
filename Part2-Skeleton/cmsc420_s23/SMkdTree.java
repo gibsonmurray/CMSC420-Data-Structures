@@ -74,8 +74,6 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		@Override
 		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) throws Exception {
-			this.size++;
-			this.insertionCount++;
 			this.subCell = cell;
 
 			if (cutDim == 0) { // x-split
@@ -104,6 +102,8 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 					this.right = this.right.insert(pt, rect);
 				}
 			}
+			this.size++;
+			this.insertionCount++;
 			return this;
 		}
 
@@ -146,6 +146,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 					this.right = this.right.delete(pt);
 				}
 			}
+			this.size--;
 			return this;
 		}
 
@@ -217,7 +218,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			if (this.point == null) {
 				this.point = pt;
 				return this;
-			} else if (this.point.equals(pt)) {
+			} else if (this.point.getPoint2D().equals(pt.getPoint2D())) {
 				throw new Exception("Insertion of duplicate point");
 			} else {
 				ArrayList<LPoint> list = new ArrayList<LPoint>();
@@ -234,7 +235,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		@Override
 		SMkdTree<LPoint>.Node delete(Point2D pt) throws Exception {
-			if (!this.point.getPoint2D().equals(pt)) {
+			if (this.point == null || !this.point.getPoint2D().equals(pt)) {
 				throw new Exception("Deletion of nonexistent point");
 			}
 			this.point = null;
@@ -374,6 +375,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, int cutDim,
 			double cutVal) {
 
+		// checks to see if we need to slide split
 		for (int i = 0; i < len; i++) {
 			if (pts.get(i).get(cutDim) >= cutVal) {
 				splitIndex = i;
@@ -383,15 +385,23 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		if (splitIndex == 0) { // slides it to leftmost
 			cutVal = pts.get(0).get(cutDim);
-			splitIndex++; // avoids empty list / infinite recursion
 		}
 		if (splitIndex == len) { // slides it to rightmost
 			cutVal = pts.get(len - 1).get(cutDim);
-			splitIndex--; // avoids empty list / infinite recursion
 		}
 
-		ArrayList<LPoint> leftList = new ArrayList<LPoint>(pts.subList(0, splitIndex));
-		ArrayList<LPoint> rightList = new ArrayList<LPoint>(pts.subList(splitIndex, len));
+		ArrayList<LPoint> leftList = new ArrayList<LPoint>();
+		ArrayList<LPoint> rightList = new ArrayList<LPoint>();
+
+		// partitions left and right subtrees
+		for (int i = 0; i < len; i ++) {
+			if (pts.get(i).get(cutDim) < cutVal) {
+				leftList.add(pts.get(i));
+			}
+			else {
+				rightList.add(pts.get(i));
+			}
+		}
 
 		Rectangle2D leftRect = null;
 		Rectangle2D rightRect = null;
@@ -421,39 +431,27 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		Node leftNode = bulkCreate(leftList, leftRect);
 		Node rightNode = bulkCreate(rightList, rightRect);
 
-		// check for nulls after empty arraylist
-		if (isFirstNull(leftNode, rightNode)) {
-			return rightNode;
-		}
-		if (isFirstNull(rightNode, leftNode)) {
-			return leftNode;
-		}
-
 		// fix size
 		InternalNode node = new InternalNode(cutDim, cutVal, leftNode, rightNode);
 		if (leftNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) leftNode;
 			node.size += temp.size;
-		} else {
-			node.size += 1;
+		} else if (leftNode.getClass() == ExternalNode.class){
+			ExternalNode temp = (ExternalNode) leftNode;
+			if (temp.point != null){
+				node.size += 1;
+			}
 		}
 		if (rightNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) rightNode;
 			node.size += temp.size;
-		} else {
-			node.size += 1;
-		}
-		return node;
-	}
-
-	private boolean isFirstNull(Node x, Node y) {
-		if (x.getClass() == ExternalNode.class) {
-			ExternalNode temp = (ExternalNode) x;
-			if (temp.point == null) {
-				return true;
+		} else if (rightNode.getClass() == ExternalNode.class){
+			ExternalNode temp = (ExternalNode) rightNode;
+			if (temp.point != null){
+				node.size += 1;
 			}
 		}
-		return false;
+		return node;
 	}
 
 	public void insert(LPoint pt) throws Exception {
@@ -475,7 +473,9 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			traverse(node.left, list);
 		} else {
 			ExternalNode node = (ExternalNode) curr;
-			list.add(node.point);
+			if (node.point != null) {
+				list.add(node.point);
+			}
 		}
 	}
 
@@ -517,11 +517,13 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 	public void delete(Point2D pt) throws Exception {
 		this.root = this.root.delete(pt);
-		deleteCount++;
+		this.deleteCount++;
+		this.size --;
 		if (this.deleteCount > this.size) {
 			ArrayList<LPoint> list = new ArrayList<LPoint>();
 			traverse(root, list);
 			this.root = bulkCreate(list, rootCell);
+			this.deleteCount = 0;
 		}
 	}
 
