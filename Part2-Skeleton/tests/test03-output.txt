@@ -1,0 +1,226 @@
+comment: Rebuild-offset=6
+initialize: rebuild-offset = 6 bounding-box = [(0.0,0.0),(10.0,10.0)]
+insert(ATL): successful {Atlanta, (1.0,4.0)}
+list:
+  [ATL: (1.0,4.0)]
+Tree structure:
+  [ATL: (1.0,4.0)]
+insert(JFK): successful {New York, (9.5,1.5)}
+list:
+  (x=5.0) 2:0
+  [JFK: (9.5,1.5)]
+  [ATL: (1.0,4.0)]
+Tree structure:
+  | [JFK: (9.5,1.5)]
+  (x=5.0) 2:0
+  | [ATL: (1.0,4.0)]
+insert(BWI): successful {Baltimore, (9.0,9.0)}
+list:
+  (x=5.0) 3:1
+  (y=5.0) 2:0
+  [BWI: (9.0,9.0)]
+  [JFK: (9.5,1.5)]
+  [ATL: (1.0,4.0)]
+Tree structure:
+  | | [BWI: (9.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.5,1.5)]
+  (x=5.0) 3:1
+  | [ATL: (1.0,4.0)]
+insert(IAD): successful {Dulles, (2.0,1.0)}
+list:
+  (x=5.0) 4:2
+  (y=5.0) 2:0
+  [BWI: (9.0,9.0)]
+  [JFK: (9.5,1.5)]
+  (y=4.0) 2:0
+  [ATL: (1.0,4.0)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | [BWI: (9.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.5,1.5)]
+  (x=5.0) 4:2
+  | | [ATL: (1.0,4.0)]
+  | (y=4.0) 2:0
+  | | [IAD: (2.0,1.0)]
+insert(ORD): successful {Chicago, (2.0,6.0)}
+list:
+  (x=5.0) 5:3
+  (y=5.0) 2:0
+  [BWI: (9.0,9.0)]
+  [JFK: (9.5,1.5)]
+  (y=4.0) 3:1
+  (y=6.0) 2:0
+  [ORD: (2.0,6.0)]
+  [ATL: (1.0,4.0)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | [BWI: (9.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.5,1.5)]
+  (x=5.0) 5:3
+  | | | [ORD: (2.0,6.0)]
+  | | (y=6.0) 2:0
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 3:1
+  | | [IAD: (2.0,1.0)]
+insert(DFW): successful {Dallas-Fort Worth, (3.0,8.0)}
+list:
+  (x=5.0) 6:4
+  (y=5.0) 2:0
+  [BWI: (9.0,9.0)]
+  [JFK: (9.5,1.5)]
+  (y=4.0) 4:2
+  (y=6.0) 3:1
+  (x=2.5) 2:0
+  [DFW: (3.0,8.0)]
+  [ORD: (2.0,6.0)]
+  [ATL: (1.0,4.0)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | [BWI: (9.0,9.0)]
+  | (y=5.0) 2:0
+  | | [JFK: (9.5,1.5)]
+  (x=5.0) 6:4
+  | | | | [DFW: (3.0,8.0)]
+  | | | (x=2.5) 2:0
+  | | | | [ORD: (2.0,6.0)]
+  | | (y=6.0) 3:1
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 4:2
+  | | [IAD: (2.0,1.0)]
+insert(DCA): successful {Washington, (5.5,9.5)}
+list:
+  (x=5.0) 7:5
+  (y=5.0) 3:1
+  (x=7.5) 2:0
+  [BWI: (9.0,9.0)]
+  [DCA: (5.5,9.5)]
+  [JFK: (9.5,1.5)]
+  (y=4.0) 4:2
+  (y=6.0) 3:1
+  (x=2.5) 2:0
+  [DFW: (3.0,8.0)]
+  [ORD: (2.0,6.0)]
+  [ATL: (1.0,4.0)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | | [BWI: (9.0,9.0)]
+  | | (x=7.5) 2:0
+  | | | [DCA: (5.5,9.5)]
+  | (y=5.0) 3:1
+  | | [JFK: (9.5,1.5)]
+  (x=5.0) 7:5
+  | | | | [DFW: (3.0,8.0)]
+  | | | (x=2.5) 2:0
+  | | | | [ORD: (2.0,6.0)]
+  | | (y=6.0) 3:1
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 4:2
+  | | [IAD: (2.0,1.0)]
+insert(LAX): successful {Los Angeles, (3.5,1.5)}
+list:
+  (x=5.0) 8:6
+  (y=5.0) 3:1
+  (x=7.5) 2:0
+  [BWI: (9.0,9.0)]
+  [DCA: (5.5,9.5)]
+  [JFK: (9.5,1.5)]
+  (y=4.0) 5:3
+  (y=6.0) 3:1
+  (x=2.5) 2:0
+  [DFW: (3.0,8.0)]
+  [ORD: (2.0,6.0)]
+  [ATL: (1.0,4.0)]
+  (x=2.5) 2:0
+  [LAX: (3.5,1.5)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | | [BWI: (9.0,9.0)]
+  | | (x=7.5) 2:0
+  | | | [DCA: (5.5,9.5)]
+  | (y=5.0) 3:1
+  | | [JFK: (9.5,1.5)]
+  (x=5.0) 8:6
+  | | | | [DFW: (3.0,8.0)]
+  | | | (x=2.5) 2:0
+  | | | | [ORD: (2.0,6.0)]
+  | | (y=6.0) 3:1
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 5:3
+  | | | [LAX: (3.5,1.5)]
+  | | (x=2.5) 2:0
+  | | | [IAD: (2.0,1.0)]
+insert(SEA): successful {Seattle, (5.0,0.5)}
+list:
+  (x=5.0) 9:7
+  (y=5.0) 4:2
+  (x=7.5) 2:0
+  [BWI: (9.0,9.0)]
+  [DCA: (5.5,9.5)]
+  (x=7.5) 2:0
+  [JFK: (9.5,1.5)]
+  [SEA: (5.0,0.5)]
+  (y=4.0) 5:3
+  (y=6.0) 3:1
+  (x=2.5) 2:0
+  [DFW: (3.0,8.0)]
+  [ORD: (2.0,6.0)]
+  [ATL: (1.0,4.0)]
+  (x=2.5) 2:0
+  [LAX: (3.5,1.5)]
+  [IAD: (2.0,1.0)]
+Tree structure:
+  | | | [BWI: (9.0,9.0)]
+  | | (x=7.5) 2:0
+  | | | [DCA: (5.5,9.5)]
+  | (y=5.0) 4:2
+  | | | [JFK: (9.5,1.5)]
+  | | (x=7.5) 2:0
+  | | | [SEA: (5.0,0.5)]
+  (x=5.0) 9:7
+  | | | | [DFW: (3.0,8.0)]
+  | | | (x=2.5) 2:0
+  | | | | [ORD: (2.0,6.0)]
+  | | (y=6.0) 3:1
+  | | | [ATL: (1.0,4.0)]
+  | (y=4.0) 5:3
+  | | | [LAX: (3.5,1.5)]
+  | | (x=2.5) 2:0
+  | | | [IAD: (2.0,1.0)]
+size: 9
+comment: Our first attempt at a nearest-neighbor query
+nearest-neighbor((1.0,8.5)): found [DFW: (3.0,8.0)]
+visited:
+  ORD: (2.0,6.0) squared dist = 7.25
+  DFW: (3.0,8.0) squared dist = 4.25
+nearest-neighbor((2.5,3.0)): found [ATL: (1.0,4.0)]
+visited:
+  ATL: (1.0,4.0) squared dist = 3.25
+  IAD: (2.0,1.0) squared dist = 4.25
+  LAX: (3.5,1.5) squared dist = 3.25
+nearest-neighbor((9.0,7.5)): found [BWI: (9.0,9.0)]
+comment: The next nearest-neighbor visits DCA but just barely, since it lies on the border
+visited:
+  DCA: (5.5,9.5) squared dist = 16.25
+  BWI: (9.0,9.0) squared dist = 2.25
+nearest-neighbor((6.5,5.0)): found [ORD: (2.0,6.0)]
+visited:
+  ATL: (1.0,4.0) squared dist = 31.25
+  IAD: (2.0,1.0) squared dist = 36.25
+  ORD: (2.0,6.0) squared dist = 21.25
+  DFW: (3.0,8.0) squared dist = 21.25
+  LAX: (3.5,1.5) squared dist = 21.25
+  SEA: (5.0,0.5) squared dist = 22.5
+  DCA: (5.5,9.5) squared dist = 21.25
+  BWI: (9.0,9.0) squared dist = 22.25
+  JFK: (9.5,1.5) squared dist = 21.25
+clear: successful
+list:
+  [null]
+Tree structure:
+  [null]
+size: 0
+nearest-neighbor((1.0,8.5)): not found
+visited:
