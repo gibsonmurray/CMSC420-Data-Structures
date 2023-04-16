@@ -6,11 +6,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Comparator;
 
-/*
- * AN ADDITIONAL CHALLENGE IS SORT ONLY ONCE ON RESTRUCTURE
- * (LIKELY A TRAVERSAL THING BUT IDK)
- */
-
 public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 	/* ----------------------- PART I: ----------------------- */
@@ -541,8 +536,8 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	/* ----------------------- CHALLENGE: ----------------------- */
 
 	private class LPointIterator implements Iterator<LPoint> {
-		public LPointIterator() {
 
+		public LPointIterator() {
 		}
 
 		public boolean hasNext() {
