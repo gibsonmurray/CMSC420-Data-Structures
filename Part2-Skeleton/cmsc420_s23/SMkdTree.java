@@ -25,9 +25,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		abstract Node restructure(LPoint pt);
 
-		abstract LPoint nearestNeighbor(Point2D center, Rectangle2D cell, LPoint best);
-
-		abstract LPoint nearestNeighborVisit(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best);
+		abstract LPoint nearestNeighbor(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best);
 
 	}
 
@@ -146,42 +144,21 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		public LPoint nearestNeighbor(Point2D center, Rectangle2D cell, LPoint best) {
+		LPoint nearestNeighbor(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best) {
 			int cd = this.cutDim;
 			double cv = this.cutVal;
 			Rectangle2D leftCell = cell.leftPart(cd, cv);
 			Rectangle2D rightCell = cell.rightPart(cd, cv);
 
 			if (center.get(cd) < cv) {
-				best = this.left.nearestNeighbor(center, leftCell, best);
+				best = this.left.nearestNeighbor(ans, center, leftCell, best);
 				if (rightCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
-					best = this.right.nearestNeighbor(center, rightCell, best);
+					best = this.right.nearestNeighbor(ans, center, rightCell, best);
 				}
 			} else {
-				best = this.right.nearestNeighbor(center, rightCell, best);
+				best = this.right.nearestNeighbor(ans, center, rightCell, best);
 				if (leftCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
-					best = this.left.nearestNeighbor(center, leftCell, best);
-				}
-			}
-			return best;
-		}
-
-		@Override
-		LPoint nearestNeighborVisit(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best) {
-			int cd = this.cutDim;
-			double cv = this.cutVal;
-			Rectangle2D leftCell = cell.leftPart(cd, cv);
-			Rectangle2D rightCell = cell.rightPart(cd, cv);
-
-			if (center.get(cd) < cv) {
-				best = this.left.nearestNeighborVisit(ans, center, leftCell, best);
-				if (rightCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
-					best = this.right.nearestNeighborVisit(ans, center, rightCell, best);
-				}
-			} else {
-				best = this.right.nearestNeighborVisit(ans, center, rightCell, best);
-				if (leftCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
-					best = this.left.nearestNeighborVisit(ans, center, leftCell, best);
+					best = this.left.nearestNeighbor(ans, center, leftCell, best);
 				}
 			}
 			return best;
@@ -238,24 +215,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		LPoint nearestNeighbor(Point2D center, Rectangle2D cell, LPoint best) {
-			if (this.point == null) {
-				return null;
-			}
-			ByXThenY comp = new ByXThenY();
-			if (best == null) {
-				best = this.point;
-			} else if (center.distanceSq(this.point.getPoint2D()) < center.distanceSq(best.getPoint2D())) {
-				best = this.point;
-			} else if (center.distanceSq(this.point.getPoint2D()) == center.distanceSq(best.getPoint2D())
-					&& comp.compare(this.point, best) < 0) {
-				best = this.point;
-			}
-			return best;
-		}
-
-		@Override
-		LPoint nearestNeighborVisit(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best) {
+		LPoint nearestNeighbor(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best) {
 			if (this.point == null) {
 				return null;
 			}
@@ -526,12 +486,12 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	 * Some Error in this method
 	 */
 	public LPoint nearestNeighbor(Point2D center) {
-		return root.nearestNeighbor(center, rootCell, null);
+		return root.nearestNeighbor(new ArrayList<LPoint>(), center, rootCell, null);
 	}
 
 	public ArrayList<LPoint> nearestNeighborVisit(Point2D center) {
 		ArrayList<LPoint> ans = new ArrayList<LPoint>();
-		root.nearestNeighborVisit(ans, center, rootCell, null);
+		root.nearestNeighbor(ans, center, rootCell, null);
 		Collections.sort(ans, new ByXThenY());
 		return ans;
 	}
