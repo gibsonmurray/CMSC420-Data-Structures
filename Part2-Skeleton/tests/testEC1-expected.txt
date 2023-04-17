@@ -50,7 +50,7 @@ Tree structure:
   | | | [LAX: (4.0,2.0)]
   | | (x=2.5) 2:0
   | | | [IAD: (2.0,1.0)]
-iterator:
+iterate:
   IAD: (2.0,1.0)
   LAX: (4.0,2.0)
   ATL: (1.0,4.0)
@@ -103,7 +103,7 @@ Tree structure:
   | | | [LAX: (4.0,2.0)]
   | | (x=2.5) 2:0
   | | | [IAD: (2.0,1.0)]
-iterator:
+iterate:
   IAD: (2.0,1.0)
   LAX: (4.0,2.0)
   ATL: (1.0,4.0)
@@ -157,7 +157,7 @@ Tree structure:
   | | | [LAX: (4.0,2.0)]
   | | (x=2.5) 1:0
   | | | [null]
-iterator:
+iterate:
   LAX: (4.0,2.0)
   ATL: (1.0,4.0)
   DFW: (3.0,8.0)
@@ -170,5 +170,5 @@ list:
   [null]
 Tree structure:
   [null]
-iterator:
+iterate:
 successful

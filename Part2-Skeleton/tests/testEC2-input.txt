@@ -1,0 +1,484 @@
+comment:Similar to test10, but with iterates
+initialize:5:0:1000:0:1000
+insert:ACK:NANTUCKET:529:766
+insert:ACY:ATLANTIC CITY:735:691
+insert:AEX:ALEXANDRIA:522:476
+insert:AKR:AKRON:446:265
+insert:ALB:ALBANY:294:985
+insert:AMA:AMARILLO:371:711
+insert:ART:WATERTOWN:210:892
+insert:ATL:ATLANTA:948:149
+insert:AUG:AUGUSTA:857:426
+insert:AUS:AUSTIN:458:489
+insert:BCT:BOCA RATON:280:341
+insert:BFI:SEATTLE:390:609
+insert:BFM:MOBILE:165:197
+insert:BGR:BANGOR:167:924
+insert:BHM:BIRMINGHAM:471:677
+insert:BLI:BELLINGHAM:783:276
+insert:BNA:NASHVILLE:913:299
+insert:BOI:BOISE:985:557
+insert:BOS:BOSTON:533:588
+insert:BRO:BROWNSVILLE:803:851
+insert:BTR:BATON ROUGE:412:395
+insert:BUF:BUFFALO:531:435
+insert:BUR:BURBANK:124:996
+insert:BWI:BALTIMORE:203:270
+insert:CBM:COLUMBUS:874:145
+insert:CHA:CHATTANOOGA:422:265
+insert:CHS:CHARLESTON:992:271
+insert:CIC:CHICO:231:106
+insert:CLE:CLEVELAND:689:330
+insert:CLL:COLLEGE STATION:152:571
+insert:CLT:CHARLOTTE:514:771
+insert:CMH:COLUMBUS:601:749
+insert:CNM:CARLSBAD:536:856
+insert:CNW:WACO:667:935
+insert:COS:COLORADO SPRINGS:613:723
+insert:CPR:CASPER:850:927
+insert:CRP:CORPUS CHRISTI:488:835
+insert:CVG:CINCINNATI:877:555
+insert:CYS:CHEYENNE:645:479
+insert:DAL:DALLAS:619:646
+insert:DAY:DAYTON:108:340
+insert:DCA:WASHINGTON:674:246
+insert:DEN:DENVER:868:571
+insert:DET:DETROIT:634:568
+insert:DFW:DALLAS-FORT WORTH:443:187
+insert:DLF:DEL RIO:526:488
+insert:DLH:DULUTH:868:159
+insert:DMA:TUCSON:437:486
+insert:DPA:WEST CHICAGO:182:537
+insert:DRT:DEL RIO:776:410
+insert:DSM:DES MOINES:437:608
+insert:DTW:DETROIT:679:347
+insert:DUG:DOUGLAS:833:685
+insert:DYS:ABILENE:732:465
+insert:EDW:EDWARDS AFB:733:741
+insert:EFD:HOUSTON:257:368
+insert:ELP:EL PASO:578:371
+insert:EWR:NEWARK:459:671
+insert:EYW:KEY WEST:106:285
+insert:FAT:FRESNO:890:926
+insert:FFO:DAYTON:558:607
+insert:FLL:FORT LAUDERDALE:928:656
+insert:FMY:FORT MYERS:444:784
+insert:FOE:TOPEKA:518:448
+insert:FTW:FORT WORTH:414:705
+insert:FXE:FORT LAUDERDALE:842:251
+insert:FYV:FAYETTEVILLE:722:756
+insert:GEG:SPOKANE:998:610
+insert:GLS:GALVESTON:383:905
+insert:GRB:GREEN BAY:321:811
+insert:GRR:GRAND RAPIDS:932:559
+insert:GSB:GOLDSBORO:519:375
+insert:GTF:GREAT FALLS:230:393
+insert:GVT:GREENVILE:216:307
+insert:GVW:GRANDVIEW:883:192
+insert:GWO:GREENWOOD:329:652
+insert:HFD:HARTFORD:852:846
+insert:HMN:ALAMOGORDO:308:262
+insert:HOU:HOUSTON:614:584
+insert:HPN:WHITE PLAINS:607:229
+insert:HRO:HARRISON:208:635
+insert:HUF:TERRE HAUTE:982:367
+insert:HWO:HOLLYWOOD:291:171
+insert:IAB:WICHITA:978:731
+insert:IAD:WASHINGTON:579:499
+insert:IAG:NIAGARA FALLS:546:454
+insert:IAH:HOUSTON:677:183
+insert:IKK:KANKAKEE:888:931
+insert:ABQ:KIRTLAND A.F.B.:503:947
+insert:ILM:WILMINGTON:105:767
+insert:IND:INDIANAPOLIS:630:617
+insert:INT:WINSTON-SALEM:430:345
+insert:ISP:ISLIP:641:142
+insert:JAN:JACKSON:701:876
+insert:JAX:JACKSONVILLE:230:310
+insert:JBR:JONESBORO:396:307
+insert:JFK:NEW YORK:405:229
+insert:LAS:LAS VEGAS:896:363
+insert:LAX:LOS ANGELES:917:462
+insert:LBB:LUBBOCK:113:611
+insert:LCK:COLUMBUS:169:120
+insert:LGA:NEW YORK:940:649
+insert:LGB:LONG BEACH:718:233
+insert:LIT:LITTLE ROCK:550:408
+insert:LNA:WEST PALM BEACH:158:767
+insert:LNK:LINCOLN:805:237
+insert:LOU:LOUISVILLE:397:543
+insert:LRD:LAREDO:355:120
+insert:LRF:JACKSONVILLE:624:674
+insert:LSV:LAS VEGAS:535:442
+insert:LUF:PHOENIX:982:132
+insert:LUK:CINCINNATI:794:774
+insert:MAF:MIDLAND:607:409
+insert:MCC:SACRAMENTO:868:216
+insert:MCF:TAMPA:755:486
+insert:MCI:KANSAS CITY:294:804
+insert:MCO:ORLANDO:506:262
+insert:MDT:HARRISBURG:926:547
+insert:MDW:CHICAGO:650:787
+insert:MEM:MEMPHIS:436:846
+insert:MHR:SACRAMENTO:701:155
+insert:MIA:MIAMI:228:834
+insert:MKE:MILWAUKEE:125:412
+insert:MKO:MUSKOGEE:301:828
+insert:MNM:MACON:476:769
+insert:MOD:MODESTO:262:277
+insert:MOT:MINOT:921:311
+insert:MPV:MONTPELIER:410:715
+insert:MQT:MARQUETTE:486:607
+insert:MSP:MINNEAPOLIS:563:187
+insert:MSS:MASSENA:477:213
+insert:MSY:NEW ORLEANS:512:504
+insert:MXF:MONTGOMERY:277:602
+insert:MYR:MYRTLE BEACH:937:189
+insert:NBG:NEW ORLEANS:308:224
+insert:NCA:JACKSONVILLE:505:352
+insert:NEL:LAKEHURST:396:169
+insert:NGU:NORFOLK:802:771
+insert:NHK:PATUXENT RIVER:105:136
+insert:NIP:JACKSONVILLE:446:741
+insert:NOW:PORT ANGELES:669:364
+insert:NPA:PENSACOLA:891:507
+insert:NQX:KEY WEST:656:361
+insert:NSE:MILTON:548:235
+insert:NZC:JACKSONVILLE:813:311
+insert:NZY:SAN DIEGO:147:422
+insert:OAK:OAKLAND:229:617
+insert:OFF:OMAHA:604:294
+insert:OKC:OKLAHOMA CITY:951:312
+insert:OMA:OMAHA:851:478
+insert:ONT:ONTARIO:318:249
+insert:OPF:MIAMI:993:249
+insert:ORD:CHICAGO:682:189
+insert:ORF:NORFOLK:565:296
+insert:ORL:ORLANDO:610:774
+insert:PAM:PANAMA CITY:260:959
+insert:PBI:WEST PALM BEACH:782:975
+insert:PDX:PORTLAND:790:394
+insert:PHF:NEWPORT NEWS:411:220
+insert:PHL:PHILADELPHIA:771:105
+insert:PHX:PHOENIX:461:650
+insert:PIE:ST. PETERSBURG:499:322
+insert:PIT:PITTSBURGH:433:695
+insert:PNE:PHILADELPHIA:965:136
+insert:PNM:PRINCETON:416:943
+insert:POB:FAYETTEVILLE:143:958
+insert:PSP:PALM SPRINGS:746:736
+insert:PSX:PALACIOS:648:875
+insert:RDR:RED RIVER:163:590
+insert:RDU:RALEIGH-DURHAM:277:315
+insert:RIC:RICHMOND:490:561
+insert:RME:ROME:876:639
+insert:RND:SAN ANTONIO:933:243
+insert:RNO:RENO:285:358
+insert:ROC:ROCHESTER:495:779
+insert:ROW:ROSWELL:839:292
+insert:SAC:SACRAMENTO:693:379
+insert:SAF:SANTA FE:523:659
+insert:SAN:SAN DIEGO:349:381
+insert:SAT:SAN ANTONIO:224:653
+insert:SAV:SAVANNAH:662:989
+insert:SEA:SEATTLE:201:134
+insert:SFF:SPOKANE:831:928
+insert:SFO:SAN FRANCISCO:864:653
+insert:SJC:SAN JOSE:718:905
+insert:SKA:SPOKANE:577:142
+insert:SKF:SAN ANTONIO:949:954
+insert:SLC:SALT LAKE CITY:877:739
+insert:SMF:SACRAMENTO:105:100
+insert:SPG:ST. PETERSBURG:104:103
+insert:SPS:WICHITA FALLS:103:104
+insert:STL:ST. LOUIS:100:105
+insert:SUX:SIOUX CITY:97:104
+insert:TIK:OKLAHOMA CITY:96:103
+insert:TPA:TAMPA:95:100
+insert:TUL:TULSA:96:97
+insert:TUS:TUCSON:97:96
+insert:TYS:KNOXVILLE:100:95
+insert:WRB:MACON:103:96
+insert:YIP:DETROIT:104:97
+size
+list
+iterate
+find:461:650
+find:499:322
+find:433:695
+find:965:136
+find:416:943
+find:143:958
+find:746:736
+find:648:875
+find:163:590
+find:277:315
+find:490:561
+find:876:639
+find:933:243
+find:285:358
+find:495:779
+find:839:292
+find:693:379
+find:523:659
+find:349:381
+find:224:653
+comment:There are 12 candidates for the following nearest-neighbor-visit query
+nearest-neighbor-visit:100:100
+nearest-neighbor-visit:828:725
+nearest-neighbor-visit:364:367
+nearest-neighbor-visit:39:903
+nearest-neighbor-visit:622:261
+nearest-neighbor-visit:242:449
+nearest-neighbor-visit:648:564
+nearest-neighbor-visit:286:837
+nearest-neighbor-visit:694:93
+nearest-neighbor-visit:695:756
+nearest-neighbor-visit:214:123
+nearest-neighbor-visit:520:261
+nearest-neighbor-visit:196:937
+nearest-neighbor-visit:927:559
+nearest-neighbor-visit:833:404
+nearest-neighbor-visit:35:314
+nearest-neighbor-visit:930:150
+nearest-neighbor-visit:100:998
+nearest-neighbor-visit:560:401
+nearest-neighbor-visit:524:153
+nearest-neighbor-visit:915:207
+delete:ACK
+list
+comment:This is the first iterate after a deletion
+iterate
+delete:ACY
+delete:AEX
+delete:AKR
+delete:ALB
+delete:AMA
+delete:ART
+delete:ATL
+delete:AUG
+delete:AUS
+delete:BCT
+delete:BFI
+delete:BFM
+delete:BGR
+delete:BHM
+delete:BLI
+delete:BNA
+delete:BOI
+delete:BOS
+delete:BRO
+delete:BTR
+delete:BUF
+delete:BUR
+delete:BWI
+delete:CBM
+delete:CHA
+delete:CHS
+delete:CIC
+delete:CLE
+delete:CLL
+delete:CLT
+delete:CMH
+delete:CNM
+delete:CNW
+delete:COS
+delete:CPR
+delete:CRP
+delete:CVG
+delete:CYS
+delete:DAL
+delete:DAY
+delete:DCA
+delete:DEN
+delete:DET
+delete:DFW
+delete:DLF
+delete:DLH
+delete:DMA
+delete:DPA
+delete:DRT
+delete:DSM
+delete:DTW
+delete:DUG
+delete:DYS
+delete:EDW
+delete:EFD
+delete:ELP
+delete:EWR
+delete:EYW
+delete:FAT
+delete:FFO
+delete:FLL
+delete:FMY
+delete:FOE
+delete:FTW
+delete:FXE
+delete:FYV
+delete:GEG
+delete:GLS
+delete:GRB
+delete:GRR
+delete:GSB
+delete:GTF
+delete:GVT
+delete:GVW
+delete:GWO
+delete:HFD
+delete:HMN
+delete:HOU
+delete:HPN
+delete:HRO
+delete:HUF
+delete:HWO
+delete:IAB
+delete:IAD
+delete:IAG
+delete:IAH
+delete:IKK
+delete:ABQ
+delete:ILM
+delete:IND
+delete:INT
+delete:ISP
+delete:JAN
+delete:JAX
+delete:JBR
+delete:JFK
+delete:LAS
+delete:LAX
+delete:LBB
+list
+iterate
+size
+delete-count
+comment: Deleting LCK should cause a full rebuild
+delete:LCK
+list
+iterate
+size
+delete-count
+delete:LGA
+delete:LGB
+delete:LIT
+delete:LNA
+delete:LNK
+delete:LOU
+delete:LRD
+delete:LRF
+delete:LSV
+delete:LUF
+delete:LUK
+delete:MAF
+delete:MCC
+delete:MCF
+delete:MCI
+size
+list
+iterate
+delete:MCO
+delete:MDT
+delete:MDW
+delete:MEM
+delete:MHR
+delete:MIA
+delete:MKE
+delete:MKO
+delete:MNM
+delete:MOD
+delete:MOT
+delete:MPV
+delete:MQT
+delete:MSP
+delete:MSS
+delete:MSY
+delete:MXF
+delete:MYR
+delete:NBG
+delete:NCA
+delete:NEL
+delete:NGU
+delete:NHK
+delete:NIP
+delete:NOW
+delete:NPA
+delete:NQX
+delete:NSE
+delete:NZC
+delete:NZY
+delete:OAK
+delete:OFF
+delete:OKC
+delete:OMA
+comment: Deleting ONT should cause a full rebuild
+delete:ONT
+delete:OPF
+delete:ORD
+delete:ORF
+delete:ORL
+delete:PAM
+delete:PBI
+delete:PDX
+delete:PHF
+delete:PHL
+delete:PHX
+delete:PIE
+delete:PIT
+delete:PNE
+delete:PNM
+delete:POB
+delete:PSP
+delete:PSX
+delete:RDR
+delete:RDU
+delete:RIC
+delete:RME
+delete:RND
+delete:RNO
+delete:ROC
+comment: Deleting ROW should cause a full rebuild
+delete:ROW
+delete:SAC
+delete:SAF
+delete:SAN
+delete:SAT
+delete:SAV
+delete:SEA
+delete:SFF
+delete:SFO
+delete:SJC
+delete:SKA
+delete:SKF
+delete:SLC
+list
+iterate
+size
+delete-count
+comment: Deleting SMF should cause a full rebuild
+delete:SMF
+list
+iterate
+size
+delete-count
+delete:SPG
+delete:SPS
+delete:STL
+delete:SUX
+delete:TIK
+comment: Deleting TPA should cause a full rebuild
+delete:TPA
+delete:TUL
+delete:TUS
+comment: Deleting TYS should cause a full rebuild
+delete:TYS
+delete:WRB
+list
+iterate
+size
+delete-count
+comment: Deleting YIP should cause a full rebuild
+delete:YIP
+list
+iterate
+size
+delete-count

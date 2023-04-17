@@ -192,7 +192,7 @@ public class Part2CommandHandler {
 				if (visited == null)
 					throw new Exception("Error - nearest-neighbor-visit returned a null result");
 				Iterator<Airport> iter = visited.iterator(); // iterator for the list
-				output += "visited:" + System.lineSeparator();
+				output += "nearest-neighbor-visit:" + System.lineSeparator();
 				while (iter.hasNext()) { // output the preorder list (flat)
 					Airport next = iter.next();
 					output += "  " + next.toString() + " squared dist = " + q.distanceSq(next.getPoint2D()) + System.lineSeparator();
@@ -222,12 +222,12 @@ public class Part2CommandHandler {
 				Iterator<Airport> iter = kdTree.iterator();
 				if (iter == null)
 					throw new Exception("Error - iterate returned a null result");
-				output += "iterator:" + System.lineSeparator();
+				output += "iterate:" + System.lineSeparator();
 				while (iter.hasNext()) { // output the contents of the iterator
 					output += "  " + iter.next() + System.lineSeparator();
 				}
 				try {
-					iter.next();
+					iter.next(); // attempt one additional access (should fail)
 					output += "Failure - We are expecting iterator.next() to generate an exception" + System.lineSeparator();
 				} catch (NoSuchElementException e) { // exception thrown?
 					output += "successful" + System.lineSeparator();
@@ -242,6 +242,7 @@ public class Part2CommandHandler {
 				else
 					System.err.println("Error: Invalid command - \"" + cmd + "\" (Ignored)");
 			}
+
 			line.close();
 		} catch (Exception e) { // exception thrown?
 			if (e.getMessage() == null) {
@@ -249,6 +250,7 @@ public class Part2CommandHandler {
 			} else {
 				output += "Failure due to exception: \"" + e.getMessage() + "\"" + System.lineSeparator();
 			}
+			e.printStackTrace(System.err);
 		} catch (Error e) { // error occurred?
 			System.err.print("Operation failed due to runtime error: " + e.getMessage());
 			e.printStackTrace(System.err);

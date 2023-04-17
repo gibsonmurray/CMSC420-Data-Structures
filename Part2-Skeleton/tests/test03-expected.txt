@@ -192,21 +192,21 @@ Tree structure:
 size: 9
 comment: Our first attempt at a nearest-neighbor query
 nearest-neighbor((1.0,8.5)): found [DFW: (3.0,8.0)]
-visited:
+nearest-neighbor-visit:
   ORD: (2.0,6.0) squared dist = 7.25
   DFW: (3.0,8.0) squared dist = 4.25
 nearest-neighbor((2.5,3.0)): found [ATL: (1.0,4.0)]
-visited:
+nearest-neighbor-visit:
   ATL: (1.0,4.0) squared dist = 3.25
   IAD: (2.0,1.0) squared dist = 4.25
   LAX: (3.5,1.5) squared dist = 3.25
 nearest-neighbor((9.0,7.5)): found [BWI: (9.0,9.0)]
 comment: The next nearest-neighbor visits DCA but just barely, since it lies on the border
-visited:
+nearest-neighbor-visit:
   DCA: (5.5,9.5) squared dist = 16.25
   BWI: (9.0,9.0) squared dist = 2.25
 nearest-neighbor((6.5,5.0)): found [ORD: (2.0,6.0)]
-visited:
+nearest-neighbor-visit:
   ATL: (1.0,4.0) squared dist = 31.25
   IAD: (2.0,1.0) squared dist = 36.25
   ORD: (2.0,6.0) squared dist = 21.25
@@ -223,4 +223,4 @@ Tree structure:
   [null]
 size: 0
 nearest-neighbor((1.0,8.5)): not found
-visited:
+nearest-neighbor-visit:

@@ -1,0 +1,226 @@
+comment:Inserts 150 points. Rebuild-offset=3
+initialize:3:-10:180:-180:180
+comment:Some operations on an empty tree
+size
+list
+find:0:0
+clear
+comment:Lots of insertions
+insert:TMX:TIMIMOUN:29:0
+insert:NRD:NORDERNEY:53:5
+insert:GWT:WESTERLAND:54:8
+insert:TLL:TALLINN:59:24
+insert:ENF:ENONTEKIO:68:23
+insert:KEV:HALLI:61:24
+insert:HEM:HELSINKI:60:25
+list
+comment:Inserting HEL should trigger a partial rebuild
+insert:HEL:HELSINKI:60:24
+list
+insert:BSK:BISKRA:34:5
+insert:ELG:EL GOLEA:30:2
+insert:HTN:HOTAN:37:79
+insert:URC:URUMQI:43:87
+insert:HRB:HARBIN:45:126
+insert:DLC:DALIAN:38:121
+insert:NYI:SUNYANI:7:-2
+insert:TKD:TAKORADI:4:-1
+insert:ABJ:ABIDJAN:5:-3
+insert:BYK:BOUAKE:7:-5
+insert:DJO:DALOA:6:-6
+list
+comment:Inserting HGO should trigger a partial rebuild
+insert:HGO:KORHOGO:9:-5
+list
+insert:MJC:MAN:7:-7
+insert:JYV:JYVASKYLA:62:25
+insert:KAU:KAUHAVA:63:23
+insert:KEM:KEMI:65:24
+insert:KAJ:KAJAANI:64:27
+insert:LDY:LONDONDERRY:55:-7
+insert:BHX:BIRMINGHAM:52:-1
+insert:CVT:COVENTRY:52:-2
+insert:BNI:BENIN:6:5
+insert:CBQ:CALABAR:4:8
+insert:ENU:ENUGU:6:7
+insert:QUS:GUSAU:12:6
+insert:DJE:DJERBA:35:14
+insert:EBM:EL BORMA:34:14
+insert:SFA:SFAX:34:23
+insert:TOE:TOZEUR:33:14
+comment:Inserting LRL should trigger a partial rebuild
+insert:LRL:NIATOUGOU:9:1
+insert:LFW:LOME:6:1
+comment:Inserting HHN should trigger a partial rebuild
+insert:HHN:HAHN:49:7
+insert:MHG:MANNHEIM:49:8
+comment:Inserting XFW should trigger a partial rebuild
+insert:XFW:HAMBURG:53:9
+comment:Inserting KEL should trigger a partial rebuild
+insert:KEL:KIEL:54:10
+insert:LBC:LUEBECK:53:10
+list
+comment:Inserting EME should trigger a partial rebuild
+insert:EME:EMDEN:53:7
+list
+insert:WVN:WILHELMSHAVEN:53:8
+insert:BMK:BORKUM:53:6
+insert:ENA:KENAI:60:-151
+insert:FAI:FAIRBANKS:64:-146
+insert:FBK:FORT WAINWRIGHT:64:-147
+insert:GAL:GALENA:64:-156
+insert:GKN:GULKANA:62:-145
+insert:SGY:SKAGWAY:59:-135
+comment:Inserting HOM should trigger a partial rebuild
+insert:HOM:HOMER:59:-151
+insert:ILI:ILIAMNA:59:-154
+insert:UTO:INDIAN MOUNTAINS:65:-153
+insert:NGB:NINBO:29:121
+insert:NKG:NANJING:31:118
+insert:HFE:HEFEI:31:117
+insert:TAO:QINGDAO:36:120
+insert:SHA:SHANGHAI:31:121
+comment:Inserting YNT should trigger a partial rebuild
+insert:YNT:YANTAI:37:121
+insert:CKG:CHONGQING:29:106
+insert:LXA:LHASA:0:0
+insert:CTU:CHENGDU:30:103
+insert:HME:HASSI-MESSAOUD:31:6
+insert:INZ:IN SALAH:27:2
+insert:YEV:INUVIK:68:-133
+insert:YFB:IQALUIT:63:-68
+insert:YFC:FREDERICTON:45:-66
+insert:IVL:IVALO:68:27
+insert:JOE:JOENSUU:62:29
+insert:GKA:GOROKA:-6:145
+insert:MAG:MADANG:-5:145
+insert:HGU:MOUNT HAGEN:-5:144
+insert:LAE:NADZAB:-6:146
+insert:POM:PORT MORESBY:-9:147
+insert:WWK:WEWAK:-3:143
+insert:VEY:VESTMANNAEYJAR:63:-20
+comment:Inserting YAM should trigger a partial rebuild
+insert:YAM:SAULT SAINTE MARIE:46:-84
+insert:YAV:WINNIPEG:50:-97
+insert:YAW:HALIFAX:44:-63
+insert:YAY:ST. ANTHONY:51:-56
+insert:YAZ:TOFINO:49:-125
+insert:YBB:PELLY BAY:68:-89
+insert:YDQ:DAWSON CREEK:55:-120
+insert:GHA:GHARDAIA:32:3
+insert:PKO:PARAKOU:9:2
+insert:OUA:OUAGADOUGOU:12:-1
+insert:BOY:BOBO-DIOULASSO:11:-4
+insert:ACC:ACCRA:5:0
+insert:TML:TAMALE:9:0
+list
+comment:Inserting GLO should trigger a partial rebuild
+insert:GLO:GOLOUCHESTERSHIRE:51:-2
+list
+insert:OGX:OUARGLA:31:5
+insert:IAM:ZARZAITINE:28:9
+insert:COO:COTONOU:6:2
+insert:TLM:TLEMCEN:35:-1
+insert:ORN:ORAN:35:2
+insert:MUW:GHRISS:35:3
+insert:AZR:ADRAR:27:0
+insert:TGR:TOUGGOURT:32:14
+size
+list
+find:50:-97
+find:65:24
+find:65:25
+nearest-neighbor:7:-7
+nearest-neighbor:60:25
+nearest-neighbor:63:44
+nearest-neighbor:61:30
+nearest-neighbor:100:27
+nearest-neighbor:52:-3
+nearest-neighbor:70:3
+nearest-neighbor:40:-20
+nearest-neighbor:16:5
+nearest-neighbor:-12:-188
+insert:LOO:LAGHOUAT:33:2
+insert:XIC:XICHANG:27:102
+insert:KHG:KASHI:39:76
+insert:QAS:ECH-CHELIFF:36:1
+insert:TAF:ORAN:35:0
+insert:YFO:FLIN FLON:54:-101
+insert:YHM:HAMILTON:42:-79
+insert:YHU:MONTREAL:45:-73
+insert:YHY:HAY RIVER:60:-115
+insert:YHZ:HALIFAX:44:-62
+insert:YIB:ATIKOKAN:39:14
+insert:YIO:POND INLET:72:-77
+size
+list
+insert:YJN:ST. JEAN:45:-72
+insert:YND:GATINEAU:45:-76
+insert:YNM:MATAGAMI:49:-77
+insert:YOC:OLD CROW:67:-139
+insert:YOD:COLD LAKE:54:-110
+insert:YOJ:HIGH LEVEL:58:-117
+insert:YOW:OTTAWA:45:-75
+insert:YRM:ROCKY MOUNTAIN HOUSE:52:-114
+insert:YRT:RANKIN INLET:62:-92
+comment:Inserting YSB should trigger a partial rebuild
+insert:YSB:SUDBURY:46:-80
+comment:Inserting YSC should trigger a partial rebuild
+insert:YSC:SHERBROOKE:45:-71
+insert:YSJ:ST. JOHN:45:-65
+insert:YWA:PETAWAWA:45:-77
+insert:YED:EDMONTON:53:-113
+comment:Inserting YEG should trigger a partial rebuild
+insert:YEG:EDMONTON:54:-113
+insert:YEK:ESKIMO POINT:61:-94
+size
+list
+insert:YEN:ESTEVAN:49:-102
+insert:YET:EDSON:53:-116
+insert:YEU:EUREKA:79:-85
+insert:YWG:WINNIPEG:49:-97
+insert:YWK:WABUSH:52:-66
+insert:YWL:WILLIAMS LAKE:52:-122
+insert:YWY:WRIGLEY:38:14
+insert:YXC:CRANBROOK:49:-115
+insert:YYU:KAPUSKASING:49:-82
+insert:SPY:SAN PEDRO:4:-6
+insert:ASK:YAMOUSSOUKRO:6:-5
+insert:ABV:ABUJA:9:7
+insert:AKR:AKURE:7:5
+insert:YYW:ARMSTRONG:50:-88
+insert:YYY:MONT JOLI:48:-68
+insert:YYZ:TORONTO:43:-79
+insert:CZL:CONSTANTINE:36:6
+size
+list
+insert:TEE:TEBESSA:35:8
+comment:Inserting HRM should trigger a partial rebuild
+insert:HRM:TILREMPT:32:2
+insert:TID:TIARET:35:1
+comment:Inserting TIN should trigger a partial rebuild
+insert:TIN:TINDOUF:27:-8
+size
+list
+find:50:-97
+find:65:24
+find:65:25
+find:34:23
+find:39:14
+find:38:14
+find:35:14
+find:34:14
+find:33:14
+find:32:14
+find:36:6
+find:34:5
+nearest-neighbor:7:-7
+nearest-neighbor:60:25
+nearest-neighbor:63:44
+nearest-neighbor:61:30
+nearest-neighbor:100:27
+nearest-neighbor:52:-3
+nearest-neighbor:70:3
+nearest-neighbor:40:-20
+nearest-neighbor:16:5
+nearest-neighbor:-12:-188

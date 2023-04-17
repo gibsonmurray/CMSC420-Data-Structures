@@ -522,6 +522,9 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 	}
 
+	/*
+	 * Some Error in this method
+	 */
 	public LPoint nearestNeighbor(Point2D center) {
 		return root.nearestNeighbor(center, rootCell, null);
 	}
