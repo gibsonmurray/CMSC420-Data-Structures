@@ -349,11 +349,10 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		ArrayList<LPoint> rightList = new ArrayList<LPoint>();
 
 		// partitions left and right subtrees
-		for (int i = 0; i < len; i ++) {
+		for (int i = 0; i < len; i++) {
 			if (pts.get(i).get(cutDim) < cutVal) {
 				leftList.add(pts.get(i));
-			}
-			else {
+			} else {
 				rightList.add(pts.get(i));
 			}
 		}
@@ -391,18 +390,18 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		if (leftNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) leftNode;
 			node.size += temp.size;
-		} else if (leftNode.getClass() == ExternalNode.class){
+		} else if (leftNode.getClass() == ExternalNode.class) {
 			ExternalNode temp = (ExternalNode) leftNode;
-			if (temp.point != null){
+			if (temp.point != null) {
 				node.size += 1;
 			}
 		}
 		if (rightNode.getClass() == InternalNode.class) {
 			InternalNode temp = (InternalNode) rightNode;
 			node.size += temp.size;
-		} else if (rightNode.getClass() == ExternalNode.class){
+		} else if (rightNode.getClass() == ExternalNode.class) {
 			ExternalNode temp = (ExternalNode) rightNode;
-			if (temp.point != null){
+			if (temp.point != null) {
 				node.size += 1;
 			}
 		}
@@ -473,7 +472,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	public void delete(Point2D pt) throws Exception {
 		this.root = this.root.delete(pt);
 		this.deleteCount++;
-		this.size --;
+		this.size--;
 		if (this.deleteCount > this.size) {
 			ArrayList<LPoint> list = new ArrayList<LPoint>();
 			traverse(root, list);
