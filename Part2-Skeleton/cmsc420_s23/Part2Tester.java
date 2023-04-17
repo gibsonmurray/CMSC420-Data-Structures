@@ -34,11 +34,11 @@ public class Part2Tester {
 			// "test03-input.txt",
 			// "test04-input.txt",
 			// "test05-input.txt",
-			"test06-input.txt",
-//			"test07-input.txt",
-//			"test08-input.txt",
-//			"test09-input.txt",
-//			"test10-input.txt",
+			// "test06-input.txt",
+			"test07-input.txt",
+			"test08-input.txt",
+			"test09-input.txt",
+			"test10-input.txt",
 //			"testEC1-input.txt", // for the Challenge Problem
 //			"testEC2-input.txt", // for the Challenge Problem
 			};
@@ -48,11 +48,11 @@ public class Part2Tester {
 			// "test03-output.txt",
 			// "test04-output.txt",
 			// "test05-output.txt",
-			"test06-output.txt",
-//			"test07-output.txt",
-//			"test08-output.txt",
-//			"test09-output.txt",
-//			"test10-output.txt",
+			// "test06-output.txt",
+			"test07-output.txt",
+			"test08-output.txt",
+			"test09-output.txt",
+			"test10-output.txt",
 //			"testEC1-output.txt", // for the Challenge Problem
 //			"testEC2-output.txt", // for the Challenge Problem
 			};

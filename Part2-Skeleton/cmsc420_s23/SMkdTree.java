@@ -152,12 +152,12 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 			if (center.get(cd) < cv) {
 				best = this.left.nearestNeighbor(ans, center, leftCell, best);
-				if (rightCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
+				if (best == null || rightCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
 					best = this.right.nearestNeighbor(ans, center, rightCell, best);
 				}
 			} else {
 				best = this.right.nearestNeighbor(ans, center, rightCell, best);
-				if (leftCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
+				if (best == null || leftCell.distanceSq(center) <= center.distanceSq(best.getPoint2D())) {
 					best = this.left.nearestNeighbor(ans, center, leftCell, best);
 				}
 			}
@@ -217,7 +217,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		@Override
 		LPoint nearestNeighbor(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best) {
 			if (this.point == null) {
-				return null;
+				return best;
 			}
 			ByXThenY comp = new ByXThenY();
 			if (best == null) {
