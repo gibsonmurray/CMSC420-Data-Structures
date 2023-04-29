@@ -2,8 +2,6 @@ package cmsc420_s23;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Comparator;
 
 public class SMkdTree<LPoint extends LabeledPoint2D> {
@@ -480,10 +478,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			this.deleteCount = 0;
 		}
 	}
-
-	/*
-	 * Some Error in this method
-	 */
+	
 	public LPoint nearestNeighbor(Point2D center) {
 		return root.nearestNeighbor(new ArrayList<LPoint>(), center, rootCell, null);
 	}
