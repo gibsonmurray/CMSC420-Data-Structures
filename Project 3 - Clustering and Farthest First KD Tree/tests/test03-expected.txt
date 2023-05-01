@@ -67,7 +67,6 @@ ff-list-kd [tree structure]:
   | | | | [LAX: (40.0,20.0)] => {ORD}
   | | (x=31.0) 3:1 => {ORD}
   | | | [LAS: (10.0,20.0)] => {ORD}
-ff-traversal-size: 1
 ff-list-centers:
   ORD: (20.0,60.0)
 ff-list-assignments:
@@ -140,7 +139,6 @@ ff-list-kd [tree structure]:
   | | | | [LAX: (40.0,20.0)] => {ORD PVD}
   | | (x=31.0) 3:1 => {ORD PVD}
   | | | [LAS: (10.0,20.0)] => {ORD PVD}
-ff-traversal-size: 2
 ff-list-centers:
   ORD: (20.0,60.0)
   PVD: (90.0,20.0)
@@ -213,7 +211,6 @@ ff-list-kd [tree structure]:
   | | | | [LAX: (40.0,20.0)] => {ORD PVD}
   | | (x=31.0) 3:1 => {BWI ORD PVD}
   | | | [LAS: (10.0,20.0)] => {BWI ORD PVD}
-ff-traversal-size: 3
 ff-list-centers:
   BWI: (80.0,80.0)
   ORD: (20.0,60.0)
@@ -286,7 +283,6 @@ ff-list-kd [tree structure]:
   | | | | [null] => {LAX}
   | | (x=31.0) 2:1 => {BWI LAX ORD PVD}
   | | | [LAS: (10.0,20.0)] => {LAX ORD}
-ff-traversal-size: 4
 ff-list-centers:
   BWI: (80.0,80.0)
   LAX: (40.0,20.0)
@@ -359,7 +355,6 @@ ff-list-kd [tree structure]:
   | | | | [null] => {LAX}
   | | (x=31.0) 2:1 => {BWI LAX ORD PVD SFO}
   | | | [LAS: (10.0,20.0)] => {LAX ORD SFO}
-ff-traversal-size: 5
 ff-list-centers:
   BWI: (80.0,80.0)
   LAX: (40.0,20.0)

@@ -16,7 +16,6 @@ ff-add-site:LAS:Las Vegas:10:20
 ff-add-site:MCO:Orlando:61:30
 ff-sites-size
 ff-list-kd
-ff-traversal-size
 ff-list-centers
 ff-list-assignments
 ff-traversal-size
@@ -24,7 +23,6 @@ ff-list-traversal
 ff-extract-next
 ff-sites-size
 ff-list-kd
-ff-traversal-size
 ff-list-centers
 ff-list-assignments
 ff-traversal-size
@@ -32,7 +30,6 @@ ff-list-traversal
 ff-extract-next
 ff-sites-size
 ff-list-kd
-ff-traversal-size
 ff-list-centers
 ff-list-assignments
 ff-traversal-size
@@ -40,7 +37,6 @@ ff-list-traversal
 ff-extract-next
 ff-sites-size
 ff-list-kd
-ff-traversal-size
 ff-list-centers
 ff-list-assignments
 ff-traversal-size
@@ -48,7 +44,6 @@ ff-list-traversal
 ff-extract-next
 ff-sites-size
 ff-list-kd
-ff-traversal-size
 ff-list-centers
 ff-list-assignments
 ff-traversal-size
