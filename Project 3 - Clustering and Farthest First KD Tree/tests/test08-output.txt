@@ -81,9 +81,9 @@ ca-list-kd:
   (y=736.5) 2:0 => {BHM}
   [CMH: (601.0,749.0)] => {BHM}
   [COS: (613.0,723.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA SKF TPA}
+  [null] => {BHM}
   [DAL: (619.0,646.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA SKF TPA}
+  [null] => {BHM}
   [BOS: (533.0,588.0)] => {BHM}
   (x=750.0) 10:1 => {BHM BOI DCA LBB TPA}
   (y=250.0) 6:0 => {BHM BOI DCA}
@@ -106,8 +106,8 @@ ca-list-kd:
   (x=531.0) 2:0 => {BHM DCA}
   [BUF: (531.0,435.0)] => {BHM DCA}
   [AEX: (522.0,476.0)] => {BHM DCA}
-  [null] => {BHM BOI BUR DCA SKF TPA}
-  [null] => {BHM BOI BUR DCA SKF TPA}
+  [null] => {BHM DCA}
+  [null] => {DCA}
   (y=500.0) 16:3 => {BHM BOI BUR DCA LBB SKF TPA}
   (x=250.0) 7:2 => {BHM BOI BUR DCA LBB SKF TPA}
   (y=750.0) 4:1 => {BHM BUR DCA LBB}
@@ -122,7 +122,7 @@ ca-list-kd:
   (y=924.0) 2:0 => {BUR}
   [BGR: (167.0,924.0)] => {BUR}
   [ART: (210.0,892.0)] => {BUR}
-  [null] => {BHM BOI BUR DCA SKF TPA}
+  [null] => {BUR}
   [CLL: (152.0,571.0)] => {BHM BUR LBB}
   (x=250.0) 9:1 => {BHM BOI BUR DCA LBB TPA}
   (y=265.0) 5:0 => {BHM BOI DCA LBB TPA}
@@ -144,7 +144,7 @@ ca-list-kd:
   (y=125.0) 2:0 => {TPA}
   [BFM: (165.0,197.0)] => {TPA}
   [CIC: (231.0,106.0)] => {TPA}
-  [null] => {BHM BOI BUR DCA SKF TPA}
+  [null] => {TPA}
 ca-list-kd [tree structure]:
   | | | | | [CPR: (850.0,927.0)] => {BOI SKF}
   | | | | (x=850.0) 2:0 => {BOI SKF}
@@ -170,11 +170,11 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=736.5) 2:0 => {BHM}
   | | | | | | | | | | [COS: (613.0,723.0)] => {BHM}
   | | | | | | | | (y=723.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=687.5) 3:0 => {BHM}
   | | | | | | | | [DAL: (619.0,646.0)] => {BHM}
   | | | | | | (x=601.0) 3:0 => {BHM}
-  | | | | | | | [null] => {BHM BOI BUR DCA SKF TPA}
+  | | | | | | | [null] => {BHM}
   | | | | | (y=625.0) 4:0 => {BHM}
   | | | | | | [BOS: (533.0,588.0)] => {BHM}
   | (y=500.0) 24:11 => {BHM BOI BUR DCA LBB SKF TPA}
@@ -198,9 +198,9 @@ ca-list-kd [tree structure]:
   | | | | | | (x=531.0) 2:0 => {BHM DCA}
   | | | | | | | [AEX: (522.0,476.0)] => {BHM DCA}
   | | | | | (y=435.0) 2:0 => {BHM DCA}
-  | | | | | | [null] => {BHM BOI BUR DCA SKF TPA}
+  | | | | | | [null] => {BHM DCA}
   | | | (y=330.0) 4:1 => {BHM BOI DCA}
-  | | | | [null] => {BHM BOI BUR DCA SKF TPA}
+  | | | | [null] => {DCA}
   (x=500.0) 40:14 => {BHM BOI BUR DCA LBB SKF TPA}
   | | | | | [CRP: (488.0,835.0)] => {BHM BUR LBB}
   | | | | (x=375.0) 2:0 => {BHM BUR LBB}
@@ -214,7 +214,7 @@ ca-list-kd [tree structure]:
   | | | | | (y=924.0) 2:0 => {BUR}
   | | | | | | [ART: (210.0,892.0)] => {BUR}
   | | | | (x=167.0) 2:0 => {BUR}
-  | | | | | [null] => {BHM BOI BUR DCA SKF TPA}
+  | | | | | [null] => {BUR}
   | | | (y=892.0) 3:1 => {BHM BUR LBB TPA}
   | | | | [CLL: (152.0,571.0)] => {BHM BUR LBB}
   | (y=500.0) 16:3 => {BHM BOI BUR DCA LBB SKF TPA}
@@ -238,7 +238,7 @@ ca-list-kd [tree structure]:
   | | | | | (y=125.0) 2:0 => {TPA}
   | | | | | | [CIC: (231.0,106.0)] => {TPA}
   | | | | (x=165.0) 2:0 => {TPA}
-  | | | | | [null] => {BHM BOI BUR DCA SKF TPA}
+  | | | | | [null] => {TPA}
 ca-centers-size: 7
 ca-list-centers:
   BHM: (471.0,677.0)
@@ -373,8 +373,8 @@ ca-list-kd:
   (y=720.5) 2:0 => {BHM BOI SKF}
   [EDW: (733.0,741.0)] => {BHM BOI SKF}
   [ACY: (735.0,691.0)] => {BHM BOI}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM BOI}
+  [null] => {BHM BOI}
   [DET: (634.0,568.0)] => {BHM BOI DCA}
   (y=625.0) 6:1 => {BHM}
   (x=601.0) 3:0 => {BHM}
@@ -383,9 +383,9 @@ ca-list-kd:
   (y=736.5) 2:0 => {BHM}
   [CMH: (601.0,749.0)] => {BHM}
   [COS: (613.0,723.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM}
   [DAL: (619.0,646.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM}
   (x=558.0) 3:1 => {BHM}
   (y=584.0) 2:0 => {BHM}
   (x=591.5) 2:0 => {BHM}
@@ -438,7 +438,7 @@ ca-list-kd:
   (y=488.0) 2:0 => {BHM}
   [DLF: (526.0,488.0)] => {BHM}
   [AEX: (522.0,476.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM}
   [FOE: (518.0,448.0)] => {BHM DCA}
   (x=562.5) 2:0 => {DCA}
   [ELP: (578.0,371.0)] => {DCA}
@@ -469,23 +469,23 @@ ca-list-kd:
   (y=701.0) 2:0 => {BHM}
   [AMA: (371.0,711.0)] => {BHM}
   [GWO: (329.0,652.0)] => {BHM}
-  [null] => {BHM BUR LBB}
-  [null] => {BHM BUR LBB}
+  [null] => {BHM LBB}
+  [null] => {BHM LBB}
   (y=750.0) 5:1 => {BHM BUR LBB TPA}
   (x=167.0) 2:0 => {BHM BUR LBB}
   (y=892.0) 2:0 => {BHM BUR LBB}
   (y=924.0) 2:0 => {BUR}
   [BGR: (167.0,924.0)] => {BUR}
   [ART: (210.0,892.0)] => {BUR}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM BUR LBB}
+  [null] => {BUR LBB}
   (x=152.0) 3:1 => {LBB}
   (y=571.0) 3:1 => {LBB}
   (y=635.0) 2:0 => {LBB}
   [HRO: (208.0,635.0)] => {LBB}
   [CLL: (152.0,571.0)] => {LBB}
   [DPA: (182.0,537.0)] => {LBB}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {LBB}
   (x=250.0) 17:4 => {BHM BOI BUR DCA LBB LUF TPA}
   (y=250.0) 10:2 => {BHM BOI DCA LBB LUF TPA}
   (x=375.0) 8:1 => {BHM DCA LBB TPA}
@@ -522,7 +522,7 @@ ca-list-kd:
   (y=125.0) 2:0 => {TPA}
   [BFM: (165.0,197.0)] => {TPA}
   [CIC: (231.0,106.0)] => {TPA}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {TPA}
 ca-list-kd [tree structure]:
   | | | | | [FAT: (890.0,926.0)] => {BOI SKF}
   | | | | (x=875.0) 4:1 => {BOI SKF}
@@ -560,9 +560,9 @@ ca-list-kd [tree structure]:
   | | | | | | | | (y=720.5) 2:0 => {BHM BOI SKF}
   | | | | | | | | | [ACY: (735.0,691.0)] => {BHM BOI}
   | | | | | | | (y=691.0) 2:0 => {BHM BOI SKF}
-  | | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | | [null] => {BHM BOI}
   | | | | | | (x=733.0) 2:0 => {BHM BOI SKF}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | [null] => {BHM BOI}
   | | | | | (y=625.0) 3:0 => {BHM BOI DCA SKF}
   | | | | | | [DET: (634.0,568.0)] => {BHM BOI DCA}
   | | | | (x=625.0) 9:1 => {BHM BOI DCA SKF}
@@ -570,11 +570,11 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=736.5) 2:0 => {BHM}
   | | | | | | | | | | [COS: (613.0,723.0)] => {BHM}
   | | | | | | | | (y=723.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=687.5) 3:0 => {BHM}
   | | | | | | | | [DAL: (619.0,646.0)] => {BHM}
   | | | | | | (x=601.0) 3:0 => {BHM}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | [null] => {BHM}
   | | | | | (y=625.0) 6:1 => {BHM}
   | | | | | | | | | [HOU: (614.0,584.0)] => {BHM}
   | | | | | | | | (x=591.5) 2:0 => {BHM}
@@ -626,7 +626,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=488.0) 2:0 => {BHM}
   | | | | | | | | | | [AEX: (522.0,476.0)] => {BHM}
   | | | | | | | | (x=522.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=476.0) 3:1 => {BHM DCA}
   | | | | | | | | [FOE: (518.0,448.0)] => {BHM DCA}
   | | | | | (y=415.0) 6:2 => {BHM DCA}
@@ -658,17 +658,17 @@ ca-list-kd [tree structure]:
   | | | | | | | (y=701.0) 2:0 => {BHM}
   | | | | | | | | [GWO: (329.0,652.0)] => {BHM}
   | | | | | | (x=329.0) 2:0 => {BHM LBB}
-  | | | | | | | [null] => {BHM BUR LBB}
+  | | | | | | | [null] => {BHM LBB}
   | | | | | (y=652.0) 2:0 => {BHM BUR LBB}
-  | | | | | | [null] => {BHM BUR LBB}
+  | | | | | | [null] => {BHM LBB}
   | | (x=250.0) 16:6 => {BHM BOI BUR DCA LBB SKF TPA}
   | | | | | | | [BGR: (167.0,924.0)] => {BUR}
   | | | | | | (y=924.0) 2:0 => {BUR}
   | | | | | | | [ART: (210.0,892.0)] => {BUR}
   | | | | | (y=892.0) 2:0 => {BHM BUR LBB}
-  | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | [null] => {BHM BUR LBB}
   | | | | (x=167.0) 2:0 => {BHM BUR LBB}
-  | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | [null] => {BUR LBB}
   | | | (y=750.0) 5:1 => {BHM BUR LBB TPA}
   | | | | | | | [HRO: (208.0,635.0)] => {LBB}
   | | | | | | (y=635.0) 2:0 => {LBB}
@@ -676,7 +676,7 @@ ca-list-kd [tree structure]:
   | | | | | (y=571.0) 3:1 => {LBB}
   | | | | | | [DPA: (182.0,537.0)] => {LBB}
   | | | | (x=152.0) 3:1 => {LBB}
-  | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | [null] => {LBB}
   | (y=500.0) 33:10 => {BHM BOI BUR DCA LBB LUF SKF TPA}
   | | | | | | | [AUS: (458.0,489.0)] => {BHM DCA}
   | | | | | | (x=437.5) 3:0 => {BHM DCA LBB}
@@ -714,7 +714,7 @@ ca-list-kd [tree structure]:
   | | | | | (y=125.0) 2:0 => {TPA}
   | | | | | | [CIC: (231.0,106.0)] => {TPA}
   | | | | (x=165.0) 2:0 => {TPA}
-  | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | [null] => {TPA}
 ca-centers-size: 8
 ca-list-centers:
   BHM: (471.0,677.0)
@@ -906,8 +906,8 @@ ca-list-kd:
   (y=720.5) 2:0 => {BHM BOI SKF}
   [EDW: (733.0,741.0)] => {BHM BOI SKF}
   [ACY: (735.0,691.0)] => {BHM BOI}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM BOI}
+  [null] => {BHM BOI}
   (x=634.0) 2:0 => {BHM BOI DCA SAN}
   [DET: (634.0,568.0)] => {BHM BOI DCA SAN}
   [IND: (630.0,617.0)] => {BHM}
@@ -918,11 +918,11 @@ ca-list-kd:
   (y=736.5) 2:0 => {BHM}
   [CMH: (601.0,749.0)] => {BHM}
   [COS: (613.0,723.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM}
   (y=656.25) 2:0 => {BHM}
   [LRF: (624.0,674.0)] => {BHM}
   [DAL: (619.0,646.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  [null] => {BHM}
   (x=558.0) 3:1 => {BHM SAN}
   (y=584.0) 2:0 => {BHM}
   (x=591.5) 2:0 => {BHM}
@@ -1052,7 +1052,7 @@ ca-list-kd:
   (y=701.0) 2:0 => {BHM}
   [AMA: (371.0,711.0)] => {BHM}
   [GWO: (329.0,652.0)] => {BHM}
-  [null] => {BHM BUR LBB}
+  [null] => {BHM LBB}
   [null] => {BHM LBB SAN}
   (y=750.0) 8:4 => {BHM BUR LBB SAN TPA}
   (x=167.0) 5:3 => {BHM BUR LBB}
@@ -1065,7 +1065,7 @@ ca-list-kd:
   (x=136.0) 2:0 => {BUR LBB}
   [LNA: (158.0,767.0)] => {BUR LBB}
   [ILM: (105.0,767.0)] => {BUR LBB}
-  [null] => {BHM BUR LBB}
+  [null] => {BUR LBB}
   (x=152.0) 3:1 => {LBB SAN}
   (y=571.0) 3:1 => {LBB SAN}
   (y=635.0) 2:0 => {LBB}
@@ -1183,9 +1183,9 @@ ca-list-kd [tree structure]:
   | | | | | | | | (y=720.5) 2:0 => {BHM BOI SKF}
   | | | | | | | | | [ACY: (735.0,691.0)] => {BHM BOI}
   | | | | | | | (y=691.0) 2:0 => {BHM BOI SKF}
-  | | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | | [null] => {BHM BOI}
   | | | | | | (x=733.0) 2:0 => {BHM BOI SKF}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | [null] => {BHM BOI}
   | | | | | (y=625.0) 4:1 => {BHM BOI DCA SAN SKF}
   | | | | | | | [DET: (634.0,568.0)] => {BHM BOI DCA SAN}
   | | | | | | (x=634.0) 2:0 => {BHM BOI DCA SAN}
@@ -1195,13 +1195,13 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=736.5) 2:0 => {BHM}
   | | | | | | | | | | [COS: (613.0,723.0)] => {BHM}
   | | | | | | | | (y=723.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=687.5) 4:1 => {BHM}
   | | | | | | | | | [LRF: (624.0,674.0)] => {BHM}
   | | | | | | | | (y=656.25) 2:0 => {BHM}
   | | | | | | | | | [DAL: (619.0,646.0)] => {BHM}
   | | | | | | (x=601.0) 4:1 => {BHM}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB SKF TPA}
+  | | | | | | | [null] => {BHM}
   | | | | | (y=625.0) 7:2 => {BHM SAN}
   | | | | | | | | | [HOU: (614.0,584.0)] => {BHM}
   | | | | | | | | (x=591.5) 2:0 => {BHM}
@@ -1331,7 +1331,7 @@ ca-list-kd [tree structure]:
   | | | | | | | (y=701.0) 2:0 => {BHM}
   | | | | | | | | [GWO: (329.0,652.0)] => {BHM}
   | | | | | | (x=329.0) 2:0 => {BHM LBB}
-  | | | | | | | [null] => {BHM BUR LBB}
+  | | | | | | | [null] => {BHM LBB}
   | | | | | (y=652.0) 2:0 => {BHM BUR LBB SAN}
   | | | | | | [null] => {BHM LBB SAN}
   | | (x=250.0) 24:14 => {BHM BOI BUR DCA LBB SAN SKF TPA}
@@ -1345,7 +1345,7 @@ ca-list-kd [tree structure]:
   | | | | | | (x=136.0) 2:0 => {BUR LBB}
   | | | | | | | [ILM: (105.0,767.0)] => {BUR LBB}
   | | | | | (x=105.0) 2:0 => {BUR LBB}
-  | | | | | | [null] => {BHM BUR LBB}
+  | | | | | | [null] => {BUR LBB}
   | | | (y=750.0) 8:4 => {BHM BUR LBB SAN TPA}
   | | | | | | | [HRO: (208.0,635.0)] => {LBB}
   | | | | | | (y=635.0) 2:0 => {LBB}
@@ -1666,11 +1666,11 @@ ca-list-kd:
   (y=736.5) 2:0 => {BHM}
   [CMH: (601.0,749.0)] => {BHM}
   [COS: (613.0,723.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM}
   (y=656.25) 2:0 => {BHM}
   [LRF: (624.0,674.0)] => {BHM}
   [DAL: (619.0,646.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM}
   (x=562.5) 4:1 => {BHM SAN}
   [HOU: (614.0,584.0)] => {BHM}
   (y=588.0) 3:1 => {BHM SAN}
@@ -1678,7 +1678,7 @@ ca-list-kd:
   (y=606.5) 2:0 => {BHM}
   [FFO: (558.0,607.0)] => {BHM}
   [BOS: (533.0,588.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM}
   [MSY: (512.0,504.0)] => {BHM SAN}
   (x=750.0) 54:16 => {BHM BOI DCA LBB LUF SAN TPA}
   (y=250.0) 25:8 => {BHM BOI DCA LUF SAN}
@@ -1698,8 +1698,8 @@ ca-list-kd:
   (x=921.0) 2:0 => {LUF}
   [MOT: (921.0,311.0)] => {LUF}
   [BNA: (913.0,299.0)] => {LUF}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {LUF}
+  [null] => {DCA LUF}
   (y=375.0) 8:3 => {BOI DCA LUF}
   (x=812.5) 5:2 => {BOI DCA LUF}
   (y=437.5) 2:0 => {BOI DCA}
@@ -1733,7 +1733,7 @@ ca-list-kd:
   (y=159.0) 2:0 => {LUF}
   [DLH: (868.0,159.0)] => {LUF}
   [CBM: (874.0,145.0)] => {LUF}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {DCA LUF}
   [LNK: (805.0,237.0)] => {DCA LUF}
   [PHL: (771.0,105.0)] => {DCA LUF}
   (y=250.0) 29:8 => {BHM BOI DCA LUF SAN}
@@ -1766,7 +1766,7 @@ ca-list-kd:
   (y=484.375) 2:0 => {BHM SAN}
   [DLF: (526.0,488.0)] => {BHM SAN}
   [AEX: (522.0,476.0)] => {BHM SAN}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM SAN}
   [FOE: (518.0,448.0)] => {SAN}
   (x=531.25) 3:0 => {DCA SAN}
   [LIT: (550.0,408.0)] => {DCA SAN}
@@ -1793,7 +1793,7 @@ ca-list-kd:
   [ORD: (682.0,189.0)] => {DCA}
   [IAH: (677.0,183.0)] => {DCA}
   [ISP: (641.0,142.0)] => {DCA}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {DCA LUF}
   (y=187.0) 3:1 => {DCA SAN}
   (x=563.0) 3:1 => {DCA}
   (y=218.5) 2:0 => {DCA}
@@ -1838,7 +1838,7 @@ ca-list-kd:
   (y=715.0) 2:0 => {BHM}
   [MPV: (410.0,715.0)] => {BHM}
   [FTW: (414.0,705.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM}
   [PIT: (433.0,695.0)] => {BHM}
   (x=437.0) 4:1 => {BHM SAN}
   (y=607.0) 2:0 => {BHM SAN}
@@ -1854,7 +1854,7 @@ ca-list-kd:
   (y=701.0) 2:0 => {BHM}
   [AMA: (371.0,711.0)] => {BHM}
   [GWO: (329.0,652.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM LBB}
   [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
   (y=750.0) 10:2 => {BHM BUR LBB SAN SAV TPA}
   (x=125.0) 6:1 => {BHM BUR LBB}
@@ -1876,7 +1876,7 @@ ca-list-kd:
   [OAK: (229.0,617.0)] => {LBB}
   [CLL: (152.0,571.0)] => {LBB}
   [DPA: (182.0,537.0)] => {LBB SAN}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {LBB}
   (x=250.0) 33:8 => {BHM BOI BUR DCA LBB LUF SAN SAV TPA}
   (y=250.0) 21:6 => {BHM DCA LBB SAN TPA}
   (x=375.0) 12:1 => {BHM DCA LBB SAN}
@@ -1937,7 +1937,7 @@ ca-list-kd:
   (y=280.0) 2:0 => {SAN TPA}
   [GVT: (216.0,307.0)] => {SAN}
   [BWI: (203.0,270.0)] => {SAN TPA}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {LBB SAN TPA}
   (y=340.0) 2:0 => {LBB SAN TPA}
   [DAY: (108.0,340.0)] => {LBB SAN TPA}
   [EYW: (106.0,285.0)] => {SAN TPA}
@@ -1948,7 +1948,7 @@ ca-list-kd:
   (x=207.5) 2:0 => {TPA}
   [CIC: (231.0,106.0)] => {TPA}
   [LCK: (169.0,120.0)] => {TPA}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {TPA}
   [NHK: (105.0,136.0)] => {SAN TPA}
 ca-list-kd [tree structure]:
   | | | | | | | [FAT: (890.0,926.0)] => {SKF}
@@ -2025,13 +2025,13 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=736.5) 2:0 => {BHM}
   | | | | | | | | | | [COS: (613.0,723.0)] => {BHM}
   | | | | | | | | (y=723.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=687.5) 4:0 => {BHM}
   | | | | | | | | | [LRF: (624.0,674.0)] => {BHM}
   | | | | | | | | (y=656.25) 2:0 => {BHM}
   | | | | | | | | | [DAL: (619.0,646.0)] => {BHM}
   | | | | | | (x=601.0) 4:0 => {BHM}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | [null] => {BHM}
   | | | | | (y=625.0) 8:1 => {BHM SAN}
   | | | | | | | [HOU: (614.0,584.0)] => {BHM}
   | | | | | | (x=562.5) 4:1 => {BHM SAN}
@@ -2039,7 +2039,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=606.5) 2:0 => {BHM}
   | | | | | | | | | | [BOS: (533.0,588.0)] => {BHM}
   | | | | | | | | (x=533.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=588.0) 3:1 => {BHM SAN}
   | | | | | | | | [MSY: (512.0,504.0)] => {BHM SAN}
   | (y=500.0) 93:21 => {BHM BOI BUR DCA LBB LUF SAN SAV SKF TPA}
@@ -2057,9 +2057,9 @@ ca-list-kd [tree structure]:
   | | | | | | | | | | (x=921.0) 2:0 => {LUF}
   | | | | | | | | | | | [BNA: (913.0,299.0)] => {LUF}
   | | | | | | | | | (y=299.0) 2:0 => {LUF}
-  | | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | | [null] => {LUF}
   | | | | | | | | (x=913.0) 2:0 => {DCA LUF}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {DCA LUF}
   | | | | (x=875.0) 15:4 => {BHM BOI DCA LUF}
   | | | | | | | | [OMA: (851.0,478.0)] => {BOI}
   | | | | | | | (y=437.5) 2:0 => {BOI DCA}
@@ -2093,7 +2093,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=159.0) 2:0 => {LUF}
   | | | | | | | | | | [CBM: (874.0,145.0)] => {LUF}
   | | | | | | | | (x=868.0) 2:0 => {DCA LUF}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {DCA LUF}
   | | | | | | (x=812.5) 4:0 => {DCA LUF}
   | | | | | | | [LNK: (805.0,237.0)] => {DCA LUF}
   | | | | | (y=145.0) 5:1 => {DCA LUF}
@@ -2125,7 +2125,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | | | (y=484.375) 2:0 => {BHM SAN}
   | | | | | | | | | | | | [AEX: (522.0,476.0)] => {BHM SAN}
   | | | | | | | | | | (x=522.0) 2:0 => {BHM SAN}
-  | | | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | | | [null] => {BHM SAN}
   | | | | | | | | | (y=468.75) 3:0 => {BHM SAN}
   | | | | | | | | | | [FOE: (518.0,448.0)] => {SAN}
   | | | | | | | (y=437.5) 8:0 => {BHM DCA SAN}
@@ -2155,7 +2155,7 @@ ca-list-kd [tree structure]:
   | | | | | | | (y=183.0) 3:1 => {DCA}
   | | | | | | | | [ISP: (641.0,142.0)] => {DCA}
   | | | | | (y=142.0) 5:1 => {DCA LUF}
-  | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | [null] => {DCA LUF}
   | | | | (x=625.0) 8:3 => {DCA LUF SAN}
   | | | | | | | | [HPN: (607.0,229.0)] => {DCA}
   | | | | | | | (y=218.5) 2:0 => {DCA}
@@ -2197,7 +2197,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=715.0) 2:0 => {BHM}
   | | | | | | | | | | [FTW: (414.0,705.0)] => {BHM}
   | | | | | | | | (x=410.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=705.0) 3:1 => {BHM}
   | | | | | | | | [PIT: (433.0,695.0)] => {BHM}
   | | | | | (y=625.0) 10:4 => {BHM SAN}
@@ -2215,7 +2215,7 @@ ca-list-kd [tree structure]:
   | | | | | | | (y=701.0) 2:0 => {BHM}
   | | | | | | | | [GWO: (329.0,652.0)] => {BHM}
   | | | | | | (x=329.0) 2:0 => {BHM LBB}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | [null] => {BHM LBB}
   | | | | | (y=652.0) 3:1 => {BHM BUR LBB SAN}
   | | | | | | [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
   | | (x=250.0) 34:9 => {BHM BOI BUR DCA LBB SAN SAV SKF TPA}
@@ -2239,7 +2239,7 @@ ca-list-kd [tree structure]:
   | | | | | | (y=562.5) 3:1 => {LBB SAN}
   | | | | | | | [DPA: (182.0,537.0)] => {LBB SAN}
   | | | | (x=152.0) 4:1 => {LBB SAN}
-  | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | [null] => {LBB}
   | (y=500.0) 67:17 => {BHM BOI BUR DCA LBB LUF SAN SAV SKF TPA}
   | | | | | | | [AUS: (458.0,489.0)] => {BHM SAN}
   | | | | | | (x=437.5) 3:0 => {BHM SAN}
@@ -2299,7 +2299,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | (y=280.0) 2:0 => {SAN TPA}
   | | | | | | | | | [BWI: (203.0,270.0)] => {SAN TPA}
   | | | | | | (x=203.0) 3:0 => {LBB SAN TPA}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | [null] => {LBB SAN TPA}
   | | | | (x=125.0) 8:1 => {BHM LBB SAN TPA}
   | | | | | | [DAY: (108.0,340.0)] => {LBB SAN TPA}
   | | | | | (y=340.0) 2:0 => {LBB SAN TPA}
@@ -2311,7 +2311,7 @@ ca-list-kd [tree structure]:
   | | | | | | | (x=207.5) 2:0 => {TPA}
   | | | | | | | | [LCK: (169.0,120.0)] => {TPA}
   | | | | | | (y=106.0) 2:0 => {TPA}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | [null] => {TPA}
   | | | | (x=165.0) 4:1 => {SAN TPA}
   | | | | | [NHK: (105.0,136.0)] => {SAN TPA}
 ca-centers-size: 10
@@ -2624,7 +2624,7 @@ ca-list-kd:
   (y=606.5) 2:0 => {BHM}
   [FFO: (558.0,607.0)] => {BHM}
   [BOS: (533.0,588.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM}
   [MSY: (512.0,504.0)] => {BHM SAN}
   (x=750.0) 58:20 => {BHM BOI DCA LBB LUF PSP SAN TPA}
   (y=250.0) 27:10 => {BHM BOI DCA LUF PSP SAN}
@@ -2644,8 +2644,8 @@ ca-list-kd:
   (x=921.0) 2:0 => {LUF}
   [MOT: (921.0,311.0)] => {LUF}
   [BNA: (913.0,299.0)] => {LUF}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {LUF}
+  [null] => {DCA LUF}
   (y=375.0) 9:4 => {BOI DCA LUF PSP}
   (x=812.5) 5:2 => {BOI DCA LUF PSP}
   (y=437.5) 2:0 => {BOI DCA PSP}
@@ -2683,7 +2683,7 @@ ca-list-kd:
   (y=159.0) 2:0 => {LUF}
   [DLH: (868.0,159.0)] => {LUF}
   [CBM: (874.0,145.0)] => {LUF}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {DCA LUF}
   [LNK: (805.0,237.0)] => {DCA LUF}
   [PHL: (771.0,105.0)] => {DCA LUF}
   (y=250.0) 31:10 => {BHM BOI DCA LUF PSP SAN}
@@ -2718,7 +2718,7 @@ ca-list-kd:
   (y=484.375) 2:0 => {BHM SAN}
   [DLF: (526.0,488.0)] => {BHM SAN}
   [AEX: (522.0,476.0)] => {BHM SAN}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM SAN}
   [FOE: (518.0,448.0)] => {SAN}
   (x=531.25) 3:0 => {DCA SAN}
   [LIT: (550.0,408.0)] => {DCA SAN}
@@ -2745,7 +2745,7 @@ ca-list-kd:
   [ORD: (682.0,189.0)] => {DCA}
   [IAH: (677.0,183.0)] => {DCA}
   [ISP: (641.0,142.0)] => {DCA}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {DCA LUF}
   (y=187.0) 4:2 => {DCA SAN}
   (x=563.0) 3:1 => {DCA}
   (y=218.5) 2:0 => {DCA}
@@ -2792,7 +2792,7 @@ ca-list-kd:
   (y=715.0) 2:0 => {BHM}
   [MPV: (410.0,715.0)] => {BHM}
   [FTW: (414.0,705.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM}
   [PIT: (433.0,695.0)] => {BHM}
   (x=437.0) 5:2 => {BHM SAN}
   (y=607.0) 3:1 => {BHM SAN}
@@ -2808,7 +2808,7 @@ ca-list-kd:
   (y=701.0) 2:0 => {BHM}
   [AMA: (371.0,711.0)] => {BHM}
   [GWO: (329.0,652.0)] => {BHM}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {BHM LBB}
   [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
   (y=750.0) 12:4 => {BHM BUR LBB SAN SAV TPA}
   (x=125.0) 6:1 => {BHM BUR LBB}
@@ -2834,7 +2834,7 @@ ca-list-kd:
   [RDR: (163.0,591.0)] => {LBB}
   [CLL: (152.0,571.0)] => {LBB}
   [DPA: (182.0,537.0)] => {LBB SAN}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {LBB}
   (x=250.0) 47:22 => {BHM BOI BUR DCA LBB LUF PSP SAN SAV TPA}
   (y=250.0) 23:8 => {BHM DCA LBB PSP SAN TPA}
   (x=375.0) 14:3 => {BHM DCA LBB SAN}
@@ -2901,7 +2901,7 @@ ca-list-kd:
   (y=280.0) 2:0 => {SAN TPA}
   [GVT: (216.0,307.0)] => {SAN}
   [BWI: (203.0,270.0)] => {SAN TPA}
-  [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  [null] => {LBB SAN TPA}
   (y=340.0) 2:0 => {LBB SAN TPA}
   [DAY: (108.0,340.0)] => {LBB SAN TPA}
   [EYW: (106.0,285.0)] => {SAN TPA}
@@ -2927,7 +2927,7 @@ ca-list-kd:
   (x=104.0) 2:0 => {TPA}
   [SPG: (104.0,103.0)] => {TPA}
   [SPS: (103.0,104.0)] => {TPA}
-  [null] => {SAN TPA}
+  [null] => {TPA}
   [YIP: (104.0,97.0)] => {TPA}
   (y=101.0) 3:0 => {TPA}
   (x=97.0) 2:0 => {TPA}
@@ -2941,7 +2941,7 @@ ca-list-kd:
   [TYS: (100.0,95.0)] => {TPA}
   [TUS: (97.0,96.0)] => {TPA}
   [null] => {TPA}
-  [null] => {SAN TPA}
+  [null] => {TPA}
 ca-list-kd [tree structure]:
   | | | | | | | [FAT: (890.0,926.0)] => {SKF}
   | | | | | | (x=890.0) 2:0 => {SKF}
@@ -3045,7 +3045,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=606.5) 2:0 => {BHM}
   | | | | | | | | | | [BOS: (533.0,588.0)] => {BHM}
   | | | | | | | | (x=533.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=588.0) 3:1 => {BHM SAN}
   | | | | | | | | [MSY: (512.0,504.0)] => {BHM SAN}
   | (y=500.0) 104:32 => {BHM BOI BUR DCA LBB LUF PSP SAN SAV SKF...}
@@ -3063,9 +3063,9 @@ ca-list-kd [tree structure]:
   | | | | | | | | | | (x=921.0) 2:0 => {LUF}
   | | | | | | | | | | | [BNA: (913.0,299.0)] => {LUF}
   | | | | | | | | | (y=299.0) 2:0 => {LUF}
-  | | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | | [null] => {LUF}
   | | | | | | | | (x=913.0) 2:0 => {DCA LUF}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {DCA LUF}
   | | | | (x=875.0) 16:5 => {BHM BOI DCA LUF PSP}
   | | | | | | | | [OMA: (851.0,478.0)] => {BOI}
   | | | | | | | (y=437.5) 2:0 => {BOI DCA PSP}
@@ -3103,7 +3103,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=159.0) 2:0 => {LUF}
   | | | | | | | | | | [CBM: (874.0,145.0)] => {LUF}
   | | | | | | | | (x=868.0) 2:0 => {DCA LUF}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {DCA LUF}
   | | | | | | (x=812.5) 4:0 => {DCA LUF}
   | | | | | | | [LNK: (805.0,237.0)] => {DCA LUF}
   | | | | | (y=145.0) 5:1 => {DCA LUF}
@@ -3137,7 +3137,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | | | (y=484.375) 2:0 => {BHM SAN}
   | | | | | | | | | | | | [AEX: (522.0,476.0)] => {BHM SAN}
   | | | | | | | | | | (x=522.0) 2:0 => {BHM SAN}
-  | | | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | | | [null] => {BHM SAN}
   | | | | | | | | | (y=468.75) 3:0 => {BHM SAN}
   | | | | | | | | | | [FOE: (518.0,448.0)] => {SAN}
   | | | | | | | (y=437.5) 8:0 => {BHM DCA SAN}
@@ -3167,7 +3167,7 @@ ca-list-kd [tree structure]:
   | | | | | | | (y=183.0) 3:1 => {DCA}
   | | | | | | | | [ISP: (641.0,142.0)] => {DCA}
   | | | | | (y=142.0) 5:1 => {DCA LUF}
-  | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | [null] => {DCA LUF}
   | | | | (x=625.0) 9:4 => {DCA LUF SAN}
   | | | | | | | | [HPN: (607.0,229.0)] => {DCA}
   | | | | | | | (y=218.5) 2:0 => {DCA}
@@ -3211,7 +3211,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | (y=715.0) 2:0 => {BHM}
   | | | | | | | | | | [FTW: (414.0,705.0)] => {BHM}
   | | | | | | | | (x=410.0) 2:0 => {BHM}
-  | | | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | | | [null] => {BHM}
   | | | | | | | (y=705.0) 3:1 => {BHM}
   | | | | | | | | [PIT: (433.0,695.0)] => {BHM}
   | | | | | (y=625.0) 11:5 => {BHM SAN}
@@ -3229,7 +3229,7 @@ ca-list-kd [tree structure]:
   | | | | | | | (y=701.0) 2:0 => {BHM}
   | | | | | | | | [GWO: (329.0,652.0)] => {BHM}
   | | | | | | (x=329.0) 2:0 => {BHM LBB}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | [null] => {BHM LBB}
   | | | | | (y=652.0) 3:1 => {BHM BUR LBB SAN}
   | | | | | | [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
   | | (x=250.0) 38:13 => {BHM BOI BUR DCA LBB PSP SAN SAV SKF TPA}
@@ -3257,7 +3257,7 @@ ca-list-kd [tree structure]:
   | | | | | | (y=562.5) 4:2 => {LBB SAN}
   | | | | | | | [DPA: (182.0,537.0)] => {LBB SAN}
   | | | | (x=152.0) 6:3 => {LBB SAN}
-  | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | [null] => {LBB}
   | (y=500.0) 85:35 => {BHM BOI BUR DCA LBB LUF PSP SAN SAV SKF...}
   | | | | | | | [AUS: (458.0,489.0)] => {BHM SAN}
   | | | | | | (x=437.5) 3:0 => {BHM SAN}
@@ -3323,7 +3323,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | (y=280.0) 2:0 => {SAN TPA}
   | | | | | | | | | [BWI: (203.0,270.0)] => {SAN TPA}
   | | | | | | (x=203.0) 3:0 => {LBB SAN TPA}
-  | | | | | | | [null] => {BHM BOI BUR DCA LBB LUF SAN SKF TPA}
+  | | | | | | | [null] => {LBB SAN TPA}
   | | | | (x=125.0) 8:1 => {BHM LBB SAN TPA}
   | | | | | | [DAY: (108.0,340.0)] => {LBB SAN TPA}
   | | | | | (y=340.0) 2:0 => {LBB SAN TPA}
@@ -3347,7 +3347,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | | | | | | (x=104.0) 2:0 => {TPA}
   | | | | | | | | | | | | | | [SPS: (103.0,104.0)] => {TPA}
   | | | | | | | | | | | | (x=103.0) 2:0 => {TPA}
-  | | | | | | | | | | | | | [null] => {SAN TPA}
+  | | | | | | | | | | | | | [null] => {TPA}
   | | | | | | | | | | | (y=103.0) 3:1 => {TPA}
   | | | | | | | | | | | | [YIP: (104.0,97.0)] => {TPA}
   | | | | | | | | | | (x=100.5) 6:1 => {TPA}
@@ -3365,7 +3365,7 @@ ca-list-kd [tree structure]:
   | | | | | | | | (y=95.0) 3:1 => {TPA}
   | | | | | | | | | [null] => {TPA}
   | | | | | | (x=96.0) 11:4 => {TPA}
-  | | | | | | | [null] => {SAN TPA}
+  | | | | | | | [null] => {TPA}
 ca-centers-size: 11
 ca-list-centers:
   BHM: (471.0,677.0)

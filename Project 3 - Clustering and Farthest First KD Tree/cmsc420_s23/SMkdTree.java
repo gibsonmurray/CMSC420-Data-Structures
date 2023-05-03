@@ -324,8 +324,8 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		if (len == 0) {
 			ExternalNode newNode = new ExternalNode(null, cell);
 			newNode.contenders = new LinkedList<LPoint>(contenders);
+			filterContenders(newNode);
 			return newNode;
-
 		} else if (len == 1) {
 			ExternalNode newNode = new ExternalNode(pts.get(0), cell);
 			newNode.contenders = new LinkedList<LPoint>(contenders);
