@@ -453,16 +453,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		} else {
 			ExternalNode node = (ExternalNode) curr;
 			if (node.point != null) {
-				AssignedPair<LPoint> newPair = new AssignedPair<LPoint>();
-				newPair.setSite(node.point);
-				HashMap<Double, LPoint> dict = new HashMap<Double, LPoint>();
-				for (LPoint contender : node.contenders) {
-					double distance = node.point.getPoint2D().distanceSq(contender.getPoint2D());
-					dict.put(distance, contender);
-				}
-				double minDist = Collections.min(dict.keySet());
-				newPair.setDist(minDist);
-				newPair.setCenter(dict.get(minDist));
+				AssignedPair<LPoint> newPair = getPair(node.point);
 				list.add(newPair);
 			}
 		}
@@ -578,11 +569,12 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			}
 			Collections.sort(names);
 			for (int i = 0; i < names.size(); i++) {
-				if (i > 10) {
+				if (i > 9) {
+					str = str.substring(0, str.length() - 1);
 					break;
 				}
 				str += names.get(i);
-				if (i + 1 != names.size()) {
+				if (i != names.size() - 1) {
 					str += " ";
 				}
 			}
@@ -607,11 +599,12 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			}
 			Collections.sort(names);
 			for (int i = 0; i < names.size(); i++) {
-				if (i > 10) {
+				if (i > 9) {
+					str = str.substring(0, str.length() - 1);
 					break;
 				}
 				str += names.get(i);
-				if (i + 1 != names.size()) {
+				if (i != names.size() - 1) {
 					str += " ";
 				}
 			}
@@ -631,7 +624,16 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		HashMap<Double, LPoint> dict = new HashMap<Double, LPoint>();
 		for (LPoint contender : node.contenders) {
 			double distance = node.point.getPoint2D().distanceSq(contender.getPoint2D());
-			dict.put(distance, contender);
+			if (dict.containsKey(distance)) {
+				LPoint currCenter = dict.get(distance);
+				ByXThenY comparator = new ByXThenY();
+				int i = comparator.compare(contender, currCenter);
+				if (i < 0) {
+					dict.put(distance, contender);
+				}
+			} else {
+				dict.put(distance, contender);
+			}
 		}
 		double minDist = Collections.min(dict.keySet());
 		newPair.setDist(minDist);
