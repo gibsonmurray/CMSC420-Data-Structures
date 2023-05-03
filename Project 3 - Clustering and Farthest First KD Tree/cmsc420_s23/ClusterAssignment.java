@@ -16,7 +16,7 @@ public class ClusterAssignment<LPoint extends LabeledPoint2D> {
 		this.centers.add(startCenter);
 		this.startCenter = startCenter;
 	}
-	
+
 	public void addSite(LPoint site) throws Exception {
 		this.kdTree.insert(site);
 	}
@@ -50,29 +50,23 @@ public class ClusterAssignment<LPoint extends LabeledPoint2D> {
 
 	public ArrayList<String> listCenters() {
 		ArrayList<String> ans = new ArrayList<String>();
-		Collections.sort(centers, new ByNames());
 		for (LPoint center : centers) {
 			ans.add(center.getLabel() + ": " + center.getPoint2D().toString());
 		}
+		Collections.sort(ans);
 		return ans;
 	}
 
 	public ArrayList<String> listAssignments() {
 		ArrayList<AssignedPair<LPoint>> pairs = new ArrayList<AssignedPair<LPoint>>();
 		this.kdTree.traverseTree(this.kdTree.getRoot(), pairs);
-		Collections.sort(pairs);
 		ArrayList<String> ans = new ArrayList<String>();
 		for (AssignedPair<LPoint> pair : pairs) {
 			String str = "[" + pair.getSite().getLabel() + "->" + pair.getCenter().getLabel() + "]"
-							+ " distSq = " + pair.getDist();
+					+ " distSq = " + pair.getDist();
 			ans.add(str);
 		}
+		Collections.sort(ans);
 		return ans;
-	}
-
-	private class ByNames implements Comparator<LPoint> {
-		public int compare(LPoint pt1, LPoint pt2) {
-			return pt1.getLabel().compareTo(pt2.getLabel());
-		}
 	}
 }

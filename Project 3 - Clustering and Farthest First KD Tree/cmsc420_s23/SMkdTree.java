@@ -14,7 +14,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		LinkedList<LPoint> contenders;
 		Rectangle2D subCell;
 
-		abstract LPoint find(Point2D pt);
+		abstract Node find(Point2D pt);
 
 		abstract Node insert(LPoint pt, Rectangle2D cell, LinkedList<LPoint> contenders) throws Exception;
 
@@ -48,7 +48,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		LPoint find(Point2D pt) {
+		Node find(Point2D pt) {
 			if (cutDim == 0) { // x-split
 				if (pt.getX() < cutVal) {
 					return this.left.find(pt);
@@ -181,11 +181,11 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		LPoint find(Point2D pt) {
+		Node find(Point2D pt) {
 			if (this.point == null) {
 				return null;
 			} else if (this.point.getPoint2D().equals(pt)) {
-				return this.point;
+				return this;
 			} else {
 				return null;
 			}
@@ -315,7 +315,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		return this.size;
 	}
 
-	public LPoint find(Point2D q) {
+	public Node find(Point2D q) {
 		return this.root.find(q);
 	}
 
@@ -596,31 +596,46 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		} else {
 			ExternalNode node = (ExternalNode) curr;
 			String str = "";
-				if (node.point == null) {
-					str += "[null] => {";
-				} else {
-					str += "[" + node.point.toString() + "] => {";
+			if (node.point == null) {
+				str += "[null] => {";
+			} else {
+				str += "[" + node.point.toString() + "] => {";
+			}
+			ArrayList<String> names = new ArrayList<String>();
+			for (LPoint c : node.contenders) {
+				names.add(c.getLabel());
+			}
+			Collections.sort(names);
+			for (int i = 0; i < names.size(); i++) {
+				if (i > 10) {
+					break;
 				}
-				ArrayList<String> names = new ArrayList<String>();
-				for (LPoint c : node.contenders) {
-					names.add(c.getLabel());
+				str += names.get(i);
+				if (i + 1 != names.size()) {
+					str += " ";
 				}
-				Collections.sort(names);
-				for (int i = 0; i < names.size(); i++) {
-					if (i > 10) {
-						break;
-					}
-					str += names.get(i);
-					if (i + 1 != names.size()) {
-						str += " ";
-					}
-				}
-				if (names.size() > 10) {
-					str += "...";
-				}
-				str += "}";
-				ans.add(str);
+			}
+			if (names.size() > 10) {
+				str += "...";
+			}
+			str += "}";
+			ans.add(str);
 		}
 		return ans;
+	}
+
+	public AssignedPair<LPoint> getPair(LPoint pt) {
+		ExternalNode node = (ExternalNode) find(pt.getPoint2D());
+		AssignedPair<LPoint> newPair = new AssignedPair<LPoint>();
+		newPair.setSite(node.point);
+		HashMap<Double, LPoint> dict = new HashMap<Double, LPoint>();
+		for (LPoint contender : node.contenders) {
+			double distance = node.point.getPoint2D().distanceSq(contender.getPoint2D());
+			dict.put(distance, contender);
+		}
+		double minDist = Collections.min(dict.keySet());
+		newPair.setDist(minDist);
+		newPair.setCenter(dict.get(minDist));
+		return newPair;
 	}
 }
