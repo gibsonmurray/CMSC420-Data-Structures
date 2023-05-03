@@ -1,29 +1,78 @@
 package cmsc420_s23;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ClusterAssignment<LPoint extends LabeledPoint2D> {
+
+	private SMkdTree<LPoint> kdTree; // storage for the sites
+	private ArrayList<LPoint> centers; // storage for the centers
+	private LPoint startCenter;
+
+	public ClusterAssignment(int rebuildOffset, Rectangle2D bbox, LPoint startCenter) {
+		this.kdTree = new SMkdTree<LPoint>(rebuildOffset, bbox, startCenter);
+		this.centers = new ArrayList<LPoint>();
+		this.centers.add(startCenter);
+		this.startCenter = startCenter;
+	}
 	
-	// ------------------------------------------------------------------------
-	// The following class is not required, but you may find it helpful. It
-	// represents the triple (site, center, squared-distance). Feel free to
-	// delete or modify.
-	// ------------------------------------------------------------------------
-	private class AssignedPair implements Comparable<AssignedPair> {
-		private LPoint site; // a site
-		private LPoint center; // its assigned center
-		private double distanceSq; // the squared distance between them
-		public int compareTo(AssignedPair o) { /* ... */ return 0; } // for sorting
+	public void addSite(LPoint site) throws Exception {
+		this.kdTree.insert(site);
 	}
 
-	public ClusterAssignment(int rebuildOffset, Rectangle2D bbox, LPoint startCenter) { /* ... */ }
-	public void addSite(LPoint site) throws Exception { /* ... */ }
-	public void deleteSite(LPoint site) throws Exception { /* ... */ }
-	public void addCenter(LPoint center) throws Exception { /* ... */ }
-	public int sitesSize() { /* ... */ return 0; }
-	public int centersSize() { /* ... */ return 0; }
-	public void clear() { /* ... */ }
-	public ArrayList<String> listKdWithCenters() { /* ... */ return null; }
-	public ArrayList<String> listCenters() { /* ... */ return null; }
-	public ArrayList<String> listAssignments() { /* ... */ return null; }
+	public void deleteSite(LPoint site) throws Exception {
+		this.kdTree.delete(site.getPoint2D());
+	}
+
+	public void addCenter(LPoint center) throws Exception {
+		this.centers.add(center);
+		this.kdTree.addCenter(center);
+	}
+
+	public int sitesSize() {
+		return this.kdTree.size();
+	}
+
+	public int centersSize() {
+		return this.centers.size();
+	}
+
+	public void clear() {
+		this.kdTree.clear();
+		this.centers = new ArrayList<LPoint>();
+		this.centers.add(this.startCenter);
+	}
+
+	public ArrayList<String> listKdWithCenters() {
+		return this.kdTree.listWithCenters();
+	}
+
+	public ArrayList<String> listCenters() {
+		ArrayList<String> ans = new ArrayList<String>();
+		Collections.sort(centers, new ByNames());
+		for (LPoint center : centers) {
+			ans.add(center.getLabel() + ": " + center.getPoint2D().toString());
+		}
+		return ans;
+	}
+
+	public ArrayList<String> listAssignments() {
+		ArrayList<AssignedPair<LPoint>> pairs = new ArrayList<AssignedPair<LPoint>>();
+		this.kdTree.traverseTree(this.kdTree.getRoot(), pairs);
+		Collections.sort(pairs);
+		ArrayList<String> ans = new ArrayList<String>();
+		for (AssignedPair<LPoint> pair : pairs) {
+			String str = "[" + pair.getSite().getLabel() + "->" + pair.getCenter().getLabel() + "]"
+							+ " distSq = " + pair.getDist();
+			ans.add(str);
+		}
+		return ans;
+	}
+
+	private class ByNames implements Comparator<LPoint> {
+		public int compare(LPoint pt1, LPoint pt2) {
+			return pt1.getLabel().compareTo(pt2.getLabel());
+		}
+	}
 }

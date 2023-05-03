@@ -3,27 +3,28 @@ package cmsc420_s23;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 	/* ----------------------- PART I: ----------------------- */
 
-	int rebuildOffset;
-	Rectangle2D rootCell;
-	Node root;
-	int size;
-	int deleteCount;
-
 	private abstract class Node {
+		LinkedList<LPoint> contenders;
+		Rectangle2D subCell;
+		
 		abstract LPoint find(Point2D pt);
 
-		abstract Node insert(LPoint pt, Rectangle2D cell) throws Exception;
+		abstract Node insert(LPoint pt, Rectangle2D cell, LinkedList<LPoint> contenders) throws Exception;
 
 		abstract Node delete(Point2D pt) throws Exception;
 
 		abstract Node restructure(LPoint pt);
 
 		abstract LPoint nearestNeighbor(ArrayList<LPoint> ans, Point2D center, Rectangle2D cell, LPoint best);
+
+		abstract void addCenter(LPoint center);
 
 	}
 
@@ -35,7 +36,6 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		Node left, right; // children
 		int size;
 		int insertionCount;
-		Rectangle2D subCell;
 
 		private InternalNode(int cutDim, double cutVal, Node left, Node right) {
 			this.cutDim = cutDim;
@@ -44,6 +44,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			this.right = right;
 			this.size = 0;
 			this.insertionCount = 0;
+			this.contenders = new LinkedList<LPoint>();
 		}
 
 		@Override
@@ -64,33 +65,26 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) throws Exception {
-			this.subCell = cell;
+		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell, LinkedList<LPoint> contenders) throws Exception {
+			if (this.subCell == null) {
+				this.subCell = cell;
+			}
 
 			if (cutDim == 0) { // x-split
 				if (pt.getX() < cutVal) {
-					// adjust new cell "view"
-					Point2D low = new Point2D(cell.low.getX(), cell.low.getY());
-					Point2D high = new Point2D(cutVal, cell.high.getY()); // adjust rightmost cell's X
-					Rectangle2D rect = new Rectangle2D(low, high);
-					this.left = this.left.insert(pt, rect);
+					Rectangle2D rect = cell.leftPart(cutDim, cutVal);
+					this.left = this.left.insert(pt, rect, this.contenders);
 				} else {
-					Point2D low = new Point2D(cutVal, cell.low.getY()); // adjust leftmost cell's X
-					Point2D high = new Point2D(cell.high.getX(), cell.high.getY());
-					Rectangle2D rect = new Rectangle2D(low, high);
-					this.right = this.right.insert(pt, rect);
+					Rectangle2D rect = cell.rightPart(cutDim, cutVal);
+					this.right = this.right.insert(pt, rect, this.contenders);
 				}
 			} else { // y-split
 				if (pt.getY() < cutVal) {
-					Point2D low = new Point2D(cell.low.getX(), cell.low.getY());
-					Point2D high = new Point2D(cell.high.getX(), cutVal); // adjust rightmost cell's Y
-					Rectangle2D rect = new Rectangle2D(low, high);
-					this.left = this.left.insert(pt, rect);
+					Rectangle2D rect = cell.leftPart(cutDim, cutVal);
+					this.left = this.left.insert(pt, rect, this.contenders);
 				} else {
-					Point2D low = new Point2D(cell.low.getX(), cutVal); // adjust leftmost cell's Y
-					Point2D high = new Point2D(cell.high.getX(), cell.high.getY());
-					Rectangle2D rect = new Rectangle2D(low, high);
-					this.right = this.right.insert(pt, rect);
+					Rectangle2D rect = cell.rightPart(cutDim, cutVal);
+					this.right = this.right.insert(pt, rect, this.contenders);
 				}
 			}
 			this.size++;
@@ -103,7 +97,9 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			if (this.insertionCount > (this.size + rebuildOffset) / 2) {
 				ArrayList<LPoint> list = new ArrayList<LPoint>();
 				traverse(this, list);
-				return bulkCreate(list, this.subCell);
+				LinkedList<LPoint> contenders = new LinkedList<LPoint>(this.contenders);
+				Node newNode = bulkCreate(list, this.subCell, contenders);
+				return newNode;
 			} else {
 				if (cutDim == 0) { // x-split
 					if (pt.getX() < cutVal) {
@@ -161,6 +157,16 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			}
 			return best;
 		}
+
+		@Override
+		void addCenter(LPoint center) {
+			this.contenders.add(center);
+			filterContenders(this);
+			if (this.contenders.contains(center)) {
+				this.left.addCenter(center);
+				this.right.addCenter(center);
+			}
+		}
 	}
 
 	/* --------------------- EXTERNAL NODE --------------------- */
@@ -168,8 +174,10 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	private class ExternalNode extends Node {
 		LPoint point; // the point (null if empty)
 
-		private ExternalNode(LPoint point) {
+		private ExternalNode(LPoint point, Rectangle2D subCell) {
 			this.point = point;
+			this.subCell = subCell;
+			this.contenders = new LinkedList<LPoint>();
 		}
 
 		@Override
@@ -184,9 +192,10 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 
 		@Override
-		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell) throws Exception {
+		SMkdTree<LPoint>.Node insert(LPoint pt, Rectangle2D cell, LinkedList<LPoint> contenders) throws Exception {
 			if (this.point == null) {
 				this.point = pt;
+				this.contenders = new LinkedList<LPoint>(contenders);
 				return this;
 			} else if (this.point.getPoint2D().equals(pt.getPoint2D())) {
 				throw new Exception("Insertion of duplicate point");
@@ -194,7 +203,8 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 				ArrayList<LPoint> list = new ArrayList<LPoint>();
 				list.add(this.point);
 				list.add(pt);
-				return bulkCreate(list, cell);
+				Node newNode = bulkCreate(list, this.subCell, this.contenders);
+				return newNode;
 			}
 		}
 
@@ -229,6 +239,13 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			ans.add(this.point);
 			return best;
 		}
+
+		@Override
+		void addCenter(LPoint center) {
+			this.contenders.add(center);
+			filterContenders(this);
+		}
+
 	}
 
 	/* --------------------- COMPARATOR --------------------- */
@@ -277,10 +294,19 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 	/* --------------------- SMKD TREE METHODS --------------------- */
 
-	public SMkdTree(int rebuildOffset, Rectangle2D rootCell) {
+	private int rebuildOffset;
+	private Rectangle2D rootCell;
+	private Node root;
+	private int size;
+	private int deleteCount;
+	private LPoint startCenter;
+
+	public SMkdTree(int rebuildOffset, Rectangle2D rootCell, LPoint startCenter) {
 		this.rebuildOffset = rebuildOffset;
 		this.rootCell = rootCell;
-		this.root = new ExternalNode(null);
+		this.root = new ExternalNode(null, this.rootCell);
+		this.root.contenders.add(startCenter);
+		this.startCenter = startCenter;
 		this.size = 0;
 		this.deleteCount = 0;
 	}
@@ -293,12 +319,15 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		return this.root.find(q);
 	}
 
-	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell) {
+	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell, LinkedList<LPoint> contenders) {
 		int len = pts.size();
 		if (len == 0) {
-			return new ExternalNode(null);
+			return new ExternalNode(null, cell);
 		} else if (len == 1) {
-			return new ExternalNode(pts.get(0));
+			ExternalNode newNode = new ExternalNode(pts.get(0), cell);
+			newNode.contenders = new LinkedList<LPoint>(contenders);
+			filterContenders(newNode);
+			return newNode;
 		} else {
 			double xLength = cell.high.getX() - cell.low.getX();
 			double yLength = cell.high.getY() - cell.low.getY();
@@ -321,12 +350,12 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			// set cut value based on dimension
 			double cutVal = cutDim == 1 ? cell.high.getY() - (yLength / 2) : cell.high.getX() - (xLength / 2);
 			int splitIndex = len;
-			return bulkCreate(pts, cell, len, splitIndex, cutDim, cutVal);
+			return bulkCreate(pts, cell, len, splitIndex, cutDim, cutVal, contenders);
 		}
 	}
 
 	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell, int len, int splitIndex, int cutDim,
-			double cutVal) {
+			double cutVal, LinkedList<LPoint> contenders) {
 
 		// checks to see if we need to slide split
 		for (int i = 0; i < len; i++) {
@@ -355,33 +384,11 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			}
 		}
 
-		Rectangle2D leftRect = null;
-		Rectangle2D rightRect = null;
+		Rectangle2D leftRect = cell.leftPart(cutDim, cutVal);
+		Rectangle2D rightRect = cell.rightPart(cutDim, cutVal);
 
-		if (cutDim == 0) {
-			// create new left cell
-			Point2D leftLow = new Point2D(cell.low.getX(), cell.low.getY());
-			Point2D leftHigh = new Point2D(cutVal, cell.high.getY()); // adjust leftmost cell's X
-			leftRect = new Rectangle2D(leftLow, leftHigh);
-
-			// create new right cell
-			Point2D rightLow = new Point2D(cutVal, cell.low.getY()); // adjust rightmost cell's X
-			Point2D rightHigh = new Point2D(cell.high.getX(), cell.high.getY());
-			rightRect = new Rectangle2D(rightLow, rightHigh);
-		} else {
-			// create new left cell
-			Point2D leftLow = new Point2D(cell.low.getX(), cell.low.getY());
-			Point2D leftHigh = new Point2D(cell.high.getX(), cutVal); // adjust leftmost cell's Y
-			leftRect = new Rectangle2D(leftLow, leftHigh);
-
-			// create new right cell
-			Point2D rightLow = new Point2D(cell.low.getX(), cutVal); // adjust rightmost cell's Y
-			Point2D rightHigh = new Point2D(cell.high.getX(), cell.high.getY());
-			rightRect = new Rectangle2D(rightLow, rightHigh);
-		}
-
-		Node leftNode = bulkCreate(leftList, leftRect);
-		Node rightNode = bulkCreate(rightList, rightRect);
+		Node leftNode = bulkCreate(leftList, leftRect, contenders);
+		Node rightNode = bulkCreate(rightList, rightRect, contenders);
 
 		// fix size
 		InternalNode node = new InternalNode(cutDim, cutVal, leftNode, rightNode);
@@ -403,6 +410,10 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 				node.size += 1;
 			}
 		}
+
+		node.contenders = new LinkedList<LPoint>(contenders);
+		node.subCell = cell;
+		filterContenders(node);
 		return node;
 	}
 
@@ -412,7 +423,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			throw new Exception("Attempt to insert a point outside bounding box");
 		}
 
-		this.root = root.insert(pt, rootCell);
+		this.root = root.insert(pt, rootCell, this.root.contenders);
 		this.size++;
 
 		this.root = root.restructure(pt);
@@ -431,8 +442,37 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		}
 	}
 
+	public void traverseTree(Node curr, ArrayList<AssignedPair<LPoint>> list) {
+		if (curr.getClass() == InternalNode.class) {
+			InternalNode node = (InternalNode) curr;
+			traverseTree(node.right, list);
+			traverseTree(node.left, list);
+		} else {
+			ExternalNode node = (ExternalNode) curr;
+			if (node.point != null) {
+				AssignedPair<LPoint> newPair = new AssignedPair<LPoint>();
+				newPair.setSite(node.point);
+				HashMap<Double, LPoint> dict = new HashMap<Double, LPoint>();
+				for (LPoint contender : node.contenders) {
+					double distance = node.point.getPoint2D().distanceSq(contender.getPoint2D());
+					dict.put(distance, contender);
+				}
+				double minDist = Collections.min(dict.keySet());
+				newPair.setDist(minDist);
+				newPair.setCenter(dict.get(minDist));
+				list.add(newPair);
+			}
+		}
+	}
+
+	public Node getRoot() {
+		return this.root;
+	}
+
 	public void clear() {
-		this.root = new ExternalNode(null);
+		this.root = new ExternalNode(null, this.rootCell);
+		this.root.contenders = new LinkedList<LPoint>();
+		this.root.contenders.add(this.startCenter);
 		this.size = 0;
 	}
 
@@ -474,7 +514,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		if (this.deleteCount > this.size) {
 			ArrayList<LPoint> list = new ArrayList<LPoint>();
 			traverse(root, list);
-			this.root = bulkCreate(list, rootCell);
+			this.root = bulkCreate(list, rootCell, this.root.contenders);
 			this.deleteCount = 0;
 		}
 	}
@@ -495,6 +535,89 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	// You may modify/add/remove these as you see fit, since they will
 	// just be used internally by your code.
 	// ----------------------------------------------------------------
-	// void addCenter(LPoint center) { /* ... */ return null; }
-	// ArrayList<String> listWithCenters() { /* ... */ return null; }
+	public void addCenter(LPoint center) {
+		this.root.addCenter(center);
+	}
+
+	public ArrayList<String> listWithCenters() {
+		return listWithCentersAux(new ArrayList<String>(), root);
+	}
+	
+	private void filterContenders(Node node) {
+		double rmin = Double.MAX_VALUE;
+		for (LPoint c : node.contenders) {
+			double ri = node.subCell.maxDistanceSq(c.getPoint2D());
+			rmin = Math.min(rmin, ri);
+		}
+
+		LinkedList<LPoint> tempContenders = new LinkedList<LPoint>(node.contenders);
+		for (LPoint c : tempContenders) {
+			double ri = node.subCell.distanceSq(c.getPoint2D());
+			if (ri > rmin) {
+				node.contenders.remove(c);
+			}
+		}
+	}
+
+	private ArrayList<String> listWithCentersAux(ArrayList<String> ans, Node curr) {
+		if (curr.getClass() == InternalNode.class) {
+			InternalNode node = (InternalNode) curr;
+			String str = "";
+			if (node.cutDim == 0) {
+				str += "(x=" + node.cutVal + ") ";
+			} else {
+				str += "(y=" + node.cutVal + ") ";
+			}
+			str += node.size + ":" + node.insertionCount + " => {";
+			ArrayList<String> names = new ArrayList<String>();
+			for (LPoint c : node.contenders) {
+				names.add(c.getLabel());
+			}
+			Collections.sort(names);
+			for (int i = 0; i < names.size(); i++) {
+				if (i > 10) {
+					break;
+				}
+				str += names.get(i);
+				if (i + 1 != names.size()) {
+					str += " ";
+				}
+			}
+			if (names.size() > 10) {
+				str += "...";
+			}
+			str += "}";
+			ans.add(str);
+			ans = listWithCentersAux(ans, node.right);
+			ans = listWithCentersAux(ans, node.left);
+		} else {
+			ExternalNode node = (ExternalNode) curr;
+			String str = "";
+			if (node.point != null) {
+				str += "[" + node.point.toString() + "] => {";
+				ArrayList<String> names = new ArrayList<String>();
+				for (LPoint c : node.contenders) {
+					names.add(c.getLabel());
+				}
+				Collections.sort(names);
+				for (int i = 0; i < names.size(); i++) {
+					if (i > 10) {
+						break;
+					}
+					str += names.get(i);
+					if (i + 1 != names.size()) {
+						str += " ";
+					}
+				}
+				if (names.size() > 10) {
+					str += "...";
+				}
+				str += "}";
+			} else {
+				str += "[null]";
+			}
+			ans.add(str);
+		}
+		return ans;
+	}
 }
