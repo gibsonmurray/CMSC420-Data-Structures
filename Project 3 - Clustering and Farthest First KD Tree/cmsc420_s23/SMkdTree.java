@@ -13,7 +13,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	private abstract class Node {
 		LinkedList<LPoint> contenders;
 		Rectangle2D subCell;
-		
+
 		abstract LPoint find(Point2D pt);
 
 		abstract Node insert(LPoint pt, Rectangle2D cell, LinkedList<LPoint> contenders) throws Exception;
@@ -322,7 +322,10 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	private Node bulkCreate(ArrayList<LPoint> pts, Rectangle2D cell, LinkedList<LPoint> contenders) {
 		int len = pts.size();
 		if (len == 0) {
-			return new ExternalNode(null, cell);
+			ExternalNode newNode = new ExternalNode(null, cell);
+			newNode.contenders = new LinkedList<LPoint>(contenders);
+			return newNode;
+
 		} else if (len == 1) {
 			ExternalNode newNode = new ExternalNode(pts.get(0), cell);
 			newNode.contenders = new LinkedList<LPoint>(contenders);
@@ -518,7 +521,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 			this.deleteCount = 0;
 		}
 	}
-	
+
 	public LPoint nearestNeighbor(Point2D center) {
 		return root.nearestNeighbor(new ArrayList<LPoint>(), center, rootCell, null);
 	}
@@ -542,7 +545,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 	public ArrayList<String> listWithCenters() {
 		return listWithCentersAux(new ArrayList<String>(), root);
 	}
-	
+
 	private void filterContenders(Node node) {
 		double rmin = Double.MAX_VALUE;
 		for (LPoint c : node.contenders) {
@@ -593,8 +596,11 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 		} else {
 			ExternalNode node = (ExternalNode) curr;
 			String str = "";
-			if (node.point != null) {
-				str += "[" + node.point.toString() + "] => {";
+				if (node.point == null) {
+					str += "[null] => {";
+				} else {
+					str += "[" + node.point.toString() + "] => {";
+				}
 				ArrayList<String> names = new ArrayList<String>();
 				for (LPoint c : node.contenders) {
 					names.add(c.getLabel());
@@ -613,10 +619,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 					str += "...";
 				}
 				str += "}";
-			} else {
-				str += "[null]";
-			}
-			ans.add(str);
+				ans.add(str);
 		}
 		return ans;
 	}
