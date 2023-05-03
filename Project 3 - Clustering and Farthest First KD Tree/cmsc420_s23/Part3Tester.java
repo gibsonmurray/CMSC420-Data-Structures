@@ -30,17 +30,25 @@ public class Part3Tester {
 	private static final String outFolder = "tests"; // folder with output files (from project root)
 	private static String[] inputFileList = { 
 			// "test01-input.txt",
-			"test02-input.txt",
-//			"test03-input.txt",
-//			"test04-input.txt",
-//			"test05-input.txt",
+			// "test02-input.txt",
+			"test03-input.txt",
+			// "test04-input.txt",
+			// "test05-input.txt",
+			// "test06-input.txt",
+			// "test07-input.txt",
+			// "test08-input.txt",
+			// "test09-input.txt",
 			};
 	private static String[] outputFileList = { 
 			// "test01-output.txt",
-			"test02-output.txt",
-//			"test03-output.txt",
-//			"test04-output.txt",
-//			"test05-output.txt",
+			// "test02-output.txt",
+			"test03-output.txt",
+			// "test04-output.txt",
+			// "test05-output.txt",
+			// "test06-output.txt",
+			// "test07-output.txt",
+			// "test08-output.txt",
+			// "test09-output.txt",
 			};
 	// --------------------------------------------------------------------------------------------
 
