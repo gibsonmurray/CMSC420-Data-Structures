@@ -210,6 +210,7 @@ public class SMkdTree<LPoint extends LabeledPoint2D> {
 
 		@Override
 		SMkdTree<LPoint>.Node restructure(LPoint pt) {
+			filterContenders(this);
 			return this;
 		}
 

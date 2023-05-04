@@ -1855,7 +1855,7 @@ ca-list-kd:
   [AMA: (371.0,711.0)] => {BHM}
   [GWO: (329.0,652.0)] => {BHM}
   [null] => {BHM LBB}
-  [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
+  [MXF: (277.0,602.0)] => {BHM LBB SAN}
   (y=750.0) 10:2 => {BHM BUR LBB SAN SAV TPA}
   (x=125.0) 6:1 => {BHM BUR LBB}
   (y=875.0) 5:1 => {BHM BUR LBB}
@@ -1949,7 +1949,7 @@ ca-list-kd:
   [CIC: (231.0,106.0)] => {TPA}
   [LCK: (169.0,120.0)] => {TPA}
   [null] => {TPA}
-  [NHK: (105.0,136.0)] => {SAN TPA}
+  [NHK: (105.0,136.0)] => {TPA}
 ca-list-kd [tree structure]:
   | | | | | | | [FAT: (890.0,926.0)] => {SKF}
   | | | | | | (x=890.0) 2:0 => {SKF}
@@ -2217,7 +2217,7 @@ ca-list-kd [tree structure]:
   | | | | | | (x=329.0) 2:0 => {BHM LBB}
   | | | | | | | [null] => {BHM LBB}
   | | | | | (y=652.0) 3:1 => {BHM BUR LBB SAN}
-  | | | | | | [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
+  | | | | | | [MXF: (277.0,602.0)] => {BHM LBB SAN}
   | | (x=250.0) 34:9 => {BHM BOI BUR DCA LBB SAN SAV SKF TPA}
   | | | | | | | [ART: (210.0,892.0)] => {BUR}
   | | | | | | (x=187.5) 3:1 => {BUR}
@@ -2313,7 +2313,7 @@ ca-list-kd [tree structure]:
   | | | | | | (y=106.0) 2:0 => {TPA}
   | | | | | | | [null] => {TPA}
   | | | | (x=165.0) 4:1 => {SAN TPA}
-  | | | | | [NHK: (105.0,136.0)] => {SAN TPA}
+  | | | | | [NHK: (105.0,136.0)] => {TPA}
 ca-centers-size: 10
 ca-list-centers:
   BHM: (471.0,677.0)
@@ -2809,7 +2809,7 @@ ca-list-kd:
   [AMA: (371.0,711.0)] => {BHM}
   [GWO: (329.0,652.0)] => {BHM}
   [null] => {BHM LBB}
-  [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
+  [MXF: (277.0,602.0)] => {BHM LBB SAN}
   (y=750.0) 12:4 => {BHM BUR LBB SAN SAV TPA}
   (x=125.0) 6:1 => {BHM BUR LBB}
   (y=875.0) 5:1 => {BHM BUR LBB}
@@ -3231,7 +3231,7 @@ ca-list-kd [tree structure]:
   | | | | | | (x=329.0) 2:0 => {BHM LBB}
   | | | | | | | [null] => {BHM LBB}
   | | | | | (y=652.0) 3:1 => {BHM BUR LBB SAN}
-  | | | | | | [MXF: (277.0,602.0)] => {BHM BUR LBB SAN}
+  | | | | | | [MXF: (277.0,602.0)] => {BHM LBB SAN}
   | | (x=250.0) 38:13 => {BHM BOI BUR DCA LBB PSP SAN SAV SKF TPA}
   | | | | | | | [ART: (210.0,892.0)] => {BUR}
   | | | | | | (x=187.5) 3:1 => {BUR}

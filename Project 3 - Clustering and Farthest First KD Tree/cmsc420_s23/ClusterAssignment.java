@@ -16,7 +16,7 @@ public class ClusterAssignment<LPoint extends LabeledPoint2D> {
 		this.centers.add(startCenter);
 		this.startCenter = startCenter;
 	}
-	
+
 	public void addSite(LPoint site) throws Exception {
 		this.kdTree.insert(site);
 	}
@@ -64,7 +64,7 @@ public class ClusterAssignment<LPoint extends LabeledPoint2D> {
 		ArrayList<String> ans = new ArrayList<String>();
 		for (AssignedPair<LPoint> pair : pairs) {
 			String str = "[" + pair.getSite().getLabel() + "->" + pair.getCenter().getLabel() + "]"
-							+ " distSq = " + pair.getDist();
+					+ " distSq = " + pair.getDist();
 			ans.add(str);
 		}
 		return ans;
