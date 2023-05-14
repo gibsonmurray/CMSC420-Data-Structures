@@ -8,17 +8,15 @@ import cmsc420_s23.WtLeftHeap.Locator;
 
 public class FarthestFirst<LPoint extends LabeledPoint2D> {
 
-	private LPoint startCenter; // the initial center
-	private WtLeftHeap<Double, AssignedPair> heap; // heap for assigned pairs
+	private WtLeftHeap<Double, AssignedPair<LPoint>> heap; // heap for assigned pairs
 	private HashMap<String, Locator> map; // a map used for saving heap locators
 	private SMkdTree<LPoint> kdTree; // kd-tree for sites
 	private ArrayList<LPoint> traversal; // the traversal
 	private HashMap<String, LPoint> points; // stores all the labeled points to rebuild heap
 
 	public FarthestFirst(int rebuildOffset, Rectangle2D bbox, LPoint startCenter) {
-		this.startCenter = startCenter;
 		this.kdTree = new SMkdTree<LPoint>(rebuildOffset, bbox, startCenter);
-		this.heap = new WtLeftHeap<Double, AssignedPair>();
+		this.heap = new WtLeftHeap<Double, AssignedPair<LPoint>>();
 		this.map = new HashMap<String, Locator>();
 		this.traversal = new ArrayList<LPoint>();
 		this.traversal.add(startCenter);

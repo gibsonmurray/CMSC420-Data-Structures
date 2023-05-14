@@ -75,4 +75,6 @@ public class ClusterAssignment<LPoint extends LabeledPoint2D> {
 			return pt1.getLabel().compareTo(pt2.getLabel());
 		}
 	}
+
+	public void deleteCenter(LPoint center) throws Exception {/* ... */}
 }
